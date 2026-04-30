@@ -6,7 +6,7 @@ import { Vortex } from "./ui/Vortex";
 
 const products = [
   { id: "black", name: "Mysterious Black", color: "#050505", image: "/cushion-black.png" },
-  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-black.png", isFiltered: true }, // Using black image as base
+  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-slate.png", isFiltered: true }, // Using slate image as better color base
   { id: "slate", name: "Slate Gray", color: "#64748b", image: "/cushion-slate.png" },
 ];
 
@@ -225,7 +225,7 @@ export const CircularFeatures = () => {
                      <img 
                        src={selectedProduct.image} 
                        alt={selectedProduct.name} 
-                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'invert-[0.2] sepia-[1] saturate-[10] hue-rotate-[180deg] brightness-[0.8]' : ''}`}
+                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'brightness-110 sepia-[0.8] hue-rotate-[190deg] saturate-[400%] contrast-[1.1]' : ''}`}
                      />
                    </motion.div>
                  </AnimatePresence>
