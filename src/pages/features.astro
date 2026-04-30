@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { CircularFeatures } from '../components/CircularFeatures';
+---
+
+<Layout title="Product | Smart Cushion">
+	<Navbar client:load />
+	<main class="bg-black">
+    {/* The entire product journey is now integrated into a single scroll component */}
+    <CircularFeatures client:load />
+	</main>
+</Layout>

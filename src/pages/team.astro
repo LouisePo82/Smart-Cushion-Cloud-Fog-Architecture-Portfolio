@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { TeamGrid } from '../components/TeamGrid';
+---
+
+<Layout title="Our Team | Smart Cushion">
+	<Navbar client:load />
+	<main class="pt-32 pb-20 bg-black overflow-hidden">
+		<section class="container mx-auto px-4">
+			<div class="text-center mb-16">
+				<h1 class="text-4xl lg:text-6xl font-bold mb-6 text-white">The Minds Behind <br/><span class="text-primary">Smart Cushion</span></h1>
+				<p class="text-xl text-neutral-400 max-w-2xl mx-auto">
+					Meet the innovators dedicated to revolutionizing ergonomic health through AI and IoT technology.
+				</p>
+			</div>
+
+			<TeamGrid client:load />
+		</section>
+	</main>
+</Layout>

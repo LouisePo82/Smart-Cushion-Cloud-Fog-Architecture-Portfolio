@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { CircularDashboard } from '../components/CircularDashboard';
+---
+
+<Layout title="Dashboard | PostureAI">
+	<Navbar client:load />
+	
+	<main class="bg-black">
+    {/* The Dashboard Preview using the Circular Carousel logic */}
+		<CircularDashboard client:load />
+	</main>
+</Layout>

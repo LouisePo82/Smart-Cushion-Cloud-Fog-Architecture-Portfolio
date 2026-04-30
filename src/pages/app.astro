@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { Button } from '@/components/ui/button';
+---
+
+<Layout title="Mobile App | Smart Cushion">
+	<Navbar client:load />
+	<main class="pt-32 pb-20">
+		<section class="container mx-auto px-4">
+			<div class="flex flex-col lg:flex-row items-center gap-16">
+				<div class="flex-1 relative order-2 lg:order-1">
+					<div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border aspect-[4/5] max-w-md mx-auto">
+						<img src="/app.png" alt="Smart Cushion App Interface" class="w-full h-full object-cover" />
+					</div>
+					<div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 blur-[100px] rounded-full"></div>
+				</div>
+				
+				<div class="flex-1 order-1 lg:order-2">
+					<h1 class="text-4xl lg:text-6xl font-bold mb-8 leading-tight">Control Your Health <br/><span class="text-primary">From Your Phone</span></h1>
+					<p class="text-xl text-muted-foreground mb-8">
+						Our mobile app is designed to be the command center for your ergonomic health. 
+						Monitor your posture in real-time, set goals, and track your progress over weeks and months.
+					</p>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+						{[
+							{ t: "Heatmap", d: "Live sitting pressure visualization." },
+							{ t: "Analytics", d: "Deep dive into your sitting habits." },
+							{ t: "Notifications", d: "Gentle reminders to stand or adjust." },
+							{ t: "Goals", d: "Set and achieve posture milestones." }
+						].map(item => (
+							<div class="p-6 rounded-2xl bg-secondary/20 border">
+								<h3 class="text-lg font-bold mb-2">{item.t}</h3>
+								<p class="text-sm text-muted-foreground">{item.d}</p>
+							</div>
+						))}
+					</div>
+					<div class="flex flex-wrap gap-4">
+						<Button size="lg" class="rounded-full">App Store</Button>
+						<Button size="lg" variant="outline" class="rounded-full">Google Play</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
