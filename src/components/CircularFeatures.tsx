@@ -283,16 +283,43 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 10-12. Final CTA Slide */}
+          {/* 10-12. Final CTA Slide - Enhanced with Cyber Aurora Effect */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
               scale: useTransform(smoothProgress, [0.88, 0.94], [0.9, 1]),
               pointerEvents: useTransform(smoothProgress, [0.88, 0.94, 1], ["none", "auto", "auto"])
             }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 overflow-hidden"
           >
-            <h2 className="text-5xl lg:text-9xl font-bold text-white mb-10 lg:mb-16 tracking-tighter">
+            {/* Cyber Aurora Grid Background */}
+            <div className="absolute inset-0 -z-10">
+               {/* 3D Perspective Grid */}
+               <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" 
+                    style={{ transform: 'perspective(1000px) rotateX(60deg) translateY(100px) scale(2)' }}
+               />
+               {/* Aurora Pulsing Glows */}
+               <motion.div 
+                 animate={{
+                   scale: [1, 1.2, 1],
+                   opacity: [0.1, 0.3, 0.1],
+                   x: [-50, 50, -50],
+                 }}
+                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[150px] rounded-full"
+               />
+               <motion.div 
+                 animate={{
+                   scale: [1.2, 1, 1.2],
+                   opacity: [0.1, 0.2, 0.1],
+                   x: [50, -50, 50],
+                 }}
+                 transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-secondary/10 blur-[130px] rounded-full"
+               />
+            </div>
+
+            <h2 className="text-5xl lg:text-9xl font-bold text-white mb-10 lg:mb-16 tracking-tighter relative z-10">
               Explore your <br/> 
               <span className="text-primary italic font-black">Live Dashboard.</span>
             </h2>
