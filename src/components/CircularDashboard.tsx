@@ -72,7 +72,6 @@ export const CircularDashboard = () => {
   const angleStep = 45;
   const totalRotation = angleStep * (totalFeatures - 1);
 
-  // Rotation logic adjusted for half-circle view
   const rotation = useTransform(
     smoothProgress, 
     [1.2 / itemsCount, (totalFeatures + 0.2) / itemsCount], 
@@ -83,10 +82,13 @@ export const CircularDashboard = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Right Side: HALF CIRCLE */}
+        {/* Right Side: HALF CIRCLE WITH BORDER */}
         <div className="absolute right-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center">
           
-          {/* 0. Intro Illustration for Slide 0 - Shifted more to the left to avoid being cut */}
+          {/* External Glowing Ring */}
+          <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
+
+          {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
@@ -105,7 +107,7 @@ export const CircularDashboard = () => {
             </div>
           </motion.div>
 
-          {/* Rotating Half-Circle */}
+          {/* Rotating Half-Circle (REFINED BORDER) */}
           <motion.div 
             style={{ 
               opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
@@ -114,7 +116,7 @@ export const CircularDashboard = () => {
           >
             <motion.div
               style={{ rotate: rotation }}
-              className="relative w-full h-full rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center"
+              className="relative w-full h-full rounded-full border-2 border-primary/20 bg-primary/5 flex items-center justify-center shadow-[inset_0_0_50px_rgba(var(--primary),0.1)]"
             >
               {dashboardViews.map((view, index) => {
                 const angle = index * -angleStep;
@@ -152,11 +154,11 @@ export const CircularDashboard = () => {
                 );
               })}
             </motion.div>
-            <div className="absolute left-[-20px] w-20 h-[2px] bg-gradient-to-r from-primary to-transparent z-20" />
+            <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
           </motion.div>
         </div>
 
-        {/* Left Side: Description - Shifted to provide more space */}
+        {/* Left Side: Description */}
         <div className="mr-[25vw] flex-1 pl-10 lg:pl-24">
           <div className="relative h-[80vh] flex flex-col justify-center">
             

@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles } from "lucide-react";
+import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, ArrowRight } from "lucide-react";
 import { Vortex } from "./ui/Vortex";
 
 const products = [
@@ -71,14 +71,14 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const itemsCount = totalFeatures + 2; 
+  const itemsCount = totalFeatures + 3; // Intro + Showcase + 6 Features + CTA
 
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
 
   const rotation = useTransform(
     smoothProgress, 
-    [0.25, 0.9], 
+    [0.25, 0.85], 
     [0, -totalRotation]
   );
 
@@ -86,21 +86,24 @@ export const CircularFeatures = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: TRUE HALF CIRCLE */}
+        {/* Left Side: TRUE HALF CIRCLE WITH BORDER */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [-100, 0, 0, -100])
+            opacity: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [-100, 0, 0, -100])
           }}
           className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center"
         >
+          {/* External Glowing Ring */}
+          <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
+          
           <motion.div
             style={{ rotate: rotation }}
-            className="relative w-full h-full rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center"
+            className="relative w-full h-full rounded-full border-2 border-primary/20 bg-primary/5 flex items-center justify-center shadow-[inset_0_0_50px_rgba(var(--primary),0.1)]"
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = 0.25 + (index * (0.65 / (totalFeatures - 1)));
+              const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
               const glowRange = 0.03;
 
               return (
@@ -134,7 +137,9 @@ export const CircularFeatures = () => {
               );
             })}
           </motion.div>
-          <div className="absolute right-[-20px] w-20 h-[2px] bg-gradient-to-l from-primary to-transparent z-20" />
+          
+          {/* Connector Line with Glow */}
+          <div className="absolute right-[-20px] w-20 h-[3px] bg-gradient-to-l from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
         {/* Content Area */}
@@ -218,7 +223,7 @@ export const CircularFeatures = () => {
 
           {/* 2-n. Features Slides */}
           {features.map((feature, index) => {
-            const activePoint = 0.25 + (index * (0.65 / (totalFeatures - 1)));
+            const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
             const range = 0.05; 
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
@@ -240,6 +245,27 @@ export const CircularFeatures = () => {
               </motion.div>
             );
           })}
+
+          {/* FINAL CTA SLIDE (To fill the black space) */}
+          <motion.div
+            style={{
+              opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
+              scale: useTransform(smoothProgress, [0.9, 0.95], [0.9, 1]),
+              y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
+            }}
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+          >
+            <h2 className="text-5xl lg:text-8xl font-bold text-white mb-12 tracking-tighter">
+              Experience the Future <br/> 
+              <span className="text-primary italic">of Sitting.</span>
+            </h2>
+            <div className="flex gap-6">
+              <a href="/dashboard" className="px-12 py-6 bg-primary text-white rounded-full font-bold text-2xl hover:scale-105 transition-transform flex items-center gap-3">
+                Try Live Demo <ArrowRight size={24} />
+              </a>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </div>
