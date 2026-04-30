@@ -81,9 +81,10 @@ export const SolutionsScroll = () => {
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
               <motion.div
-                initial={{ opacity: 0, filter: "blur(20px)", scale: 0.8 }}
-                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                initial={{ filter: "blur(20px)", scale: 0.9 }}
+                whileInView={{ filter: "blur(0px)", scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
               >
                 <h2 className="text-5xl lg:text-9xl font-bold text-white mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">
                   A Journey through <br/>
