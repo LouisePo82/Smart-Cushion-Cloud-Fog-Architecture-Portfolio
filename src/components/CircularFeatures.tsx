@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, Palette } from "lucide-react";
+import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles } from "lucide-react";
 import { Vortex } from "./ui/Vortex";
 
 const products = [
@@ -71,12 +71,11 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const itemsCount = totalFeatures + 2; // Intro + Showcase + 6 Features
+  const itemsCount = totalFeatures + 2; 
 
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
 
-  // Sync rotation with the feature slides (starting from 0.25 to 0.9)
   const rotation = useTransform(
     smoothProgress, 
     [0.25, 0.9], 
@@ -87,13 +86,13 @@ export const CircularFeatures = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: Rotating Circle */}
+        {/* Left Side: Rotating Circle (REDUCED SIZE: 38vw) */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [0, 1, 1, 0]),
             x: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [-100, 0, 0, -100])
           }}
-          className="absolute left-[-20vw] w-[50vw] h-[50vw] flex items-center justify-center"
+          className="absolute left-[-12vw] w-[38vw] h-[38vw] flex items-center justify-center"
         >
           <motion.div
             style={{ rotate: rotation }}
@@ -101,7 +100,6 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              // Active points for the circle icons
               const activePoint = 0.25 + (index * (0.65 / (totalFeatures - 1)));
               const glowRange = 0.03;
 
@@ -110,7 +108,7 @@ export const CircularFeatures = () => {
                   key={index}
                   className="absolute"
                   style={{
-                    transform: `rotate(${angle}deg) translate(25vw) rotate(-${angle}deg)`,
+                    transform: `rotate(${angle}deg) translate(19vw) rotate(-${angle}deg)`,
                   }}
                 >
                   <motion.div 
@@ -130,7 +128,7 @@ export const CircularFeatures = () => {
                     }}
                     className={`p-5 rounded-full bg-neutral-900 border-2 transition-colors ${feature.color}`}
                   >
-                    <feature.icon size={32} />
+                    <feature.icon size={28} />
                   </motion.div>
                 </div>
               );
@@ -142,7 +140,7 @@ export const CircularFeatures = () => {
         {/* Content Area */}
         <div className="relative w-full h-full">
           
-          {/* 0. Vortex Intro Slide - PERFECTLY CENTERED */}
+          {/* 0. Vortex Intro Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
@@ -170,12 +168,12 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide - SPACED FROM CIRCLE */}
+          {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
             }}
-            className="absolute inset-0 flex items-center justify-center pl-[45vw] pr-10 lg:pr-32"
+            className="absolute inset-0 flex items-center justify-center pl-[35vw] pr-10 lg:pr-32"
           >
             <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
               <div className="flex-1 w-full">
@@ -218,9 +216,8 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 2-n. Features Slides - EACH HAS INTERNAL PADDING TO AVOID CIRCLE */}
+          {/* 2-n. Features Slides */}
           {features.map((feature, index) => {
-            // Precise active point calculation for feature text
             const activePoint = 0.25 + (index * (0.65 / (totalFeatures - 1)));
             const range = 0.05; 
 
@@ -231,7 +228,7 @@ export const CircularFeatures = () => {
               <motion.div
                 key={index}
                 style={{ opacity, y }}
-                className="absolute inset-0 flex flex-col justify-center pl-[50vw] pr-10 lg:pr-32 pointer-events-none"
+                className="absolute inset-0 flex flex-col justify-center pl-[35vw] pr-10 lg:pr-32 pointer-events-none"
               >
                 <span className={`text-sm font-mono mb-4 ${feature.color}`}>TECH / 0{index + 1}</span>
                 <h3 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">

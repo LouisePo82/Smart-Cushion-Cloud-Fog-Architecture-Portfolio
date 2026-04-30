@@ -83,7 +83,7 @@ export const CircularDashboard = () => {
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
         {/* Right Side: Rotating Circle / Intro Illustration */}
-        <div className="absolute right-[-10vw] w-[55vw] h-full flex items-center justify-center">
+        <div className="absolute right-[-8vw] w-[50vw] h-full flex items-center justify-center">
           
           {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
@@ -92,32 +92,24 @@ export const CircularDashboard = () => {
               scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
               x: useTransform(smoothProgress, [0, 0.12], [0, 100]),
             }}
-            className="absolute inset-0 flex items-center justify-center pr-[10vw]"
+            className="absolute inset-0 flex items-center justify-center pr-[5vw]"
           >
-            <div className="relative w-full max-w-2xl aspect-[4/3] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 group">
+            <div className="relative w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 group">
                <img 
                  src="/dashboard-intro.png" 
                  alt="User tracking posture" 
                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                />
                <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
-               <motion.div 
-                 animate={{ opacity: [0.4, 0.7, 0.4] }}
-                 transition={{ duration: 3, repeat: Infinity }}
-                 className="absolute bottom-10 left-10 flex items-center gap-3"
-               >
-                 <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                 <span className="text-xs font-mono text-white/70 uppercase tracking-widest">System Online / Monitoring</span>
-               </motion.div>
             </div>
           </motion.div>
 
-          {/* Rotating Circle (appears after intro) */}
+          {/* Rotating Circle (REDUCED SIZE: 38vw) */}
           <motion.div 
             style={{ 
               opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
             }}
-            className="w-[45vw] h-[45vw] flex items-center justify-center"
+            className="w-[38vw] h-[38vw] flex items-center justify-center"
           >
             <motion.div
               style={{ rotate: rotation }}
@@ -133,7 +125,7 @@ export const CircularDashboard = () => {
                     key={index}
                     className="absolute"
                     style={{
-                      transform: `rotate(${angle}deg) translate(-22.5vw) rotate(${-angle}deg)`,
+                      transform: `rotate(${angle}deg) translate(-19vw) rotate(${-angle}deg)`,
                     }}
                   >
                     <motion.div 
@@ -153,7 +145,7 @@ export const CircularDashboard = () => {
                       }}
                       className={`p-5 rounded-full bg-neutral-900 border-2 transition-colors z-30 ${view.color}`}
                     >
-                      <view.icon size={32} />
+                      <view.icon size={28} />
                     </motion.div>
                   </div>
                 );
@@ -164,7 +156,7 @@ export const CircularDashboard = () => {
         </div>
 
         {/* Left Side: Description */}
-        <div className="mr-[30vw] flex-1 pl-10 lg:pl-20">
+        <div className="mr-[35vw] flex-1 pl-10 lg:pl-24">
           <div className="relative h-[80vh] flex flex-col justify-center">
             
             {/* 0. Intro Slide */}
