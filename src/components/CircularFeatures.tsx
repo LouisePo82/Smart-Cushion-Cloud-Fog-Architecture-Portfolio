@@ -225,7 +225,7 @@ export const CircularFeatures = () => {
                      <img 
                        src={selectedProduct.image} 
                        alt={selectedProduct.name} 
-                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'brightness-110 sepia-[0.8] hue-rotate-[190deg] saturate-[400%] contrast-[1.1]' : ''}`}
+                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'sepia-[1] hue-rotate-[190deg] saturate-[1000%] brightness-[0.8] contrast-[1.2]' : ''}`}
                      />
                    </motion.div>
                  </AnimatePresence>
