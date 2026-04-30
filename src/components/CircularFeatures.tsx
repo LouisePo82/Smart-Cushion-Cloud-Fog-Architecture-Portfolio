@@ -100,7 +100,7 @@ export const CircularFeatures = () => {
 
       <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
-        {/* Background Vortex - Hidden on small mobile to save perf/visibility */}
+        {/* Background Vortex */}
         <motion.div 
           style={{ opacity: vortexOpacity }}
           className="absolute inset-0 z-0 pointer-events-none hidden md:block"
@@ -114,11 +114,11 @@ export const CircularFeatures = () => {
            />
         </motion.div>
 
-        {/* Left Side: Circular UI - HIDDEN ON MOBILE */}
+        {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.1, 0.15, 0.85, 0.9], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.1, 0.15, 0.85, 0.9], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.2, 0.25, 0.85, 0.9], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.2, 0.25, 0.85, 0.9], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="hidden lg:flex absolute left-[-19vw] w-[38vw] h-[38vw] items-center justify-center z-10"
