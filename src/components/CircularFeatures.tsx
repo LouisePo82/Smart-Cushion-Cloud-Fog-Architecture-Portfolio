@@ -193,7 +193,7 @@ export const CircularFeatures = () => {
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount + 0.05], ["none", "auto", "none"])
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], ["none", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
