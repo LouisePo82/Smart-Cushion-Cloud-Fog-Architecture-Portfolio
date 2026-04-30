@@ -146,7 +146,7 @@ export const CircularDashboard = () => {
           }}
           className="absolute right-0 lg:right-[22vw] w-full lg:w-[40vw] h-[30vh] lg:h-auto flex items-center justify-center top-20 lg:top-auto z-0 opacity-20 lg:opacity-100"
         >
-          <div className="relative w-[80%] lg:w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20">
+          <div className="relative w-[80%] lg:w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
              <img 
                src="/dashboard-intro.png" 
                alt="User tracking posture" 
@@ -173,13 +173,13 @@ export const CircularDashboard = () => {
                 className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
               >
                 <div className="flex flex-col items-center lg:items-start">
-                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] mb-6">
-                    <Sparkles size={14} /> Control Center
+                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-8">
+                    <Sparkles size={16} /> Control Center
                   </span>
-                  <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                    Your Health, <br/><span className="text-primary">Visualized.</span>
+                  <h1 className="text-4xl lg:text-9xl font-bold text-white mb-8 leading-tight tracking-tighter">
+                    Your Health, <br/><span className="text-primary italic font-black">Visualized.</span>
                   </h1>
-                  <p className="text-base lg:text-xl text-neutral-400 max-w-xl leading-relaxed">
+                  <p className="text-base lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed font-medium">
                     The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
                   </p>
                 </div>
@@ -203,22 +203,22 @@ export const CircularDashboard = () => {
                     }}
                     className="absolute inset-0 flex flex-col justify-center"
                   >
-                    <div className="flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-10">
+                    <div className="flex flex-col lg:flex-row-reverse items-center gap-10 lg:gap-20">
                       <div className="flex-1 text-center lg:text-left">
-                        <span className={`text-xs font-mono mb-2 lg:mb-4 block ${view.color}`}>0{index + 1} / DASHBOARD VIEW</span>
-                        <h2 className="text-2xl lg:text-5xl font-bold text-white mb-4 lg:mb-6">
+                        <span className={`text-xs lg:text-sm font-mono mb-6 lg:mb-8 block ${view.color} uppercase tracking-widest`}>0{index + 1} / DASHBOARD VIEW</span>
+                        <h2 className="text-3xl lg:text-8xl font-bold text-white mb-6 lg:mb-10 tracking-tighter">
                           {view.title}
                         </h2>
-                        <p className="text-sm lg:text-lg text-neutral-400 leading-relaxed mb-6 lg:mb-8">
+                        <p className="text-base lg:text-3xl text-neutral-400 leading-relaxed font-medium mb-10">
                           {view.description}
                         </p>
                       </div>
                       <div className="flex-1 w-full max-w-sm lg:max-w-none mx-auto">
-                        <div className="rounded-xl lg:rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl shadow-primary/10">
+                        <div className="rounded-2xl lg:rounded-[3rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm p-2 lg:p-4">
                           <img 
                             src={view.image} 
                             alt={view.title} 
-                            className="w-full h-auto object-cover"
+                            className="w-full h-auto object-cover rounded-xl lg:rounded-[2.5rem]"
                           />
                         </div>
                       </div>
@@ -232,7 +232,7 @@ export const CircularDashboard = () => {
           {/* FINAL CTA */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
+              opacity: useTransform(smoothProgress, [0.8, 0.88, 1], [0, 1, 1]),
               scale: useTransform(smoothProgress, [0.8, 0.88], [0.9, 1]),
               pointerEvents: useTransform(smoothProgress, [0.8, 0.88, 1], ["none", "auto", "auto"])
             }}
@@ -251,16 +251,16 @@ export const CircularDashboard = () => {
              </div>
 
              <div className="text-center px-6 w-full max-w-4xl">
-                <h2 className="text-4xl lg:text-8xl font-bold text-white mb-8 lg:mb-10 tracking-tighter">
-                  Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
+                <h2 className="text-4xl lg:text-9xl font-bold text-white mb-12 lg:mb-16 tracking-tighter">
+                  Take Command of <br/><span className="text-primary italic font-black">Your Wellbeing.</span>
                 </h2>
-                <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center gap-8">
                   <a href="/app" className="w-full sm:w-auto">
-                    <button className="w-full sm:w-auto px-8 py-4 lg:px-12 lg:py-6 bg-white text-black rounded-full font-bold text-lg lg:text-2xl hover:bg-primary hover:text-white transition-all shadow-xl">
+                    <button className="w-full sm:w-auto px-10 py-5 lg:px-16 lg:py-8 bg-white text-black rounded-full font-bold text-xl lg:text-3xl hover:bg-primary hover:text-white transition-all shadow-2xl">
                        How can I track my health?
                     </button>
                   </a>
-                  <p className="text-neutral-500 font-mono text-[10px] lg:text-sm tracking-widest uppercase">Start your health journey today</p>
+                  <p className="text-neutral-500 font-mono text-xs lg:text-lg tracking-widest uppercase">Start your health journey today</p>
                 </div>
              </div>
           </motion.div>
