@@ -181,7 +181,7 @@ export const CircularFeatures = () => {
             <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
               <div className="flex-1 w-full">
                 <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
-                  <SparklesIcon size={14} /> The Masterpiece
+                  <Sparkles size={14} /> The Masterpiece
                 </span>
                 <h2 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                   Design <span className="text-primary">DNA</span>
@@ -213,7 +213,7 @@ export const CircularFeatures = () => {
                       className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden"
                       style={{ backgroundColor: selectedProduct.color + "44" }}
                    >
-                     <SparklesIcon className="text-white/20 w-32 h-32" />
+                     <Sparkles className="text-white/20 w-32 h-32" />
                    </motion.div>
                  </AnimatePresence>
               </div>
