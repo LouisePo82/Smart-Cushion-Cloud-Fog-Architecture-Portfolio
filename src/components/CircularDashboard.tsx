@@ -68,7 +68,7 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
-  // Intro (0) + 5 Views (1-5) + CTA (6) = 7 sections
+  // Reduced total height for faster scrolling
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
@@ -81,11 +81,11 @@ export const CircularDashboard = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[700vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points */}
+    <div ref={containerRef} className="relative h-[500vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points (Faster spacing) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[100vh] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[calc(500vh/7)] w-full" style={{ scrollSnapAlign: "start" }} />
         ))}
       </div>
 
@@ -237,7 +237,7 @@ export const CircularDashboard = () => {
               style={{
                 opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
                 y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
-                pointerEvents: useTransform(smoothProgress, [0.9, 0.95], ["none", "auto"])
+                pointerEvents: useTransform(smoothProgress, [0.9, 1], ["none", "auto"])
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >

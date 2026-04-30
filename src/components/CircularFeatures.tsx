@@ -71,6 +71,7 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
+  // Reduced total height for faster scrolling
   const sections = Array.from({ length: 9 });
   const itemsCount = sections.length; 
 
@@ -84,11 +85,11 @@ export const CircularFeatures = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[900vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points */}
+    <div ref={containerRef} className="relative h-[600vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points (Faster spacing) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[100vh] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[calc(600vh/9)] w-full" style={{ scrollSnapAlign: "start" }} />
         ))}
       </div>
 
@@ -179,7 +180,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide - REAL CUSHION IMAGES */}
+          {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
