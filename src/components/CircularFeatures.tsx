@@ -5,9 +5,9 @@ import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, ArrowRight } fr
 import { Vortex } from "./ui/Vortex";
 
 const products = [
-  { id: "black", name: "Mysterious Black", color: "#050505" },
-  { id: "blue", name: "Electric Blue", color: "#3b82f6" },
-  { id: "slate", name: "Slate Gray", color: "#64748b" },
+  { id: "black", name: "Mysterious Black", color: "#050505", image: "/cushion-black.png" },
+  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-blue.png" },
+  { id: "slate", name: "Slate Gray", color: "#64748b", image: "/cushion-slate.png" },
 ];
 
 const features = [
@@ -71,7 +71,6 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  // Intro (0) + Showcase (1) + 6 Features (2-7) + CTA (8) = 9 sections
   const sections = Array.from({ length: 9 });
   const itemsCount = sections.length; 
 
@@ -180,7 +179,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide - FIXED CLICKING */}
+          {/* 1. Product Showcase Slide - REAL CUSHION IMAGES */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
@@ -203,10 +202,7 @@ export const CircularFeatures = () => {
                   {products.map((p) => (
                     <button
                       key={p.id}
-                      onClick={() => {
-                        console.log("Selected color:", p.id);
-                        setSelectedProduct(p);
-                      }}
+                      onClick={() => setSelectedProduct(p)}
                       className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 ${
                         selectedProduct.id === p.id ? "border-primary scale-110" : "border-neutral-800"
                       }`}
@@ -216,7 +212,7 @@ export const CircularFeatures = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex-1 w-full max-w-md aspect-square rounded-[3rem] bg-neutral-900/30 border border-neutral-800 p-8 flex items-center justify-center">
+              <div className="flex-1 w-full max-w-md aspect-square rounded-[3rem] bg-neutral-900/30 border border-neutral-800 p-4 flex items-center justify-center">
                  <AnimatePresence mode="wait">
                    <motion.div
                       key={selectedProduct.id}
@@ -224,9 +220,12 @@ export const CircularFeatures = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 1.1 }}
                       className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden"
-                      style={{ backgroundColor: selectedProduct.color + "44" }}
                    >
-                     <Sparkles className="text-white/20 w-32 h-32" />
+                     <img 
+                       src={selectedProduct.image} 
+                       alt={selectedProduct.name} 
+                       className="w-full h-full object-contain"
+                     />
                    </motion.div>
                  </AnimatePresence>
               </div>
@@ -247,7 +246,7 @@ export const CircularFeatures = () => {
                 style={{ 
                   opacity, 
                   y,
-                  pointerEvents: "none" // Features are non-interactive
+                  pointerEvents: "none" 
                 }}
                 className="absolute inset-0 flex flex-col justify-center pl-[30vw] pr-10 lg:pr-32"
               >
