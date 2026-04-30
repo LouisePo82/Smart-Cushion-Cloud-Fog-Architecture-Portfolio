@@ -1,8 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, Palette } from "lucide-center";
-import { Brain as BrainIcon, Cpu as CpuIcon, Smartphone as MobileIcon, Cloud as CloudIcon, Bell as BellIcon, Battery as BatteryIcon, Sparkles as SparklesIcon } from "lucide-react";
+import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, Palette } from "lucide-react";
 import { Vortex } from "./ui/Vortex";
 
 const products = [
@@ -15,42 +14,42 @@ const features = [
   {
     title: "AI Posture Detection",
     description: "Our proprietary machine learning model analyzes 16 sensor points to provide pinpoint accuracy in real-time.",
-    icon: BrainIcon,
+    icon: Brain,
     color: "text-blue-500",
     glow: "rgba(59, 130, 246, 0.5)"
   },
   {
     title: "Embedded Fog Computing",
     description: "Localized data processing ensures zero latency and maximum privacy for your sensitive health data.",
-    icon: CpuIcon,
+    icon: Cpu,
     color: "text-cyan-500",
     glow: "rgba(6, 182, 212, 0.5)"
   },
   {
     title: "Seamless App Sync",
     description: "Get real-time feedback and long-term health trends right on your mobile device via Bluetooth 5.0.",
-    icon: MobileIcon,
+    icon: Smartphone,
     color: "text-indigo-500",
     glow: "rgba(99, 102, 241, 0.5)"
   },
   {
     title: "Cloud Integration",
     description: "Securely backup your health history and sync across all your ergonomic devices automatically.",
-    icon: CloudIcon,
+    icon: Cloud,
     color: "text-purple-500",
     glow: "rgba(168, 85, 247, 0.5)"
   },
   {
     title: "Smart Vibrations",
     description: "Subtle haptic feedback alerts you immediately when your posture needs adjustment without distraction.",
-    icon: BellIcon,
+    icon: Bell,
     color: "text-orange-500",
     glow: "rgba(249, 115, 22, 0.5)"
   },
   {
     title: "30-Day Battery",
     description: "Ultra-low power design keeps your cushion running for a month on a single USB-C charge.",
-    icon: BatteryIcon,
+    icon: Battery,
     color: "text-emerald-500",
     glow: "rgba(160, 185, 129, 0.5)"
   },
