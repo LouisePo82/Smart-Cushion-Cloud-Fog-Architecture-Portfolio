@@ -8,7 +8,9 @@ import {
   History, 
   ShieldCheck,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 const dashboardViews = [
@@ -264,6 +266,36 @@ export const CircularDashboard = () => {
                 </div>
              </div>
           </motion.div>
+        </div>
+
+        {/* Mobile Navigation Arrows */}
+        <div className="flex lg:hidden absolute bottom-8 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
+          <button 
+            onClick={() => {
+              const container = containerRef.current;
+              if (container) {
+                const currentScroll = container.scrollTop;
+                const viewHeight = window.innerHeight;
+                container.scrollTo({ top: currentScroll - viewHeight, behavior: 'smooth' });
+              }
+            }}
+            className="p-4 rounded-full bg-black/50 border border-white/10 text-white pointer-events-auto active:scale-95 transition-transform backdrop-blur-md"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button 
+            onClick={() => {
+              const container = containerRef.current;
+              if (container) {
+                const currentScroll = container.scrollTop;
+                const viewHeight = window.innerHeight;
+                container.scrollTo({ top: currentScroll + viewHeight, behavior: 'smooth' });
+              }
+            }}
+            className="p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-95 transition-transform shadow-lg shadow-primary/20"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
       
