@@ -203,7 +203,7 @@ export const CircularFeatures = () => {
                     <button
                       key={p.id}
                       onClick={() => setSelectedProduct(p)}
-                      className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 ${
+                      className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 border-white/20 ${
                         selectedProduct.id === p.id ? "border-primary scale-110" : "border-neutral-800"
                       }`}
                       style={{ backgroundColor: p.color }}
