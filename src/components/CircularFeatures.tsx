@@ -6,7 +6,7 @@ import { Vortex } from "./ui/Vortex";
 
 const products = [
   { id: "black", name: "Mysterious Black", color: "#050505", image: "/cushion-black.png" },
-  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-slate.png", isFiltered: true }, // Using slate image as better color base
+  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-blue.png" },
   { id: "slate", name: "Slate Gray", color: "#64748b", image: "/cushion-slate.png" },
 ];
 
@@ -71,7 +71,6 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  // Super compressed height for hyper-fast scrolling
   const sections = Array.from({ length: 9 });
   const itemsCount = sections.length; 
 
@@ -86,7 +85,6 @@ export const CircularFeatures = () => {
 
   return (
     <div ref={containerRef} className="relative h-[450vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points (Hyper-fast spacing) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
           <div key={i} className="h-[calc(450vh/9)] w-full" style={{ scrollSnapAlign: "start" }} />
@@ -95,7 +93,6 @@ export const CircularFeatures = () => {
 
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: TRUE HALF CIRCLE */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [0, 1, 1, 0]),
@@ -148,10 +145,8 @@ export const CircularFeatures = () => {
           <div className="absolute right-[-20px] w-20 h-[3px] bg-gradient-to-l from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
-        {/* Content Area */}
         <div className="relative w-full h-full">
           
-          {/* 0. Vortex Intro Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
@@ -180,7 +175,6 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide - CSS FILTER FIX FOR BLUE CUSHION */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
@@ -225,7 +219,7 @@ export const CircularFeatures = () => {
                      <img 
                        src={selectedProduct.image} 
                        alt={selectedProduct.name} 
-                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'sepia-[1] hue-rotate-[190deg] saturate-[1000%] brightness-[0.8] contrast-[1.2]' : ''}`}
+                       className="w-full h-full object-contain"
                      />
                    </motion.div>
                  </AnimatePresence>
@@ -233,7 +227,6 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 2-7. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
             const range = 0.05; 
@@ -262,7 +255,6 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 8. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
