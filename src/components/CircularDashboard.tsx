@@ -99,9 +99,9 @@ export const CircularDashboard = () => {
           {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.1, 0.14], [1, 1, 0]),
-              scale: useTransform(smoothProgress, [0, 0.12], [1, 0.9]),
-              x: useTransform(smoothProgress, [0, 0.14], [0, 100]),
+              opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
+              scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
+              x: useTransform(smoothProgress, [0, 0.1], [0, 100]),
             }}
             className="absolute right-[22vw] w-[40vw] flex items-center justify-center"
           >
@@ -173,9 +173,9 @@ export const CircularDashboard = () => {
             {/* Intro Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0, 0.1, 0.14], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.1, 0.14], [0, 0, -50]),
-                pointerEvents: useTransform(smoothProgress, [0, 0.14], ["auto", "none"])
+                opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
+                y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
+                pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
               }}
               className="absolute inset-0 flex flex-col justify-center"
             >

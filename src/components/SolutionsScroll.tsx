@@ -76,8 +76,8 @@ export const SolutionsScroll = () => {
             {/* Intro Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0, 0.12, 0.18], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.12, 0.18], [0, 0, -50]),
+                opacity: useTransform(smoothProgress, [0, 0.06, 0.12], [1, 1, 0]),
+                y: useTransform(smoothProgress, [0, 0.06, 0.12], [0, 0, -50]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
