@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { 
   Activity, 
   BarChart3, 
@@ -79,69 +79,95 @@ export const CircularDashboard = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black">
+    <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Right Side: Rotating Circle */}
-        <motion.div 
-          style={{ 
-            opacity: useTransform(smoothProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]),
-          }}
-          className="absolute right-[-20vw] w-[45vw] h-[45vw] flex items-center justify-center"
-        >
+        {/* Right Side: Rotating Circle / Intro Illustration */}
+        <div className="absolute right-[-10vw] w-[55vw] h-full flex items-center justify-center">
+          
+          {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
-            style={{ rotate: rotation }}
-            className="relative w-full h-full rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center"
+            style={{
+              opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
+              scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
+              x: useTransform(smoothProgress, [0, 0.12], [0, 100]),
+            }}
+            className="absolute inset-0 flex items-center justify-center pr-[10vw]"
           >
-            {dashboardViews.map((view, index) => {
-              const angle = index * -angleStep;
-              // Precise active point calculation
-              const activePoint = (index + 1.2) / itemsCount;
-              const glowRange = 0.04; // Narrower range for sharper effect
-
-              return (
-                <div
-                  key={index}
-                  className="absolute"
-                  style={{
-                    transform: `rotate(${angle}deg) translate(-22.5vw) rotate(${-angle}deg)`,
-                  }}
-                >
-                  <motion.div 
-                    style={{
-                      scale: useTransform(smoothProgress, 
-                        [activePoint - glowRange, activePoint, activePoint + glowRange], 
-                        [0.8, 1.25, 0.8]
-                      ),
-                      borderColor: useTransform(smoothProgress,
-                        [activePoint - glowRange, activePoint, activePoint + glowRange],
-                        ["rgba(255,255,255,0.1)", "var(--primary)", "rgba(255,255,255,0.1)"]
-                      ),
-                      boxShadow: useTransform(smoothProgress,
-                        [activePoint - glowRange, activePoint, activePoint + glowRange],
-                        ["0px 0px 0px rgba(0,0,0,0)", `0px 0px 25px ${view.glow}`, "0px 0px 0px rgba(0,0,0,0)"]
-                      ),
-                      backgroundColor: useTransform(smoothProgress,
-                        [activePoint - glowRange, activePoint, activePoint + glowRange],
-                        ["rgba(10,10,10,0.8)", "rgba(20,20,20,1)", "rgba(10,10,10,0.8)"]
-                      )
-                    }}
-                    className={`p-5 rounded-full border-2 transition-colors z-30 ${view.color}`}
-                  >
-                    <view.icon size={32} />
-                  </motion.div>
-                </div>
-              );
-            })}
+            <div className="relative w-full max-w-2xl aspect-[4/3] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 group">
+               <img 
+                 src="/dashboard-intro.png" 
+                 alt="User tracking posture" 
+                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               />
+               <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
+               <motion.div 
+                 animate={{ opacity: [0.4, 0.7, 0.4] }}
+                 transition={{ duration: 3, repeat: Infinity }}
+                 className="absolute bottom-10 left-10 flex items-center gap-3"
+               >
+                 <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+                 <span className="text-xs font-mono text-white/70 uppercase tracking-widest">System Online / Monitoring</span>
+               </motion.div>
+            </div>
           </motion.div>
-          <div className="absolute left-[-20px] w-20 h-[2px] bg-gradient-to-r from-primary to-transparent z-20" />
-        </motion.div>
 
-        {/* Left Side: Description + Dashboard Screenshot */}
+          {/* Rotating Circle (appears after intro) */}
+          <motion.div 
+            style={{ 
+              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
+            }}
+            className="w-[45vw] h-[45vw] flex items-center justify-center"
+          >
+            <motion.div
+              style={{ rotate: rotation }}
+              className="relative w-full h-full rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center"
+            >
+              {dashboardViews.map((view, index) => {
+                const angle = index * -angleStep;
+                const activePoint = (index + 1.2) / itemsCount;
+                const glowRange = 0.04;
+
+                return (
+                  <div
+                    key={index}
+                    className="absolute"
+                    style={{
+                      transform: `rotate(${angle}deg) translate(-22.5vw) rotate(${-angle}deg)`,
+                    }}
+                  >
+                    <motion.div 
+                      style={{
+                        scale: useTransform(smoothProgress, 
+                          [activePoint - glowRange, activePoint, activePoint + glowRange], 
+                          [0.8, 1.25, 0.8]
+                        ),
+                        borderColor: useTransform(smoothProgress,
+                          [activePoint - glowRange, activePoint, activePoint + glowRange],
+                          ["rgba(255,255,255,0.1)", "var(--primary)", "rgba(255,255,255,0.1)"]
+                        ),
+                        boxShadow: useTransform(smoothProgress,
+                          [activePoint - glowRange, activePoint, activePoint + glowRange],
+                          ["0px 0px 0px rgba(0,0,0,0)", `0px 0px 25px ${view.glow}`, "0px 0px 0px rgba(0,0,0,0)"]
+                        ),
+                      }}
+                      className={`p-5 rounded-full bg-neutral-900 border-2 transition-colors z-30 ${view.color}`}
+                    >
+                      <view.icon size={32} />
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </motion.div>
+            <div className="absolute left-[-20px] w-20 h-[2px] bg-gradient-to-r from-primary to-transparent z-20" />
+          </motion.div>
+        </div>
+
+        {/* Left Side: Description */}
         <div className="mr-[30vw] flex-1 pl-10 lg:pl-20">
           <div className="relative h-[80vh] flex flex-col justify-center">
             
-            {/* 0. Intro */}
+            {/* 0. Intro Slide */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
@@ -155,12 +181,12 @@ export const CircularDashboard = () => {
               <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Your Health, <br/><span className="text-primary">Visualized.</span>
               </h1>
-              <p className="text-xl text-neutral-400 max-w-xl">
-                The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits.
+              <p className="text-xl text-neutral-400 max-w-xl leading-relaxed">
+                The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
               </p>
             </motion.div>
 
-            {/* Views */}
+            {/* View Slides */}
             {dashboardViews.map((view, index) => {
               const activePoint = (index + 1.2) / itemsCount;
               const range = 0.07;
