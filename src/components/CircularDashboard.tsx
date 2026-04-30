@@ -68,12 +68,12 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
+  // Increased height slightly to reduce sensitivity (350vh -> 450vh)
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
   const totalRotation = angleStep * (totalFeatures - 1);
 
-  // Aligned rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
     [1 / itemsCount, 5 / itemsCount], 
@@ -81,7 +81,7 @@ export const CircularDashboard = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[350vh] bg-black">
+    <div ref={containerRef} className="relative h-[450vh] bg-black">
       {/* Snap Points Container */}
       <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
         {sections.map((_, i) => (
@@ -232,23 +232,25 @@ export const CircularDashboard = () => {
               );
             })}
 
-            {/* Final CTA */}
+            {/* Final CTA - NOW FULLY CENTERED */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
                 y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
                 pointerEvents: useTransform(smoothProgress, [0.9, 1], ["none", "auto"])
               }}
-              className="absolute inset-0 flex flex-col justify-center items-center text-center"
+              className="absolute inset-0 flex flex-col justify-center items-center text-center -ml-[30vw] md:-ml-0 pr-[25vw] md:pr-0"
             >
-              <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8">
-                Take Command of <br/><span className="text-primary">Your Wellbeing.</span>
-              </h2>
-              <div className="flex gap-4">
-                <button className="px-10 py-5 bg-primary text-white rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(var(--primary),0.3)]">
-                  Launch Live Demo
-                </button>
-              </div>
+               <div className="max-w-4xl mx-auto flex flex-col items-center">
+                  <h2 className="text-4xl lg:text-7xl font-bold text-white mb-8">
+                    Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
+                  </h2>
+                  <div className="flex gap-4">
+                    <button className="px-10 py-5 bg-primary text-white rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(var(--primary),0.3)]">
+                      Launch Live Demo
+                    </button>
+                  </div>
+               </div>
             </motion.div>
           </div>
         </div>

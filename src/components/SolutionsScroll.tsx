@@ -51,16 +51,16 @@ export const SolutionsScroll = () => {
     restDelta: 0.001,
   });
 
-  // Hyper-accelerated height
+  // Increased height to 540vh to reduce sensitivity (90vh per slide)
   const sections = Array.from({ length: 6 });
   const itemsCount = sections.length;
 
   return (
-    <div ref={containerRef} className="relative h-[350vh] bg-neutral-950 scroll-snap-container">
-      {/* Invisible Snap Points (Hyper-fast) */}
-      <div className="absolute inset-0 pointer-events-none">
+    <div ref={containerRef} className="relative h-[540vh] bg-neutral-950">
+      {/* Snap Points Container */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(350vh/6)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[90vh] w-full snap-start" />
         ))}
       </div>
 
@@ -171,7 +171,7 @@ export const SolutionsScroll = () => {
       </div>
       
       <style jsx>{`
-        .scroll-snap-container {
+        .scroll-snap-y-mandatory {
           scroll-snap-type: y mandatory;
         }
       `}</style>
