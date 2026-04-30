@@ -71,7 +71,6 @@ export const CircularDashboard = () => {
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
-  const totalRotation = angleStep * (totalFeatures - 1);
 
   const rotation = useTransform(
     smoothProgress, 
@@ -82,94 +81,60 @@ export const CircularDashboard = () => {
   return (
     <div ref={containerRef} className="relative h-[450vh] bg-black">
       {/* Snap Points Container */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
         {sections.map((_, i) => (
-          <div key={i} className="h-screen w-full snap-start" />
+          <div key={i} className="h-[100dvh] w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
-        {/* Right Side: HALF CIRCLE WITH BORDER */}
-        <div className="absolute right-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center">
-          
+        {/* Right Side: Circular UI - HIDDEN ON MOBILE */}
+        <div className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center">
           <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
-
-          {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
-            style={{
-              opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-              scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
-              x: useTransform(smoothProgress, [0, 0.1], [0, 100]),
-            }}
-            className="absolute right-[22vw] w-[40vw] flex items-center justify-center"
+            style={{ rotate: rotation }}
+            className="relative w-full h-full rounded-full border-2 border-primary/20 bg-primary/5 flex items-center justify-center shadow-[inset_0_0_50px_rgba(var(--primary),0.1)]"
           >
-            <div className="relative w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20">
-               <img 
-                 src="/dashboard-intro.png" 
-                 alt="User tracking posture" 
-                 className="w-full h-full object-cover"
-               />
-               <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
-            </div>
-          </motion.div>
+            {dashboardViews.map((view, index) => {
+              const angle = index * -angleStep;
+              const activePoint = (index + 1) / itemsCount;
+              const glowRange = 0.04;
 
-          {/* Rotating Half-Circle */}
-          <motion.div 
-            style={{ 
-              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.8, 0.85], [0, 1, 1, 0]),
-            }}
-            className="w-full h-full flex items-center justify-center"
-          >
-            <motion.div
-              style={{ rotate: rotation }}
-              className="relative w-full h-full rounded-full border-2 border-primary/20 bg-primary/5 flex items-center justify-center shadow-[inset_0_0_50px_rgba(var(--primary),0.1)]"
-            >
-              {dashboardViews.map((view, index) => {
-                const angle = index * -angleStep;
-                const activePoint = (index + 1) / itemsCount;
-                const glowRange = 0.04;
-
-                return (
-                  <div
-                    key={index}
-                    className="absolute"
+              return (
+                <div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    transform: `rotate(${angle}deg) translate(-19vw) rotate(${-angle}deg)`,
+                  }}
+                >
+                  <motion.div 
                     style={{
-                      transform: `rotate(${angle}deg) translate(-19vw) rotate(${-angle}deg)`,
+                      scale: useTransform(smoothProgress, 
+                        [activePoint - glowRange, activePoint, activePoint + glowRange], 
+                        [0.8, 1.25, 0.8]
+                      ),
+                      borderColor: useTransform(smoothProgress,
+                        [activePoint - glowRange, activePoint, activePoint + glowRange],
+                        ["rgba(255,255,255,0.1)", "var(--primary)", "rgba(255,255,255,0.1)"]
+                      )
                     }}
+                    className={`p-5 rounded-full bg-neutral-900 border-2 transition-colors z-30 ${view.color}`}
                   >
-                    <motion.div 
-                      style={{
-                        scale: useTransform(smoothProgress, 
-                          [activePoint - glowRange, activePoint, activePoint + glowRange], 
-                          [0.8, 1.25, 0.8]
-                        ),
-                        borderColor: useTransform(smoothProgress,
-                          [activePoint - glowRange, activePoint, activePoint + glowRange],
-                          ["rgba(255,255,255,0.1)", "var(--primary)", "rgba(255,255,255,0.1)"]
-                        ),
-                        boxShadow: useTransform(smoothProgress,
-                          [activePoint - glowRange, activePoint, activePoint + glowRange],
-                          ["0px 0px 0px rgba(0,0,0,0)", `0px 0px 25px ${view.glow}`, "0px 0px 0px rgba(0,0,0,0)"]
-                        ),
-                      }}
-                      className={`p-5 rounded-full bg-neutral-900 border-2 transition-colors z-30 ${view.color}`}
-                    >
-                      <view.icon size={28} />
-                    </motion.div>
-                  </div>
-                );
-              })}
-            </motion.div>
-            <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
+                    <view.icon size={28} />
+                  </motion.div>
+                </div>
+              );
+            })}
           </motion.div>
+          <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </div>
 
-        {/* CONTENT AREA */}
         <div className="w-full h-full relative">
           
           {/* Main Slide Area */}
-          <div className="absolute inset-0 mr-[25vw] pl-10 lg:pl-24">
+          <div className="absolute inset-0 lg:mr-[25vw] px-6 lg:pl-24">
             <div className="relative h-full flex flex-col justify-center">
               
               {/* Intro Slide */}
@@ -179,17 +144,19 @@ export const CircularDashboard = () => {
                   y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
                   pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center"
+                className="absolute inset-0 flex flex-col justify-center text-center lg:text-left"
               >
-                <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
-                  <Sparkles size={14} /> Control Center
-                </span>
-                <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                  Your Health, <br/><span className="text-primary">Visualized.</span>
-                </h1>
-                <p className="text-xl text-neutral-400 max-w-xl leading-relaxed">
-                  The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
-                </p>
+                <div className="flex flex-col items-center lg:items-start">
+                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] mb-6">
+                    <Sparkles size={14} /> Control Center
+                  </span>
+                  <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                    Your Health, <br/><span className="text-primary">Visualized.</span>
+                  </h1>
+                  <p className="text-base lg:text-xl text-neutral-400 max-w-xl leading-relaxed">
+                    The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
+                  </p>
+                </div>
               </motion.div>
 
               {/* View Slides */}
@@ -198,7 +165,7 @@ export const CircularDashboard = () => {
                 const range = 0.07;
 
                 const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
-                const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [40, 0, -40]);
+                const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [20, 0, -20]);
 
                 return (
                   <motion.div
@@ -210,18 +177,18 @@ export const CircularDashboard = () => {
                     }}
                     className="absolute inset-0 flex flex-col justify-center"
                   >
-                    <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
-                      <div className="flex-1">
-                        <span className={`text-sm font-mono mb-4 block ${view.color}`}>0{index + 1} / DASHBOARD VIEW</span>
-                        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                    <div className="flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-10">
+                      <div className="flex-1 text-center lg:text-left">
+                        <span className={`text-xs font-mono mb-2 lg:mb-4 block ${view.color}`}>0{index + 1} / DASHBOARD VIEW</span>
+                        <h2 className="text-2xl lg:text-5xl font-bold text-white mb-4 lg:mb-6">
                           {view.title}
                         </h2>
-                        <p className="text-lg text-neutral-400 leading-relaxed mb-8">
+                        <p className="text-sm lg:text-lg text-neutral-400 leading-relaxed mb-6 lg:mb-8">
                           {view.description}
                         </p>
                       </div>
-                      <div className="flex-1 w-full">
-                        <div className="rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl shadow-primary/10">
+                      <div className="flex-1 w-full max-w-sm lg:max-w-none mx-auto">
+                        <div className="rounded-xl lg:rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl shadow-primary/10">
                           <img 
                             src={view.image} 
                             alt={view.title} 
@@ -236,21 +203,18 @@ export const CircularDashboard = () => {
             </div>
           </div>
 
-          {/* FINAL CTA - FULLY CENTERED WITH RADIANT BACKGROUND */}
+          {/* FINAL CTA */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
               scale: useTransform(smoothProgress, [0.8, 0.88], [0.9, 1]),
               pointerEvents: useTransform(smoothProgress, [0.8, 1], ["none", "auto"])
             }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/60"
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
              {/* Atmospheric Radiant Effect */}
-             <div className="absolute inset-0 -z-10 overflow-hidden">
-                {/* Digital Grid */}
+             <div className="absolute inset-0 -z-10 overflow-hidden hidden md:block">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-                
-                {/* Moving Radiant Glows */}
                 <motion.div 
                    animate={{
                      scale: [1, 1.2, 1],
@@ -261,33 +225,31 @@ export const CircularDashboard = () => {
                 />
              </div>
 
-             <div className="text-center px-6 max-w-4xl">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                >
-                  <h2 className="text-5xl lg:text-8xl font-bold text-white mb-10 tracking-tighter">
-                    Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
-                  </h2>
-                  <div className="flex flex-col items-center gap-6">
-                    <a href="/app">
-                      <button className="group relative px-12 py-6 bg-white text-black rounded-full font-bold text-2xl hover:bg-primary hover:text-white transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(var(--primary),0.4)]">
-                         <span className="relative z-10">How can I track my health?</span>
-                         <div className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 -z-0" />
-                      </button>
-                    </a>
-                    <p className="text-neutral-500 font-mono text-sm tracking-widest uppercase">Start your health journey today</p>
-                  </div>
-                </motion.div>
+             <div className="text-center px-6 w-full max-w-4xl">
+                <h2 className="text-4xl lg:text-8xl font-bold text-white mb-8 lg:mb-10 tracking-tighter">
+                  Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
+                </h2>
+                <div className="flex flex-col items-center gap-6">
+                  <a href="/app" className="w-full sm:w-auto">
+                    <button className="w-full sm:w-auto px-8 py-4 lg:px-12 lg:py-6 bg-white text-black rounded-full font-bold text-lg lg:text-2xl hover:bg-primary hover:text-white transition-all shadow-xl">
+                       How can I track my health?
+                    </button>
+                  </a>
+                  <p className="text-neutral-500 font-mono text-[10px] lg:text-sm tracking-widest uppercase">Start your health journey today</p>
+                </div>
              </div>
           </motion.div>
         </div>
       </div>
       
       <style jsx>{`
-        .scroll-snap-y-mandatory {
-          scroll-snap-type: y mandatory;
+        .scroll-snap-y-proximity {
+          scroll-snap-type: y proximity;
+        }
+        @media (min-width: 1024px) {
+          .lg\:scroll-snap-y-mandatory {
+            scroll-snap-type: y mandatory;
+          }
         }
       `}</style>
     </div>
