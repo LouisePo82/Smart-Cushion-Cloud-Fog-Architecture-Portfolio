@@ -86,13 +86,13 @@ export const CircularFeatures = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: Rotating Circle (REDUCED SIZE: 38vw) */}
+        {/* Left Side: TRUE HALF CIRCLE */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [0, 1, 1, 0]),
             x: useTransform(smoothProgress, [0.15, 0.22, 0.95, 1], [-100, 0, 0, -100])
           }}
-          className="absolute left-[-12vw] w-[38vw] h-[38vw] flex items-center justify-center"
+          className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center"
         >
           <motion.div
             style={{ rotate: rotation }}
@@ -173,7 +173,7 @@ export const CircularFeatures = () => {
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
             }}
-            className="absolute inset-0 flex items-center justify-center pl-[35vw] pr-10 lg:pr-32"
+            className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32"
           >
             <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
               <div className="flex-1 w-full">
@@ -228,7 +228,7 @@ export const CircularFeatures = () => {
               <motion.div
                 key={index}
                 style={{ opacity, y }}
-                className="absolute inset-0 flex flex-col justify-center pl-[35vw] pr-10 lg:pr-32 pointer-events-none"
+                className="absolute inset-0 flex flex-col justify-center pl-[30vw] pr-10 lg:pr-32 pointer-events-none"
               >
                 <span className={`text-sm font-mono mb-4 ${feature.color}`}>TECH / 0{index + 1}</span>
                 <h3 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">

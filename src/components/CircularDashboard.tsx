@@ -72,6 +72,7 @@ export const CircularDashboard = () => {
   const angleStep = 45;
   const totalRotation = angleStep * (totalFeatures - 1);
 
+  // Rotation logic adjusted for half-circle view
   const rotation = useTransform(
     smoothProgress, 
     [1.2 / itemsCount, (totalFeatures + 0.2) / itemsCount], 
@@ -82,34 +83,34 @@ export const CircularDashboard = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Right Side: Rotating Circle / Intro Illustration */}
-        <div className="absolute right-[-8vw] w-[50vw] h-full flex items-center justify-center">
+        {/* Right Side: HALF CIRCLE */}
+        <div className="absolute right-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center">
           
-          {/* 0. Intro Illustration for Slide 0 */}
+          {/* 0. Intro Illustration for Slide 0 - Shifted more to the left to avoid being cut */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
               scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
               x: useTransform(smoothProgress, [0, 0.12], [0, 100]),
             }}
-            className="absolute inset-0 flex items-center justify-center pr-[5vw]"
+            className="absolute right-[22vw] w-[40vw] flex items-center justify-center"
           >
-            <div className="relative w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20 group">
+            <div className="relative w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20">
                <img 
                  src="/dashboard-intro.png" 
                  alt="User tracking posture" 
-                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                 className="w-full h-full object-cover"
                />
                <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
             </div>
           </motion.div>
 
-          {/* Rotating Circle (REDUCED SIZE: 38vw) */}
+          {/* Rotating Half-Circle */}
           <motion.div 
             style={{ 
               opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
             }}
-            className="w-[38vw] h-[38vw] flex items-center justify-center"
+            className="w-full h-full flex items-center justify-center"
           >
             <motion.div
               style={{ rotate: rotation }}
@@ -155,11 +156,11 @@ export const CircularDashboard = () => {
           </motion.div>
         </div>
 
-        {/* Left Side: Description */}
-        <div className="mr-[35vw] flex-1 pl-10 lg:pl-24">
+        {/* Left Side: Description - Shifted to provide more space */}
+        <div className="mr-[25vw] flex-1 pl-10 lg:pl-24">
           <div className="relative h-[80vh] flex flex-col justify-center">
             
-            {/* 0. Intro Slide */}
+            {/* Intro Slide */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
