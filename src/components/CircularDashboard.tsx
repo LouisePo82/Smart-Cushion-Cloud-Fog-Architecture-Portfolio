@@ -90,7 +90,12 @@ export const CircularDashboard = () => {
       <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
         {/* Right Side: CIRCULAR UI - HIDDEN ON MOBILE */}
-        <div className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center">
+        <motion.div 
+          style={{ 
+            opacity: useTransform(smoothProgress, [0.14, 0.18, 0.8, 0.85], [0, 1, 1, 0]),
+          }}
+          className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center"
+        >
           <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
           <motion.div
             style={{ rotate: rotation }}
