@@ -72,7 +72,7 @@ const Hero = () => {
 
               {/* Integrated Tech Stack Card */}
               <div className="mt-12 flex flex-col items-center lg:items-start w-full">
-                <p className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500 mb-6">Powered by Advanced Tech Stack</p>
+                <p className="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500 mb-6">From Your Office to the Cloud</p>
                 
                 <div className="relative w-full bg-neutral-900/40 border border-neutral-800 rounded-[2.5rem] p-8 md:p-10 flex flex-col items-center justify-center overflow-hidden">
                   {/* Central Glow */}
