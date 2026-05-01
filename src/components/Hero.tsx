@@ -173,40 +173,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Check Our Solution - RADIANT DATA FLOW EFFECT */}
-      <motion.div
-        style={{ 
-          opacity: useTransform(scrollYProgress, [0.3, 0.45], [0, 1]),
-          y: useTransform(scrollYProgress, [0.3, 0.45], [50, 0])
-        }}
-        className="absolute bottom-10 left-0 w-full flex flex-col items-center justify-center overflow-hidden"
-      >
-        {/* Radiant Atmosphere (Like Vortex but Linear/Radiant) */}
-        <div className="absolute inset-0 -z-10 flex items-center justify-center">
-            <div className="w-[150%] h-[300%] bg-[radial-gradient(circle_at_50%_100%,rgba(59,130,246,0.1),transparent_70%)] animate-pulse" />
-            <div className="absolute bottom-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.5)]" />
-        </div>
-
-        <div className="flex flex-col items-center gap-6 relative z-10 py-10">
-           <motion.div
-             animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
-             transition={{ duration: 3, repeat: Infinity }}
-             className="text-primary"
-           >
-             <Sparkles size={24} />
-           </motion.div>
-           
-           <h3 className="text-primary font-mono text-xs lg:text-lg uppercase tracking-[0.6em] font-black drop-shadow-glow">
-              Check our solution
-           </h3>
-           
-           <motion.div
-             animate={{ y: [0, 15, 0] }}
-             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-             className="w-[1px] h-24 bg-gradient-to-b from-primary via-primary/20 to-transparent"
-           />
-        </div>
-      </motion.div>
     </section>
   );
 };

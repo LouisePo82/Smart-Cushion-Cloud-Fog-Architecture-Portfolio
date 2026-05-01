@@ -16,10 +16,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
+    { name: "Introduction", href: "/" },
     { name: "What we solve", href: "/solutions" },
     { name: "Product", href: "/features" },
     { name: "Dashboard", href: "/dashboard" },
-    { name: "Mobile App", href: "/app" },
+    { name: "Mobile Setup", href: "/app" },
     { name: "Team", href: "/team" },
   ];
 
@@ -80,7 +81,9 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button className="w-full mt-4">Get Started</Button>
+              <Button className="w-full mt-4" asChild>
+                <a href="/contact">Contact Us</a>
+              </Button>
             </div>
           </motion.div>
         )}
