@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Vortex } from "./ui/Vortex";
@@ -58,6 +58,7 @@ const features = [
 export const CircularFeatures = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [activeSlide, setActiveSlide] = useState(0);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -89,10 +90,22 @@ export const CircularFeatures = () => {
     [1, 1, 0, 0.25, 0.25, 1]
   );
 
+  // Programmatic Navigation Logic
+  const navigateTo = (index: number) => {
+    const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
+    setActiveSlide(targetIndex);
+    const container = containerRef.current;
+    if (container) {
+      // Calculate scroll position based on index
+      const scrollTarget = targetIndex * window.innerHeight;
+      container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black">
-      {/* Snap Points Container */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
+    <div ref={containerRef} className="relative h-[600vh] bg-black overflow-y-hidden lg:overflow-y-auto">
+      {/* Snap Points Container - Hidden on Mobile to prevent manual scroll issues */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[100dvh] w-full snap-start" />
         ))}
@@ -130,7 +143,7 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = (index + 4) / itemsCount; // Offset to start after Design DNA
+              const activePoint = (index + 4) / itemsCount; 
               const glowRange = 0.04;
 
               return (
@@ -189,7 +202,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1-3. Design DNA Slide - SPANS THREE SECTIONS FOR MAXIMUM DURATION */}
+          {/* 1-3. Design DNA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], [0, 1, 1, 0]),
@@ -199,7 +212,6 @@ export const CircularFeatures = () => {
           >
             <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
               <div className="flex flex-col items-center gap-6 lg:gap-10">
-                {/* LARGER IMAGE WITH BORDER */}
                 <div className="w-[45vh] h-[45vh] lg:w-[60vh] lg:h-[60vh] rounded-[2.5rem] lg:rounded-[4rem] bg-neutral-900/30 border-2 border-white/10 p-6 lg:p-10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(255,255,255,0.05)] relative group">
                   <div className="absolute inset-0 rounded-[2.5rem] lg:rounded-[4rem] border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <AnimatePresence mode="wait">
@@ -219,7 +231,6 @@ export const CircularFeatures = () => {
                   </AnimatePresence>
                 </div>
                 
-                {/* COLOR PICKER */}
                 <div className="flex gap-4 lg:gap-6 p-4 lg:p-5 rounded-2xl lg:rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
                   {products.map((p) => (
                     <button
@@ -234,7 +245,6 @@ export const CircularFeatures = () => {
                 </div>
               </div>
 
-              {/* TEXT AREA */}
               <div className="lg:absolute lg:right-0 text-center lg:text-right max-w-lg">
                 <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-4">
                   <Sparkles size={14} /> The Masterpiece
@@ -249,11 +259,9 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 4-9. Features Slides - ELIMINATED GAPS */}
+          {/* 4-9. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = (index + 4) / itemsCount; 
-            const range = 1 / itemsCount; // Wider range to overlap perfectly
-
             const opacity = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [0, 1, 0]);
             const y = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [20, 0, -20]);
 
@@ -283,7 +291,7 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 10-12. Final CTA Slide - Enhanced with Cyber Aurora Effect */}
+          {/* 10-12. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
@@ -292,13 +300,10 @@ export const CircularFeatures = () => {
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 overflow-hidden"
           >
-            {/* Cyber Aurora Grid Background */}
             <div className="absolute inset-0 -z-10">
-               {/* 3D Perspective Grid */}
                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" 
                     style={{ transform: 'perspective(1000px) rotateX(60deg) translateY(100px) scale(2)' }}
                />
-               {/* Aurora Pulsing Glows */}
                <motion.div 
                  animate={{
                    scale: [1, 1.2, 1],
@@ -307,15 +312,6 @@ export const CircularFeatures = () => {
                  }}
                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[150px] rounded-full"
-               />
-               <motion.div 
-                 animate={{
-                   scale: [1.2, 1, 1.2],
-                   opacity: [0.1, 0.2, 0.1],
-                   x: [50, -50, 50],
-                 }}
-                 transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-secondary/10 blur-[130px] rounded-full"
                />
             </div>
 
@@ -327,50 +323,26 @@ export const CircularFeatures = () => {
               Analyze My Data <ArrowRight size={28} />
             </a>
           </motion.div>
-
         </div>
 
-        {/* Mobile Navigation Arrows */}
+        {/* Mobile Navigation Arrows - Updated Logic */}
         <div className="flex lg:hidden absolute bottom-8 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = window.innerHeight;
-                container.scrollTo({ top: currentScroll - viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-black/50 border border-white/10 text-white pointer-events-auto active:scale-95 transition-transform backdrop-blur-md"
+            onClick={() => navigateTo(activeSlide - 1)}
+            className={`p-4 rounded-full bg-black/80 border border-white/20 text-white pointer-events-auto active:scale-90 transition-all backdrop-blur-lg ${activeSlide === 0 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === 0}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={32} />
           </button>
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = window.innerHeight;
-                container.scrollTo({ top: currentScroll + viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-95 transition-transform shadow-lg shadow-primary/20"
+            onClick={() => navigateTo(activeSlide + 1)}
+            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === itemsCount - 1 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === itemsCount - 1}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={32} />
           </button>
         </div>
       </div>
-      
-      <style jsx>{`
-        .scroll-snap-y-proximity {
-          scroll-snap-type: y proximity;
-        }
-        @media (min-width: 1024px) {
-          .lg\:scroll-snap-y-mandatory {
-            scroll-snap-type: y mandatory;
-          }
-        }
-      `}</style>
     </div>
   );
 };

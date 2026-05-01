@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { 
   Activity, 
@@ -58,6 +58,8 @@ const dashboardViews = [
 
 export const CircularDashboard = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -69,7 +71,6 @@ export const CircularDashboard = () => {
     restDelta: 0.001,
   });
 
-  const totalFeatures = dashboardViews.length;
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
@@ -80,10 +81,20 @@ export const CircularDashboard = () => {
     [0, 180]
   );
 
+  const navigateTo = (index: number) => {
+    const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
+    setActiveSlide(targetIndex);
+    const container = containerRef.current;
+    if (container) {
+      const scrollTarget = targetIndex * window.innerHeight;
+      container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div ref={containerRef} className="relative h-[450vh] bg-black">
-      {/* Snap Points Container */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
+    <div ref={containerRef} className="relative h-[450vh] bg-black overflow-y-hidden lg:overflow-y-auto">
+      {/* Snap Points Container - Desktop Only */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[100dvh] w-full snap-start" />
         ))}
@@ -138,7 +149,7 @@ export const CircularDashboard = () => {
           <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
-        {/* 0. Intro Illustration - NOW SEPARATE AND RESPONSIVE */}
+        {/* 0. Intro Illustration */}
         <motion.div
           style={{
             opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
@@ -181,7 +192,7 @@ export const CircularDashboard = () => {
                   <h1 className="text-4xl lg:text-9xl font-bold text-white mb-8 leading-tight tracking-tighter">
                     Your Health, <br/><span className="text-primary italic font-black">Visualized.</span>
                   </h1>
-                  <p className="text-base lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed font-medium">
+                  <p className="text-base lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed font-medium text-center lg:text-left">
                     The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
                   </p>
                 </div>
@@ -240,18 +251,6 @@ export const CircularDashboard = () => {
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
-             <div className="absolute inset-0 -z-10 overflow-hidden hidden md:block">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-                <motion.div 
-                   animate={{
-                     scale: [1, 1.2, 1],
-                     opacity: [0.1, 0.2, 0.1],
-                   }}
-                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/20 blur-[120px] rounded-full"
-                />
-             </div>
-
              <div className="text-center px-6 w-full max-w-4xl">
                 <h2 className="text-4xl lg:text-9xl font-bold text-white mb-12 lg:mb-16 tracking-tighter">
                   Take Command of <br/><span className="text-primary italic font-black">Your Wellbeing.</span>
@@ -262,7 +261,6 @@ export const CircularDashboard = () => {
                        How can I track my health?
                     </button>
                   </a>
-                  <p className="text-neutral-500 font-mono text-xs lg:text-lg tracking-widest uppercase">Start your health journey today</p>
                 </div>
              </div>
           </motion.div>
@@ -271,30 +269,18 @@ export const CircularDashboard = () => {
         {/* Mobile Navigation Arrows */}
         <div className="flex lg:hidden absolute bottom-8 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = window.innerHeight;
-                container.scrollTo({ top: currentScroll - viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-black/50 border border-white/10 text-white pointer-events-auto active:scale-95 transition-transform backdrop-blur-md"
+            onClick={() => navigateTo(activeSlide - 1)}
+            className={`p-4 rounded-full bg-black/80 border border-white/20 text-white pointer-events-auto active:scale-90 transition-all backdrop-blur-lg ${activeSlide === 0 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === 0}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={32} />
           </button>
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = window.innerHeight;
-                container.scrollTo({ top: currentScroll + viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-95 transition-transform shadow-lg shadow-primary/20"
+            onClick={() => navigateTo(activeSlide + 1)}
+            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === itemsCount - 1 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === itemsCount - 1}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={32} />
           </button>
         </div>
       </div>

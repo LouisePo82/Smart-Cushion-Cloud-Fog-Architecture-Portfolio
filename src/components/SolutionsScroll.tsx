@@ -1,7 +1,7 @@
 "use client";
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { AlertCircle, Zap, Shield, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { AlertCircle, Zap, Shield, Heart, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const solutions = [
   {
@@ -40,6 +40,8 @@ const solutions = [
 
 export const SolutionsScroll = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -54,10 +56,20 @@ export const SolutionsScroll = () => {
   const sections = Array.from({ length: 6 });
   const itemsCount = sections.length;
 
+  const navigateTo = (index: number) => {
+    const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
+    setActiveSlide(targetIndex);
+    const container = containerRef.current;
+    if (container) {
+      const viewHeight = container.clientHeight * 0.9;
+      container.scrollTo({ top: targetIndex * viewHeight, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div ref={containerRef} className="relative h-[540vh] bg-neutral-950">
-      {/* Snap Points Container */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
+    <div ref={containerRef} className="relative h-[540vh] bg-neutral-950 overflow-y-hidden lg:overflow-y-auto">
+      {/* Snap Points Container - Desktop Only */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[90vh] w-full snap-start" />
         ))}
@@ -100,7 +112,6 @@ export const SolutionsScroll = () => {
 
             {/* Solution Slides */}
             {solutions.map((item, index) => {
-              // Standardized active points: 1/6, 2/6, 3/6, 4/6
               const activePoint = (index + 1) / itemsCount;
               const range = 0.08;
 
@@ -130,7 +141,7 @@ export const SolutionsScroll = () => {
                   </div>
 
                   {/* Right Side: Text Content */}
-                  <div className="flex-1 text-left">
+                  <div className="flex-1 text-center lg:text-left">
                     <span className={`text-sm font-mono uppercase tracking-widest mb-4 block ${item.color}`}>
                       Challenge {index + 1}
                     </span>
@@ -154,7 +165,7 @@ export const SolutionsScroll = () => {
               );
             })}
 
-            {/* Closing Slide - Aligned to 5/6 (0.83) - Enhanced with Radiant Effect */}
+            {/* Closing Slide - Aligned to 5/6 (0.83) */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0.75, 0.83, 0.95], [0, 1, 1]),
@@ -162,13 +173,10 @@ export const SolutionsScroll = () => {
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center overflow-hidden"
             >
-              {/* Deep Space Radiant Background */}
               <div className="absolute inset-0 -z-10">
-                 {/* 3D Perspective Grid Floor */}
                  <div className="absolute bottom-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_100%,#000_70%,transparent_100%)] opacity-40" 
                       style={{ transform: 'perspective(1000px) rotateX(75deg) translateY(200px) scale(2)' }}
                  />
-                 {/* Atmospheric Glows */}
                  <motion.div 
                    animate={{
                      scale: [1, 1.2, 1],
@@ -177,7 +185,6 @@ export const SolutionsScroll = () => {
                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[150px] rounded-full"
                  />
-                 <div className="absolute bottom-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_30px_rgba(var(--primary),0.5)]" />
               </div>
 
               <h2 className="text-5xl lg:text-9xl font-bold text-white mb-8 tracking-tighter relative z-10">
@@ -190,46 +197,27 @@ export const SolutionsScroll = () => {
                 View Our Product
               </a>
             </motion.div>
-
           </div>
         </div>
 
         {/* Mobile Navigation Arrows */}
         <div className="flex lg:hidden absolute bottom-12 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = container.clientHeight * 0.9;
-                container.scrollTo({ top: currentScroll - viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-black/50 border border-white/10 text-white pointer-events-auto active:scale-95 transition-transform backdrop-blur-md"
+            onClick={() => navigateTo(activeSlide - 1)}
+            className={`p-4 rounded-full bg-black/80 border border-white/20 text-white pointer-events-auto active:scale-90 transition-all backdrop-blur-lg ${activeSlide === 0 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === 0}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={32} />
           </button>
           <button 
-            onClick={() => {
-              const container = containerRef.current;
-              if (container) {
-                const currentScroll = container.scrollTop;
-                const viewHeight = container.clientHeight * 0.9;
-                container.scrollTo({ top: currentScroll + viewHeight, behavior: 'smooth' });
-              }
-            }}
-            className="p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-95 transition-transform shadow-lg shadow-primary/20"
+            onClick={() => navigateTo(activeSlide + 1)}
+            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === itemsCount - 1 ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === itemsCount - 1}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={32} />
           </button>
         </div>
       </div>
-      
-      <style jsx>{`
-        .scroll-snap-y-mandatory {
-          scroll-snap-type: y mandatory;
-        }
-      `}</style>
     </div>
   );
 };
