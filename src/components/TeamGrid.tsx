@@ -32,10 +32,10 @@ const team = [
   },
   {
     name: "Hoang Mai Vu",
-    role: "Mobile App Developer",
+    role: "Real-time Dashboard Architect",
     image: "/Vu.jpg",
     bg: "bg-orange-500/20",
-    description: "Designs clear, elegant mobile experiences, blending visual storytelling with empathetic user research."
+    description: "Architects high-performance real-time dashboards, specializing in seamless data visualization and sub-100ms MQTT telemetry."
   }
 ];
 
