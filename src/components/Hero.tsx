@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowRight, Cpu, Zap, Layers, Shield, Sparkles, Monitor, Cloud, Brain, ArrowRightIcon } from "lucide-react";
 
-export const Hero = () => {
+export default function Hero() {
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center">
       {/* Background Decorative Elements */}
