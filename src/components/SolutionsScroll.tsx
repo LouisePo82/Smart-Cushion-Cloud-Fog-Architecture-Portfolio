@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import { AlertCircle, Zap, Shield, Heart, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const solutions = [
@@ -56,26 +56,30 @@ export const SolutionsScroll = () => {
   const sections = Array.from({ length: 6 });
   const itemsCount = sections.length;
 
+  // Sync activeSlide with scroll
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const index = Math.round(latest * (itemsCount - 1));
+    if (index !== activeSlide) setActiveSlide(index);
+  });
+
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
-    setActiveSlide(targetIndex);
-    const container = containerRef.current;
-    if (container) {
-      const viewHeight = container.clientHeight * 0.9;
-      container.scrollTo({ top: targetIndex * viewHeight, behavior: 'smooth' });
-    }
+    window.scrollTo({
+      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight * 0.9),
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <div ref={containerRef} className="relative h-[540vh] bg-neutral-950 overflow-y-hidden lg:overflow-y-auto">
+    <div ref={containerRef} className="relative h-[600vh] bg-neutral-950">
       {/* Snap Points Container - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-mandatory">
+      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[90vh] w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden touch-none lg:touch-auto">
         {/* Atmospheric Background */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#3b82f633,transparent_70%)]" />
@@ -165,7 +169,7 @@ export const SolutionsScroll = () => {
               );
             })}
 
-            {/* Closing Slide - Aligned to 5/6 (0.83) */}
+            {/* Closing Slide */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0.75, 0.83, 0.95], [0, 1, 1]),
@@ -193,7 +197,7 @@ export const SolutionsScroll = () => {
               <p className="text-xl lg:text-3xl text-neutral-400 max-w-2xl mb-12 font-medium relative z-10">
                 Join thousands of office professionals who have already reclaimed their spinal health.
               </p>
-              <a href="/features" className="relative z-10 px-12 py-6 bg-white text-black rounded-full font-bold text-2xl hover:bg-primary hover:text-white transition-all shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-105">
+              <a href="/features" className="relative z-20 px-12 py-6 bg-white text-black rounded-full font-bold text-2xl hover:bg-primary hover:text-white transition-all shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-105 cursor-pointer">
                 View Our Product
               </a>
             </motion.div>

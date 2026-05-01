@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import { Brain, Cpu, Smartphone, Cloud, Bell, Battery, Sparkles, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Vortex } from "./ui/Vortex";
 
@@ -71,12 +71,17 @@ export const CircularFeatures = () => {
     restDelta: 0.001,
   });
 
-  const totalFeatures = features.length;
   const sections = Array.from({ length: 12 });
   const itemsCount = sections.length; 
 
+  // Sync activeSlide state with scroll position
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const index = Math.round(latest * (itemsCount - 1));
+    if (index !== activeSlide) setActiveSlide(index);
+  });
+
   const angleStep = 40; 
-  const totalRotation = angleStep * (totalFeatures - 1);
+  const totalRotation = angleStep * (features.length - 1);
 
   const rotation = useTransform(
     smoothProgress, 
@@ -90,28 +95,26 @@ export const CircularFeatures = () => {
     [1, 1, 0, 0.25, 0.25, 1]
   );
 
-  // Programmatic Navigation Logic
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
-    setActiveSlide(targetIndex);
-    const container = containerRef.current;
-    if (container) {
-      // Calculate scroll position based on index
-      const scrollTarget = targetIndex * window.innerHeight;
-      container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-    }
+    const targetScroll = (targetIndex / (itemsCount - 1)) * (containerRef.current?.scrollHeight || 0 - window.innerHeight);
+    
+    window.scrollTo({
+      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight),
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black overflow-y-hidden lg:overflow-y-auto">
-      {/* Snap Points Container - Hidden on Mobile to prevent manual scroll issues */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-mandatory">
+    <div ref={containerRef} className="relative h-[1200vh] bg-black">
+      {/* Snap Points Container - Desktop Only */}
+      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[100dvh] w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden touch-none lg:touch-auto">
         
         {/* Background Vortex */}
         <motion.div 
@@ -181,8 +184,7 @@ export const CircularFeatures = () => {
         </motion.div>
 
         <div className="relative w-full h-full">
-          
-          {/* 0. Intro Slide */}
+          {/* Intro Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.14], [1, 1, 0]),
@@ -202,7 +204,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1-3. Design DNA Slide */}
+          {/* Design DNA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], [0, 1, 1, 0]),
@@ -259,7 +261,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 4-9. Features Slides */}
+          {/* Features Slides */}
           {features.map((feature, index) => {
             const activePoint = (index + 4) / itemsCount; 
             const opacity = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [0, 1, 0]);
@@ -291,7 +293,7 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 10-12. Final CTA Slide */}
+          {/* Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
@@ -319,13 +321,13 @@ export const CircularFeatures = () => {
               Explore your <br/> 
               <span className="text-primary italic font-black">Live Dashboard.</span>
             </h2>
-            <a href="/dashboard" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40">
-              Analyze My Data <ArrowRight size={28} />
+            <a href="https://smart-cushion-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
+              Try Demo <ArrowRight size={28} />
             </a>
           </motion.div>
         </div>
 
-        {/* Mobile Navigation Arrows - Updated Logic */}
+        {/* Mobile Navigation Arrows */}
         <div className="flex lg:hidden absolute bottom-8 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
           <button 
             onClick={() => navigateTo(activeSlide - 1)}

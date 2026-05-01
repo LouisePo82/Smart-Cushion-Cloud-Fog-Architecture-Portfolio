@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import { 
   Activity, 
   BarChart3, 
@@ -73,6 +73,13 @@ export const CircularDashboard = () => {
 
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
+
+  // Sync activeSlide with scroll
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const index = Math.round(latest * (itemsCount - 1));
+    if (index !== activeSlide) setActiveSlide(index);
+  });
+
   const angleStep = 45;
 
   const rotation = useTransform(
@@ -83,24 +90,22 @@ export const CircularDashboard = () => {
 
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
-    setActiveSlide(targetIndex);
-    const container = containerRef.current;
-    if (container) {
-      const scrollTarget = targetIndex * window.innerHeight;
-      container.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-    }
+    window.scrollTo({
+      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight),
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <div ref={containerRef} className="relative h-[450vh] bg-black overflow-y-hidden lg:overflow-y-auto">
+    <div ref={containerRef} className="relative h-[700vh] bg-black">
       {/* Snap Points Container - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto hidden lg:block scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
+      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
         {sections.map((_, i) => (
           <div key={i} className="h-[100dvh] w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden touch-none lg:touch-auto">
         
         {/* Right Side: CIRCULAR UI - HIDDEN ON MOBILE */}
         <motion.div 
@@ -251,13 +256,13 @@ export const CircularDashboard = () => {
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
-             <div className="text-center px-6 w-full max-w-4xl">
+             <div className="text-center px-6 w-full max-w-4xl relative z-10">
                 <h2 className="text-4xl lg:text-9xl font-bold text-white mb-12 lg:mb-16 tracking-tighter">
                   Take Command of <br/><span className="text-primary italic font-black">Your Wellbeing.</span>
                 </h2>
                 <div className="flex flex-col items-center gap-8">
-                  <a href="https://smart-cushion-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                    <button className="w-full sm:w-auto px-10 py-5 lg:px-16 lg:py-8 bg-white text-black rounded-full font-bold text-xl lg:text-3xl hover:bg-primary hover:text-white transition-all shadow-2xl">
+                  <a href="https://smart-cushion-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto relative z-20">
+                    <button className="w-full sm:w-auto px-10 py-5 lg:px-16 lg:py-8 bg-white text-black rounded-full font-bold text-xl lg:text-3xl hover:bg-primary hover:text-white transition-all shadow-2xl cursor-pointer">
                        Try Demo
                     </button>
                   </a>
@@ -285,17 +290,6 @@ export const CircularDashboard = () => {
           </button>
         </div>
       </div>
-      
-      <style jsx>{`
-        .scroll-snap-y-proximity {
-          scroll-snap-type: y proximity;
-        }
-        @media (min-width: 1024px) {
-          .lg\:scroll-snap-y-mandatory {
-            scroll-snap-type: y mandatory;
-          }
-        }
-      `}</style>
     </div>
   );
 };
