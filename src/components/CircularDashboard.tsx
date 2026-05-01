@@ -111,7 +111,7 @@ export const CircularDashboard = () => {
         {/* Right Side: CIRCULAR UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [1 / denominator, 1.5 / denominator, 5 / denominator, 5.5 / denominator], [0, 1, 1, 0]),
+            opacity: useTransform(smoothProgress, [0.5 / denominator, 1 / denominator, 5 / denominator, 5.5 / denominator], [0, 1, 1, 0]),
           }}
           className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center"
         >

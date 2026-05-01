@@ -299,12 +299,12 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 10-12. Final CTA Slide */}
+          {/* 10-11. Final CTA Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [10 / denominator, 11 / denominator, 1], [0, 1, 1]),
-              scale: useTransform(smoothProgress, [10 / denominator, 11 / denominator], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [10 / denominator, 11 / denominator, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [9.5 / denominator, 10 / denominator, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [9.5 / denominator, 10 / denominator], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [9.5 / denominator, 10 / denominator, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 overflow-hidden"
           >
