@@ -47,9 +47,9 @@ const features = [
     glow: "rgba(249, 115, 22, 0.5)"
   },
   {
-    title: "30-Day Battery",
-    description: "Ultra-low power design keeps your cushion running for a month on a single USB-C charge.",
-    icon: Battery,
+    title: "Capybara Data Journey",
+    description: "Observe your real-time posture through your virtual Capybara companion. A healthy spine keeps your buddy happy and thriving!",
+    icon: Sparkles,
     color: "text-emerald-500",
     glow: "rgba(160, 185, 129, 0.5)"
   },
@@ -323,11 +323,11 @@ export const CircularFeatures = () => {
             </div>
 
             <h2 className="text-5xl lg:text-9xl font-bold text-white mb-10 lg:mb-16 tracking-tighter relative z-10">
-              Explore your <br/> 
-              <span className="text-primary italic font-black">Live Dashboard.</span>
+              Watch your Capy <br/> 
+              <span className="text-primary italic font-black">Thrive.</span>
             </h2>
             <a href="/dashboard" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
-              Analyze My Data <ArrowRight size={28} />
+              Meet My Capy <ArrowRight size={28} />
             </a>
           </motion.div>
         </div>
