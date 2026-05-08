@@ -30,6 +30,12 @@ export const ArchitectureLayers = () => {
     exit: (direction: number) => ({ zIndex: 0, x: direction < 0 ? 500 : -500, opacity: 0 })
   };
 
+  const itemVariants = {
+    enter: { y: 20, opacity: 0, scale: 0.95 },
+    center: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } },
+    exit: { y: -20, opacity: 0, scale: 0.95 }
+  };
+
   return (
     <section className="py-24 bg-black relative min-h-screen border-t border-white/5 flex flex-col justify-center overflow-hidden">
       {/* Background grid */}
@@ -52,36 +58,39 @@ export const ArchitectureLayers = () => {
             {/* 3 LAYER - Cloud Computing */}
             {activeIndex === 0 && (
               <motion.div 
-                key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
+                key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.15 }}
+                className="absolute inset-0 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-xl shadow-2xl"
               >
-                <div className="text-center mb-10">
-                  <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">3</div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Cloud Computing service models</h2>
-                  <p className="text-neutral-500 font-medium">(3 Layer)</p>
+                <div className="w-full md:w-5/12 text-center md:text-left mb-10 md:mb-0 relative z-10">
+                  <motion.div variants={itemVariants} className="text-[12rem] md:text-[16rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-4">3</motion.div>
+                  <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-white mb-2">Cloud Computing</motion.h2>
+                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-sm">Service Models</motion.p>
                 </div>
-                <div className="flex flex-col gap-6 flex-1 justify-end">
-                  <div className="flex items-stretch rounded-2xl overflow-hidden border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                    <div className="w-1/3 bg-emerald-500/20 p-4 flex items-center justify-center text-center"><span className="text-emerald-400 font-bold">IoT end user</span></div>
-                    <div className="w-2/3 bg-emerald-500/10 p-5 flex items-center justify-between">
-                      <div className="text-sm text-neutral-300"><strong className="text-white text-base block mb-1">Application</strong>(e.g., Smart home, smart factory, smart metering)</div>
-                      <div className="text-emerald-400 font-black text-xl ml-4">SaaS</div>
+
+                <div className="w-full md:w-7/12 flex flex-col gap-6 relative z-10 group/list">
+                  <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 cursor-default group">
+                    <div className="w-1/3 bg-emerald-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-emerald-400 font-bold text-lg mb-1">IoT User</span><span className="text-emerald-500/70 text-xs">End Point</span></div>
+                    <div className="w-2/3 p-6 flex items-center justify-between">
+                      <div><strong className="text-white text-xl block mb-1">Application</strong><span className="text-neutral-400 text-sm">Smart home, automation</span></div>
+                      <div className="text-emerald-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">SaaS</div>
                     </div>
-                  </div>
-                  <div className="flex items-stretch rounded-2xl overflow-hidden border border-orange-500/40 shadow-[0_0_20px_rgba(249,115,22,0.1)]">
-                    <div className="w-1/3 bg-orange-500/20 p-4 flex items-center justify-center text-center"><span className="text-orange-400 font-bold">IoT app developer</span></div>
-                    <div className="w-2/3 bg-orange-500/10 p-5 flex items-center justify-between">
-                      <div className="text-sm text-neutral-300"><strong className="text-white text-base block mb-1">Platform</strong>(e.g., Software frameworks for sensor data processing)</div>
-                      <div className="text-orange-400 font-black text-xl ml-4">PaaS</div>
+                  </motion.div>
+
+                  <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-default group">
+                    <div className="w-1/3 bg-orange-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-orange-400 font-bold text-lg mb-1">Developer</span><span className="text-orange-500/70 text-xs">Builder</span></div>
+                    <div className="w-2/3 p-6 flex items-center justify-between">
+                      <div><strong className="text-white text-xl block mb-1">Platform</strong><span className="text-neutral-400 text-sm">Frameworks & APIs</span></div>
+                      <div className="text-orange-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">PaaS</div>
                     </div>
-                  </div>
-                  <div className="flex items-stretch rounded-2xl overflow-hidden border border-purple-500/40 shadow-[0_0_20px_rgba(168,85,247,0.1)]">
-                    <div className="w-1/3 bg-purple-500/20 p-4 flex items-center justify-center text-center"><span className="text-purple-400 font-bold">IoT app developer</span></div>
-                    <div className="w-2/3 bg-purple-500/10 p-5 flex items-center justify-between">
-                      <div className="text-sm text-neutral-300"><strong className="text-white text-base block mb-1">Infrastructure</strong>(e.g., Network, storage, computation)</div>
-                      <div className="text-purple-400 font-black text-xl ml-4">IaaS</div>
+                  </motion.div>
+
+                  <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] transition-all duration-500 cursor-default group">
+                    <div className="w-1/3 bg-purple-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-purple-400 font-bold text-lg mb-1">Architect</span><span className="text-purple-500/70 text-xs">Core</span></div>
+                    <div className="w-2/3 p-6 flex items-center justify-between">
+                      <div><strong className="text-white text-xl block mb-1">Infrastructure</strong><span className="text-neutral-400 text-sm">Network, Storage, Compute</span></div>
+                      <div className="text-purple-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">IaaS</div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
@@ -89,24 +98,28 @@ export const ArchitectureLayers = () => {
             {/* 5 LAYER - IoT Architecture */}
             {activeIndex === 1 && (
               <motion.div 
-                key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
+                key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.1 }}
+                className="absolute inset-0 flex flex-col bg-gradient-to-tr from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl items-center"
               >
-                <div className="text-center mb-8">
-                  <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">5</div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">IoT Architecture</h2>
-                  <p className="text-neutral-500 font-medium">(5 Layer - Typical, not a standard)</p>
+                <div className="absolute top-0 right-0 p-12 opacity-20 pointer-events-none">
+                  <div className="text-[20rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white to-white/0">5</div>
                 </div>
-                <div className="flex flex-col gap-2 flex-1 justify-end max-w-lg mx-auto w-full">
-                  <Layer5Box name="Business Layer" icon="📊" />
-                  <div className="flex justify-center"><div className="w-0.5 h-6 bg-white/20" /></div>
-                  <Layer5Box name="Application Layer" icon="📱" />
-                  <div className="flex justify-center"><div className="w-0.5 h-6 bg-white/20" /></div>
-                  <Layer5Box name="Middleware Layer" icon="⚙️" dashed />
-                  <div className="flex justify-center"><div className="w-0.5 h-6 bg-white/20" /></div>
-                  <Layer5Box name="Network Layer" icon="🌐" />
-                  <div className="flex justify-center"><div className="w-0.5 h-6 bg-white/20" /></div>
-                  <Layer5Box name="Physical Layer" icon="📡" />
+
+                <div className="text-center mb-10 relative z-10">
+                  <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white mb-3">IoT Architecture</motion.h2>
+                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-sm">Standard 5-Layer Stack</motion.p>
+                </div>
+
+                <div className="flex flex-col flex-1 justify-center w-full max-w-2xl relative z-10">
+                  <Layer5Box variants={itemVariants} name="Business Layer" icon="📊" desc="Management & ROI" color="from-blue-500/20 to-transparent" borderColor="border-blue-500/40" />
+                  <ConnectionLine variants={itemVariants} />
+                  <Layer5Box variants={itemVariants} name="Application Layer" icon="📱" desc="Smart Dashboard & Analytics" color="from-cyan-500/20 to-transparent" borderColor="border-cyan-500/40" />
+                  <ConnectionLine variants={itemVariants} />
+                  <Layer5Box variants={itemVariants} name="Middleware Layer" icon="⚙️" desc="Data Processing & Fog AI" color="from-red-500/20 to-transparent" borderColor="border-red-500/40" dashed />
+                  <ConnectionLine variants={itemVariants} />
+                  <Layer5Box variants={itemVariants} name="Network Layer" icon="🌐" desc="MQTT & Local WiFi" color="from-green-500/20 to-transparent" borderColor="border-green-500/40" />
+                  <ConnectionLine variants={itemVariants} />
+                  <Layer5Box variants={itemVariants} name="Physical Layer" icon="📡" desc="FSR Sensor & ESP32" color="from-yellow-500/20 to-transparent" borderColor="border-yellow-500/40" />
                 </div>
               </motion.div>
             )}
@@ -114,30 +127,32 @@ export const ArchitectureLayers = () => {
             {/* 7 LAYER - OSI Model */}
             {activeIndex === 2 && (
               <motion.div 
-                key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
+                key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.08 }}
+                className="absolute inset-0 flex flex-col md:flex-row bg-gradient-to-bl from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl"
               >
-                <div className="text-center mb-8">
-                  <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">7</div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">OSI model</h2>
-                  <p className="text-neutral-500 font-medium">(7 layer - Open Systems Interconnection)</p>
+                <div className="w-full md:w-1/3 text-center md:text-left flex flex-col justify-center pr-8 relative z-10">
+                  <motion.div variants={itemVariants} className="text-[12rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-2 mb-4">7</motion.div>
+                  <motion.h2 variants={itemVariants} className="text-4xl font-bold text-white mb-2">OSI Model</motion.h2>
+                  <motion.p variants={itemVariants} className="text-neutral-400 text-sm">Open Systems Interconnection</motion.p>
                 </div>
-                <div className="flex gap-4 flex-1 items-end w-full">
-                  <div className="w-1/3 flex flex-col gap-3 justify-end">
-                    <DataUnitBox text="Data" height="h-[170px]" />
-                    <DataUnitBox text="Segments (TCP) / Datagrams (UDP)" height="h-14" color="bg-cyan-500/20 text-cyan-400 border-cyan-500/30" />
-                    <DataUnitBox text="Packets" height="h-14" color="bg-green-500/20 text-green-400 border-green-500/30" />
-                    <DataUnitBox text="Frames" height="h-14" color="bg-lime-500/20 text-lime-400 border-lime-500/30" />
-                    <DataUnitBox text="Bits" height="h-14" color="bg-yellow-500/20 text-yellow-400 border-yellow-500/30" />
+
+                <div className="w-full md:w-2/3 flex gap-4 flex-1 items-end relative z-10">
+                  <div className="w-1/3 flex flex-col gap-2 justify-end">
+                    <motion.div variants={itemVariants}><DataUnitBox text="Data" height="h-[210px]" color="bg-white/5 text-white/50 border-white/10" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Segments / Datagrams" height="h-16" color="bg-cyan-500/10 text-cyan-400 border-cyan-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Packets" height="h-16" color="bg-green-500/10 text-green-400 border-green-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Frames" height="h-16" color="bg-lime-500/10 text-lime-400 border-lime-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Bits" height="h-16" color="bg-yellow-500/10 text-yellow-400 border-yellow-500/30" /></motion.div>
                   </div>
-                  <div className="w-2/3 flex flex-col gap-3">
-                    <OsiLayerBox num={7} name="Application" desc="Network services to Application" color="bg-indigo-500/20 border-indigo-500/30 text-indigo-300" />
-                    <OsiLayerBox num={6} name="Presentation" desc="Data Formatting and Encryption" color="bg-indigo-500/20 border-indigo-500/30 text-indigo-300" />
-                    <OsiLayerBox num={5} name="Session" desc="Interhost Communication" color="bg-indigo-500/20 border-indigo-500/30 text-indigo-300" />
-                    <OsiLayerBox num={4} name="Transport" desc="End-to-End Connections and Reliability" color="bg-cyan-500/20 border-cyan-500/30 text-cyan-300" />
-                    <OsiLayerBox num={3} name="Network" desc="Routing and IP (Logical Addressing)" color="bg-green-500/20 border-green-500/30 text-green-300" />
-                    <OsiLayerBox num={2} name="Data Link" desc="MAC and LLC (Physical Addressing)" color="bg-lime-500/20 border-lime-500/30 text-lime-300" />
-                    <OsiLayerBox num={1} name="Physical" desc="Media, Signal and Binary Transmission" color="bg-yellow-500/20 border-yellow-500/30 text-yellow-300" />
+                  
+                  <div className="w-2/3 flex flex-col gap-2">
+                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="Network services to Application" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="Data Formatting and Encryption" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="Interhost Communication" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="End-to-End Connections and Reliability" color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="Routing and IP (Logical Addressing)" color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="MAC and LLC (Physical Addressing)" color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="Media, Signal and Binary Transmission" color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
                   </div>
                 </div>
               </motion.div>
@@ -223,27 +238,36 @@ export const ArchitectureLayers = () => {
 };
 
 // Helper Components
-const Layer5Box = ({ name, icon, dashed = false }: { name: string, icon: string, dashed?: boolean }) => (
-  <div className={`flex items-center justify-center gap-4 p-5 rounded-xl border bg-white/5 ${dashed ? 'border-red-500/50 border-dashed' : 'border-blue-500/30'} hover:bg-white/10 transition-colors cursor-default`}>
-    <span className="text-3xl">{icon}</span>
-    <span className="text-white font-bold text-lg">{name}</span>
+export const Layer5Box = motion.create(React.forwardRef<HTMLDivElement, any>(({ name, icon, desc, color, borderColor, dashed = false }, ref) => (
+  <div ref={ref} className={`flex items-center gap-6 p-4 rounded-2xl border bg-gradient-to-r ${color} ${dashed ? 'border-red-500/50 border-dashed' : borderColor || 'border-blue-500/30'} hover:bg-white/10 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all cursor-default`}>
+    <div className="text-4xl w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">{icon}</div>
+    <div className="flex flex-col">
+      <span className="text-white font-bold text-lg md:text-xl">{name}</span>
+      {desc && <span className="text-neutral-400 text-xs md:text-sm">{desc}</span>}
+    </div>
   </div>
-);
+)));
 
-const DataUnitBox = ({ text, height, color = "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" }: { text: string, height: string, color?: string }) => (
-  <div className={`${height} ${color} border rounded-xl p-3 flex items-center justify-center text-center text-xs font-bold leading-tight`}>
+export const ConnectionLine = motion.create(React.forwardRef<HTMLDivElement, any>((props, ref) => (
+  <div ref={ref} className="flex justify-center my-1 md:my-2">
+    <div className="w-0.5 h-4 md:h-6 bg-gradient-to-b from-white/30 to-white/10 rounded-full" />
+  </div>
+)));
+
+export const DataUnitBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ text, height, color = "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" }, ref) => (
+  <div ref={ref} className={`${height} ${color} border rounded-xl p-3 flex items-center justify-center text-center text-xs font-bold leading-tight shadow-inner`}>
     {text}
   </div>
-);
+)));
 
-const OsiLayerBox = ({ num, name, desc, color }: { num: number, name: string, desc: string, color: string }) => (
-  <div className={`h-14 ${color} border rounded-xl flex items-stretch overflow-hidden group hover:scale-[1.02] transition-transform`}>
+export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, color }, ref) => (
+  <div ref={ref} className={`h-14 ${color} border rounded-xl flex items-stretch overflow-hidden group hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all cursor-default`}>
     <div className="flex-1 px-4 flex flex-col justify-center leading-tight">
-      <span className="font-bold text-white text-base">{name}</span>
-      <span className="text-[11px] opacity-80">{desc}</span>
+      <span className="font-bold text-white text-[15px] md:text-base">{name}</span>
+      <span className="text-[10px] md:text-[11px] opacity-80">{desc}</span>
     </div>
-    <div className="w-12 flex items-center justify-center font-black text-xl bg-black/20 border-l border-inherit">
+    <div className="w-10 md:w-12 flex items-center justify-center font-black text-lg md:text-xl bg-black/20 border-l border-inherit group-hover:bg-white/10 transition-colors">
       {num}
     </div>
   </div>
-);
+)));
