@@ -18,6 +18,7 @@ import {
 
 const dashboardViews = [
   {
+    id: "monitor",
     title: "Real-time Monitoring",
     description: "Experience zero-latency posture tracking with our 9-point pressure heatmap. Monitor sensor values and system status instantly.",
     icon: Activity,
@@ -26,6 +27,7 @@ const dashboardViews = [
     glow: "rgba(59, 130, 246, 0.5)"
   },
   {
+    id: "progression",
     title: "Weekly Progression",
     description: "Track your long-term alignment trends and see how your posture improves over time with detailed weekly analytics.",
     icon: BarChart3,
@@ -34,6 +36,7 @@ const dashboardViews = [
     glow: "rgba(16, 185, 129, 0.5)"
   },
   {
+    id: "performance",
     title: "Performance Analysis",
     description: "Deep dive into your sitting habits. Identify your best and worst days to make data-driven health decisions.",
     icon: ShieldCheck,
@@ -42,6 +45,7 @@ const dashboardViews = [
     glow: "rgba(168, 85, 247, 0.5)"
   },
   {
+    id: "ai",
     title: "AI Health Advisor",
     description: "Interact with our specialized AI model to receive personalized ergonomic advice and stretching reminders.",
     icon: MessageSquare,
@@ -50,6 +54,7 @@ const dashboardViews = [
     glow: "rgba(6, 182, 212, 0.5)"
   },
   {
+    id: "history",
     title: "Session History",
     description: "Review every sitting session in detail. Export logs for medical consultations or personal health tracking.",
     icon: History,
@@ -58,6 +63,7 @@ const dashboardViews = [
     glow: "rgba(249, 115, 22, 0.5)"
   },
   {
+    id: "gacha",
     title: "Capybara Gacha",
     description: "Earn points by maintaining good posture and use them in our Gacha system to unlock rare Capybara skins and accessories.",
     icon: Gift,
@@ -66,6 +72,7 @@ const dashboardViews = [
     glow: "rgba(236, 72, 153, 0.5)"
   },
   {
+    id: "collection",
     title: "Avatar Collection",
     description: "Browse and equip your unlocked Capybara themes. Show off your dedication to spinal health with exclusive digital pets.",
     icon: Library,
@@ -74,6 +81,7 @@ const dashboardViews = [
     glow: "rgba(234, 179, 8, 0.5)"
   },
   {
+    id: "passport",
     title: "Health Passport",
     description: "Your unified ergonomic profile. Track achievements, daily streaks, and overall wellness milestones in your Capybara Passport.",
     icon: BookOpen,
@@ -263,12 +271,61 @@ export const CircularDashboard = () => {
                         </p>
                       </div>
                       <div className="flex-1 w-full max-w-sm lg:max-w-none mx-auto">
-                        <div className="rounded-2xl lg:rounded-[3rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm p-2 lg:p-4">
+                        <div className="relative rounded-2xl lg:rounded-[3rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm p-2 lg:p-4 group/img">
                           <img 
                             src={view.image} 
                             alt={view.title} 
-                            className="w-full h-auto object-cover rounded-xl lg:rounded-[2.5rem]"
+                            className="w-full h-auto object-cover rounded-xl lg:rounded-[2.5rem] transition-transform duration-700 group-hover/img:scale-110"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                          {/* Dynamic Overlays based on slide ID */}
+                          {view.id === "monitor" && (
+                            <motion.div 
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              className="absolute top-8 right-8 bg-blue-500/20 backdrop-blur-md border border-blue-500/40 p-4 rounded-2xl flex flex-col items-center"
+                            >
+                              <span className="text-blue-400 text-[10px] font-mono uppercase tracking-widest mb-1">Posture Score</span>
+                              <span className="text-3xl font-black text-white">98%</span>
+                              <div className="mt-2 flex gap-1">
+                                {[1, 2, 3, 4, 5].map(i => (
+                                  <div key={i} className={`w-1.5 h-4 rounded-full ${i < 5 ? 'bg-blue-400' : 'bg-white/20'}`} />
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+
+                          {view.id === "ai" && (
+                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                              <motion.div 
+                                initial={{ y: "-100%" }}
+                                animate={{ y: "100%" }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                className="h-1/2 w-full bg-gradient-to-b from-transparent via-primary/30 to-transparent border-b-2 border-primary/50"
+                              />
+                              <div className="absolute bottom-10 left-10 flex items-center gap-3 bg-black/40 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+                                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                                <span className="text-white text-[10px] font-mono tracking-wider">AI INFERENCE ACTIVE</span>
+                              </div>
+                            </div>
+                          )}
+
+                          {view.id === "gacha" && (
+                            <div className="absolute inset-0 pointer-events-none">
+                              {[...Array(6)].map((_, i) => (
+                                <motion.div
+                                  key={i}
+                                  initial={{ y: 200, opacity: 0, x: i * 80 - 200 }}
+                                  animate={{ y: -200, opacity: [0, 1, 0] }}
+                                  transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
+                                  className="absolute bottom-0 left-1/2 text-amber-400"
+                                >
+                                  <Sparkles size={24 + Math.random() * 12} />
+                                </motion.div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>

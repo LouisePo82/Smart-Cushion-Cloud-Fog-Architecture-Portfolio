@@ -141,15 +141,15 @@ export const ArchitectureLayers = () => {
                 </div>
 
                 <div className="flex flex-col flex-1 justify-center w-full max-w-2xl relative z-10">
-                  <Layer5Box variants={itemVariants} name="Business Layer (Cloud/DB)" icon="📊" desc="Analytics, User Streaks & Capybara Gamification" color="from-blue-500/20 to-transparent" borderColor="border-blue-500/40" />
+                  <Layer5Box variants={itemVariants} name="Business Layer" icon="📊" desc="Analytics & Gamification" info="Manages user streaks, rewards, and long-term health trends stored in PostgreSQL." color="from-blue-500/20 to-transparent" borderColor="border-blue-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Application Layer (Web)" icon="📱" desc="Real-time 3D Posture Dashboard & Notifications" color="from-cyan-500/20 to-transparent" borderColor="border-cyan-500/40" />
+                  <Layer5Box variants={itemVariants} name="Application Layer" icon="📱" desc="User Interface" info="Astro & React dashboard featuring real-time 3D posture visualization and Capybara companion." color="from-cyan-500/20 to-transparent" borderColor="border-cyan-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Middleware Layer (Fog Node)" icon="⚙️" desc="Edge AI CNN Inference & Real-time Processing" color="from-red-500/20 to-transparent" borderColor="border-red-500/40" dashed />
+                  <Layer5Box variants={itemVariants} name="Middleware Layer" icon="⚙️" desc="Fog Computing" info="Local processing node running CNN models for sub-100ms posture classification." color="from-red-500/20 to-transparent" borderColor="border-red-500/40" dashed />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Network Layer (Wi-Fi/MQTT)" icon="🌐" desc="ESP32 Wireless Data Transmission via MQTT" color="from-green-500/20 to-transparent" borderColor="border-green-500/40" />
+                  <Layer5Box variants={itemVariants} name="Network Layer" icon="🌐" desc="Data Transmission" info="MQTT protocol over Wi-Fi ensuring lightweight and reliable message delivery between ESP32 and Fog Node." color="from-green-500/20 to-transparent" borderColor="border-green-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Perception Layer (Hardware)" icon="📡" desc="FSR Pressure Sensor Matrix & MPU6050" color="from-yellow-500/20 to-transparent" borderColor="border-yellow-500/40" />
+                  <Layer5Box variants={itemVariants} name="Perception Layer" icon="📡" desc="Hardware & Sensors" info="FSR sensor matrix capturing 9-point pressure data alongside MPU6050 motion tracking." color="from-yellow-500/20 to-transparent" borderColor="border-yellow-500/40" />
                 </div>
               </motion.div>
             )}
@@ -176,57 +176,76 @@ export const ArchitectureLayers = () => {
                   </div>
                   
                   <div className="w-2/3 flex flex-col gap-2">
-                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & Capybara App JSON Payloads" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="UTF-8 Encoding & Sensor Data Formatting" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="MQTT Broker Connection & Keep-Alive Pings" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee for Sensor Streams (Port 1883)" color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="Local IP Routing from Cushion to Fog Router" color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="802.11 Wi-Fi MAC Addressing" color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="2.4GHz RF Signal & Internal FSR Wiring" color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & JSON Payloads" info="Smart Cushion Web App interaction layer." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="Data Formatting" info="Conversion of raw sensor arrays into JSON for transmission." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="MQTT Connection" info="Establishing and maintaining the link between ESP32 and Broker." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee" info="Ensuring sensor packets arrive in order via TCP Port 1883." color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="IP Routing" info="Assigning local IP addresses to Cushion and Fog Nodes." color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="Wi-Fi MAC Addressing" info="Managing physical addresses for wireless data frames." color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="RF Signal & FSR Wiring" info="The physical pressure sensors and ESP32 radio waves." color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
                   </div>
                 </div>
               </motion.div>
-            )}
-
             {/* SMART CUSHION ARCHITECTURE - Data Flow */}
             {activeIndex === 4 && (
               <motion.div 
-                key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md justify-center"
+                key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-md justify-center overflow-hidden"
               >
-                <div className="text-center mb-16">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-widest mb-4">
-                    PRACTICAL IMPLEMENTATION
-                  </span>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-                    From Sensor to Screen
-                  </h2>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none" />
+                
+                <div className="text-center mb-16 relative z-10">
+                  <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-widest mb-4">
+                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> PRACTICAL IMPLEMENTATION
+                  </motion.div>
+                  <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                    From <span className="text-primary italic">Sensor</span> to <span className="text-cyan-400 italic">Screen</span>
+                  </motion.h2>
                 </div>
 
                 <div className="relative w-full max-w-6xl mx-auto">
                   {/* Connecting Line (Desktop) */}
-                  <div className="hidden lg:block absolute top-[44px] left-[8%] right-[8%] h-[2px] bg-white/10 -translate-y-1/2 rounded-full overflow-hidden">
-                     <motion.div className="absolute top-0 bottom-0 w-32 bg-gradient-to-r from-transparent via-primary to-transparent" animate={{ left: ["-10%", "110%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
-                     <motion.div className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" animate={{ left: ["-10%", "110%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1.2 }} />
+                  <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[3px] bg-white/5 -translate-y-1/2 rounded-full overflow-hidden">
+                     <motion.div className="absolute top-0 bottom-0 w-64 bg-gradient-to-r from-transparent via-primary/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
+                     <motion.div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
                   </div>
 
                   <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
                     {dataNodes.map((node, i) => (
-                      <div key={node.id} className="flex flex-col items-center w-full lg:w-48 group relative z-10">
-                        <div className={`w-20 h-20 md:w-[88px] md:h-[88px] rounded-2xl flex items-center justify-center border backdrop-blur-md bg-black/50 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_30px_rgba(var(--primary),0.2)] border-primary/40' : ''} relative`}>
-                          <node.icon className={`w-10 h-10 md:w-12 md:h-12 ${node.color}`} />
-                          {node.glow && <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-ping opacity-50" />}
+                      <motion.div 
+                        key={node.id} 
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        className="flex flex-col items-center w-full lg:w-44 group relative z-10"
+                      >
+                        <div className={`w-20 h-20 md:w-24 md:h-24 rounded-[1.5rem] flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 group-hover:border-white/30`}>
+                          <node.icon className={`w-10 h-10 md:w-12 md:h-12 ${node.color} relative z-10`} />
+                          
+                          {/* Inner pulsing glow */}
+                          <motion.div 
+                            className={`absolute inset-0 rounded-[1.5rem] ${node.bg} opacity-20`}
+                            animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+                            transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
+                          />
+
+                          {node.glow && (
+                            <div className="absolute -top-1 -right-1 flex h-4 w-4">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+                            </div>
+                          )}
                         </div>
                         <div className="mt-6 text-center">
-                          <h4 className="text-white font-bold text-lg tracking-wide mb-1.5">{node.title}</h4>
-                          <p className="text-neutral-500 text-sm font-medium">{node.desc}</p>
+                          <h4 className="text-white font-bold text-base md:text-lg tracking-wide mb-1 transition-colors group-hover:text-primary">{node.title}</h4>
+                          <p className="text-neutral-500 text-xs md:text-sm font-medium leading-tight">{node.desc}</p>
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
 
               </motion.div>
+            )}>
             )}
             
           </AnimatePresence>
@@ -268,12 +287,13 @@ export const ArchitectureLayers = () => {
 };
 
 // Helper Components
-export const Layer5Box = motion.create(React.forwardRef<HTMLDivElement, any>(({ name, icon, desc, color, borderColor, dashed = false }, ref) => (
-  <div ref={ref} className={`flex items-center gap-6 p-4 rounded-2xl border bg-gradient-to-r ${color} ${dashed ? 'border-red-500/50 border-dashed' : borderColor || 'border-blue-500/30'} hover:bg-white/10 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all cursor-default`}>
+export const Layer5Box = motion.create(React.forwardRef<HTMLDivElement, any>(({ name, icon, desc, info, color, borderColor, dashed = false }, ref) => (
+  <div ref={ref} className={`flex items-center gap-6 p-4 rounded-2xl border bg-gradient-to-r ${color} ${dashed ? 'border-red-500/50 border-dashed' : borderColor || 'border-blue-500/30'} hover:bg-white/10 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all cursor-default relative group/box`}>
     <div className="text-4xl w-14 h-14 md:w-16 md:h-16 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">{icon}</div>
     <div className="flex flex-col">
       <span className="text-white font-bold text-lg md:text-xl">{name}</span>
-      {desc && <span className="text-neutral-400 text-xs md:text-sm">{desc}</span>}
+      <span className="text-neutral-400 text-xs md:text-sm group-hover/box:hidden">{desc}</span>
+      <span className="text-primary text-xs hidden group-hover/box:block font-medium max-w-sm italic">{info}</span>
     </div>
   </div>
 )));
@@ -290,13 +310,14 @@ export const DataUnitBox = motion.create(React.forwardRef<HTMLDivElement, any>((
   </div>
 )));
 
-export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, color }, ref) => (
-  <div ref={ref} className={`h-14 ${color} border rounded-xl flex items-stretch overflow-hidden group hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all cursor-default`}>
+export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, info, color }, ref) => (
+  <div ref={ref} className={`h-14 ${color} border rounded-xl flex items-stretch overflow-hidden group/osi hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all cursor-default relative`}>
     <div className="flex-1 px-4 flex flex-col justify-center leading-tight">
       <span className="font-bold text-white text-[15px] md:text-base">{name}</span>
-      <span className="text-[10px] md:text-[11px] opacity-80">{desc}</span>
+      <span className="text-[10px] md:text-[11px] opacity-80 group-hover/osi:hidden">{desc}</span>
+      <span className="text-[10px] text-white/90 hidden group-hover/osi:block font-medium italic">{info}</span>
     </div>
-    <div className="w-10 md:w-12 flex items-center justify-center font-black text-lg md:text-xl bg-black/20 border-l border-inherit group-hover:bg-white/10 transition-colors">
+    <div className="w-10 md:w-12 flex items-center justify-center font-black text-lg md:text-xl bg-black/20 border-l border-inherit group-hover/osi:bg-white/10 transition-colors">
       {num}
     </div>
   </div>
