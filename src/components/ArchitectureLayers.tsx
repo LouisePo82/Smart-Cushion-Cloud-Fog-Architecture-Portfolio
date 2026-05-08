@@ -50,21 +50,38 @@ export const ArchitectureLayers = () => {
             {activeIndex === 0 && (
               <motion.div 
                 key="title" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.1 }}
-                className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-md shadow-2xl text-center overflow-hidden"
+                className="absolute inset-0 flex items-center justify-center bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-md shadow-2xl overflow-hidden"
               >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--primary),0.15)_0%,transparent_70%)] pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(var(--primary),0.15)_0%,transparent_70%)] pointer-events-none" />
                 
-                <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono tracking-widest text-sm relative z-10">
-                   <Activity size={16} /> Technical Documentation
-                </motion.div>
-                
-                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl xl:text-8xl font-black text-white tracking-tighter mb-8 leading-tight relative z-10">
-                  System <span className="text-primary italic">Architecture</span><br/>Models
-                </motion.h1>
-                
-                <motion.p variants={itemVariants} className="text-neutral-400 max-w-3xl mx-auto text-lg md:text-2xl font-medium leading-relaxed relative z-10">
-                  A comparative view of standard architectural models applied to the Smart Cushion ecosystem.
-                </motion.p>
+                <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 w-full h-full p-8 md:p-12 xl:p-16 relative z-10">
+                  {/* Text Container */}
+                  <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono tracking-widest text-sm">
+                       <Activity size={16} /> Technical Documentation
+                    </motion.div>
+                    
+                    <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl xl:text-7xl font-black text-white tracking-tighter mb-6 leading-tight">
+                      System <span className="text-primary italic">Architecture</span><br/>Models
+                    </motion.h1>
+                    
+                    <motion.p variants={itemVariants} className="text-neutral-400 max-w-xl text-lg md:text-xl font-medium leading-relaxed">
+                      A comparative view of standard architectural models applied to the Smart Cushion ecosystem.
+                    </motion.p>
+                  </div>
+
+                  {/* Image Container */}
+                  <div className="flex-1 w-full flex justify-center lg:justify-end items-center mt-8 lg:mt-0">
+                    <motion.div variants={itemVariants} className="relative w-full max-w-lg aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
+                       <img 
+                         src="/architecture-intro.png" 
+                         alt="Abstract IoT and Cloud Architecture" 
+                         className="w-full h-full object-cover object-center"
+                       />
+                       <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent" />
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
             )}
 
