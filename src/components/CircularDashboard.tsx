@@ -61,7 +61,7 @@ const dashboardViews = [
     title: "Capybara Gacha",
     description: "Earn points by maintaining good posture and use them in our Gacha system to unlock rare Capybara skins and accessories.",
     icon: Gift,
-    image: "/dashboard-gatcha.gif",
+    image: "/dashboard-gacha.gif",
     color: "text-pink-500",
     glow: "rgba(236, 72, 153, 0.5)"
   },
@@ -194,8 +194,8 @@ export const CircularDashboard = () => {
         >
           <div className="relative w-[80%] lg:w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
              <img 
-               src="/dashboard-intro.png" 
-               alt="User tracking posture" 
+               src="/dashboard-intro-capy.png" 
+               alt="User tracking posture with capybara" 
                className="w-full h-full object-cover"
              />
              <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
@@ -222,9 +222,10 @@ export const CircularDashboard = () => {
                   <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-8">
                     <Sparkles size={16} /> Control Center
                   </span>
-                  <h1 className="text-4xl lg:text-9xl font-bold text-white mb-8 leading-tight tracking-tighter">
-                    Your Health, <br/><span className="text-primary italic font-black">Visualized.</span>
+                  <h1 className="text-3xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 leading-tight tracking-tighter">
+                    Your Health,<br/>Improved alongside<br/><span className="text-primary italic font-black">Capybara.</span>
                   </h1>
+
                   <p className="text-base lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed font-medium text-center lg:text-left">
                     The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
                   </p>
