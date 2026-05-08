@@ -182,25 +182,7 @@ export const CircularDashboard = () => {
           <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
-        {/* Intro Illustration */}
-        <motion.div
-          style={{
-            opacity: useTransform(smoothProgress, [0, 0.05 / denominator, 0.5 / denominator], [1, 1, 0]),
-            scale: useTransform(smoothProgress, [0, 0.5 / denominator], [1, 0.9]),
-            x: useTransform(smoothProgress, [0, 0.5 / denominator], [0, 100]),
-            pointerEvents: "none"
-          }}
-          className="absolute right-0 lg:right-[22vw] w-full lg:w-[40vw] h-[30vh] lg:h-auto flex items-center justify-center top-20 lg:top-auto z-0 opacity-20 lg:opacity-100"
-        >
-          <div className="relative w-[80%] lg:w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
-             <img 
-               src="/dashboard-intro-capy.png" 
-               alt="User tracking posture with capybara" 
-               className="w-full h-full object-cover"
-             />
-             <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
-          </div>
-        </motion.div>
+        {/* The absolute Intro Illustration block is removed to prevent layout distortion */}
 
         {/* CONTENT AREA */}
         <div className="w-full h-full relative">
@@ -216,19 +198,27 @@ export const CircularDashboard = () => {
                   y: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [0, 0, -30]),
                   pointerEvents: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], ["auto", "auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
+                className="absolute inset-0 flex flex-col justify-center items-center text-center z-10 lg:pr-[20vw]"
               >
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-8">
+                <div className="flex flex-col items-center max-w-4xl w-full">
+                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-6">
                     <Sparkles size={16} /> Control Center
                   </span>
-                  <h1 className="text-3xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 leading-tight tracking-tighter">
-                    Your Health,<br/>Improved alongside<br/><span className="text-primary italic font-black">Capybara.</span>
+                  <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight tracking-tighter">
+                    Your Health,<br/>Improved alongside <span className="text-primary italic font-black">Capybara.</span>
                   </h1>
-
-                  <p className="text-base lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed font-medium text-center lg:text-left">
+                  <p className="text-base lg:text-xl text-neutral-400 max-w-2xl leading-relaxed font-medium mb-10">
                     The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
                   </p>
+                  
+                  <div className="relative w-full max-w-3xl aspect-[16/9] lg:aspect-[21/9] rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
+                     <img 
+                       src="/dashboard-intro-capy.png" 
+                       alt="User tracking posture with capybara" 
+                       className="w-full h-full object-cover object-center"
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  </div>
                 </div>
               </motion.div>
 
