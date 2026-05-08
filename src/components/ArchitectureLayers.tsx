@@ -186,29 +186,34 @@ export const ArchitectureLayers = () => {
             
           </AnimatePresence>
 
-          {/* Navigation Controls */}
-          <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-6">
-            <button onClick={() => paginate(-1)} className="p-4 rounded-full bg-white/10 border border-white/20 text-white hover:bg-primary hover:border-primary transition-all shadow-lg backdrop-blur-md">
-              <ChevronLeft size={28} />
-            </button>
-            
-            {/* Dots */}
-            <div className="flex gap-3">
-              {[0, 1, 2, 3].map((idx) => (
-                <button 
-                  key={idx} 
-                  onClick={() => {
-                    setDirection(idx > activeIndex ? 1 : -1);
-                    setActiveIndex(idx);
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all ${activeIndex === idx ? 'bg-primary scale-150 shadow-[0_0_10px_rgba(var(--primary),0.8)]' : 'bg-white/30 hover:bg-white/60'}`}
-                />
-              ))}
-            </div>
+          {/* Left Navigation Arrow */}
+          <button 
+            onClick={() => paginate(-1)} 
+            className="absolute left-4 md:-left-12 xl:-left-24 top-1/2 -translate-y-1/2 p-4 md:p-5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-primary/20 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all backdrop-blur-md z-50 group hidden sm:flex"
+          >
+            <ChevronLeft size={36} className="group-hover:-translate-x-1 transition-transform" />
+          </button>
 
-            <button onClick={() => paginate(1)} className="p-4 rounded-full bg-white/10 border border-white/20 text-white hover:bg-primary hover:border-primary transition-all shadow-lg backdrop-blur-md">
-              <ChevronRight size={28} />
-            </button>
+          {/* Right Navigation Arrow */}
+          <button 
+            onClick={() => paginate(1)} 
+            className="absolute right-4 md:-right-12 xl:-right-24 top-1/2 -translate-y-1/2 p-4 md:p-5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-primary/20 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all backdrop-blur-md z-50 group hidden sm:flex"
+          >
+            <ChevronRight size={36} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
+            {[0, 1, 2, 3].map((idx) => (
+              <button 
+                key={idx} 
+                onClick={() => {
+                  setDirection(idx > activeIndex ? 1 : -1);
+                  setActiveIndex(idx);
+                }}
+                className={`rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-8 h-2.5 bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)]' : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/50 hover:scale-125'}`}
+              />
+            ))}
           </div>
 
         </div>

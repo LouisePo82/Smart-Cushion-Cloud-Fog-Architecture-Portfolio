@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
 import { ArchitectureLayers } from '../components/ArchitectureLayers';
-import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 ---
 
 <Layout title="Smart Cushion | System Architecture">
@@ -12,9 +11,6 @@ import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 		
 		{/* Phân tích 3 mô hình tiêu chuẩn 3-5-7 */}
 		<ArchitectureLayers client:load />
-
-		{/* Luồng Dữ liệu thực tế của Smart Cushion (Từ Edge lên Cloud) */}
-		<ArchitectureDiagram client:load />
 		
 	</main>
 
