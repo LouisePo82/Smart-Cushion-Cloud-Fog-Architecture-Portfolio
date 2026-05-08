@@ -25,15 +25,15 @@ export const ArchitectureLayers = () => {
   };
 
   const variants = {
-    enter: (direction: number) => ({ x: direction > 0 ? 500 : -500, opacity: 0 }),
+    enter: (direction: number) => ({ x: direction > 0 ? 200 : -200, opacity: 0 }),
     center: { zIndex: 1, x: 0, opacity: 1 },
-    exit: (direction: number) => ({ zIndex: 0, x: direction < 0 ? 500 : -500, opacity: 0 })
+    exit: (direction: number) => ({ zIndex: 0, x: direction < 0 ? 200 : -200, opacity: 0 })
   };
 
   const itemVariants = {
-    enter: { y: 20, opacity: 0, scale: 0.95 },
-    center: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } },
-    exit: { y: -20, opacity: 0, scale: 0.95 }
+    enter: { y: 15, opacity: 0, scale: 0.98 },
+    center: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 400, damping: 25 } },
+    exit: { y: -15, opacity: 0, scale: 0.98 }
   };
 
   return (
@@ -58,7 +58,7 @@ export const ArchitectureLayers = () => {
             {/* 3 LAYER - Cloud Computing */}
             {activeIndex === 0 && (
               <motion.div 
-                key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.15 }}
+                key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.08 }}
                 className="absolute inset-0 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-xl shadow-2xl"
               >
                 <div className="w-full md:w-5/12 text-center md:text-left mb-10 md:mb-0 relative z-10">
@@ -98,7 +98,7 @@ export const ArchitectureLayers = () => {
             {/* 5 LAYER - IoT Architecture */}
             {activeIndex === 1 && (
               <motion.div 
-                key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.1 }}
+                key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.06 }}
                 className="absolute inset-0 flex flex-col bg-gradient-to-tr from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl items-center"
               >
                 <div className="absolute top-0 right-0 p-12 opacity-20 pointer-events-none">
@@ -111,15 +111,15 @@ export const ArchitectureLayers = () => {
                 </div>
 
                 <div className="flex flex-col flex-1 justify-center w-full max-w-2xl relative z-10">
-                  <Layer5Box variants={itemVariants} name="Business Layer" icon="📊" desc="Management & ROI" color="from-blue-500/20 to-transparent" borderColor="border-blue-500/40" />
+                  <Layer5Box variants={itemVariants} name="Business Layer (Cloud/DB)" icon="📊" desc="Analytics, User Streaks & Capybara Gamification" color="from-blue-500/20 to-transparent" borderColor="border-blue-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Application Layer" icon="📱" desc="Smart Dashboard & Analytics" color="from-cyan-500/20 to-transparent" borderColor="border-cyan-500/40" />
+                  <Layer5Box variants={itemVariants} name="Application Layer (Web)" icon="📱" desc="Real-time 3D Posture Dashboard & Notifications" color="from-cyan-500/20 to-transparent" borderColor="border-cyan-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Middleware Layer" icon="⚙️" desc="Data Processing & Fog AI" color="from-red-500/20 to-transparent" borderColor="border-red-500/40" dashed />
+                  <Layer5Box variants={itemVariants} name="Middleware Layer (Fog Node)" icon="⚙️" desc="Edge AI CNN Inference & Real-time Processing" color="from-red-500/20 to-transparent" borderColor="border-red-500/40" dashed />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Network Layer" icon="🌐" desc="MQTT & Local WiFi" color="from-green-500/20 to-transparent" borderColor="border-green-500/40" />
+                  <Layer5Box variants={itemVariants} name="Network Layer (Wi-Fi/MQTT)" icon="🌐" desc="ESP32 Wireless Data Transmission via MQTT" color="from-green-500/20 to-transparent" borderColor="border-green-500/40" />
                   <ConnectionLine variants={itemVariants} />
-                  <Layer5Box variants={itemVariants} name="Physical Layer" icon="📡" desc="FSR Sensor & ESP32" color="from-yellow-500/20 to-transparent" borderColor="border-yellow-500/40" />
+                  <Layer5Box variants={itemVariants} name="Perception Layer (Hardware)" icon="📡" desc="FSR Pressure Sensor Matrix & MPU6050" color="from-yellow-500/20 to-transparent" borderColor="border-yellow-500/40" />
                 </div>
               </motion.div>
             )}
@@ -127,7 +127,7 @@ export const ArchitectureLayers = () => {
             {/* 7 LAYER - OSI Model */}
             {activeIndex === 2 && (
               <motion.div 
-                key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.08 }}
+                key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.04 }}
                 className="absolute inset-0 flex flex-col md:flex-row bg-gradient-to-bl from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl"
               >
                 <div className="w-full md:w-1/3 text-center md:text-left flex flex-col justify-center pr-8 relative z-10">
@@ -146,13 +146,13 @@ export const ArchitectureLayers = () => {
                   </div>
                   
                   <div className="w-2/3 flex flex-col gap-2">
-                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="Network services to Application" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="Data Formatting and Encryption" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="Interhost Communication" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="End-to-End Connections and Reliability" color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="Routing and IP (Logical Addressing)" color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="MAC and LLC (Physical Addressing)" color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="Media, Signal and Binary Transmission" color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & Capybara App JSON Payloads" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="UTF-8 Encoding & Sensor Data Formatting" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="MQTT Broker Connection & Keep-Alive Pings" color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee for Sensor Streams (Port 1883)" color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="Local IP Routing from Cushion to Fog Router" color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="802.11 Wi-Fi MAC Addressing" color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
+                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="2.4GHz RF Signal & Internal FSR Wiring" color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
                   </div>
                 </div>
               </motion.div>
