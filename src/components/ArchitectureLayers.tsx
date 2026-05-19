@@ -501,37 +501,37 @@ export const ArchitectureLayers = () => {
       </div>
 
       {/* Subtle Bottom Ambient Orbital Core (Visual Consistency with Product & Dashboard) */}
-      <div className="absolute bottom-[-160px] left-1/2 -translate-x-1/2 w-[320px] h-[320px] pointer-events-none z-0 hidden md:flex items-center justify-center opacity-40">
+      <div className="absolute bottom-[-120px] left-1/2 -translate-x-1/2 w-[320px] h-[320px] pointer-events-none z-0 hidden md:flex items-center justify-center opacity-100">
         {/* Outer Orbit */}
         <motion.div 
-          className="absolute w-full h-full rounded-full border border-white/5 border-dashed"
+          className="absolute w-full h-full rounded-full border border-white/15 border-dashed"
           animate={{ rotate: 360 }}
           transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
         />
         {/* Middle Orbit */}
         <motion.div 
-          className="absolute w-[240px] h-[240px] rounded-full border border-primary/10"
+          className="absolute w-[240px] h-[240px] rounded-full border border-primary/40 shadow-[0_0_15px_rgba(249,115,22,0.2)]"
           animate={{ rotate: -360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
           {/* Tiny traveling photon dot */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_#f97316]" />
         </motion.div>
         {/* Inner Orbit */}
         <motion.div 
-          className="absolute w-[160px] h-[160px] rounded-full border border-white/10 border-dashed"
+          className="absolute w-[160px] h-[160px] rounded-full border border-white/20 border-dashed"
           animate={{ rotate: 180 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         {/* Inner Core */}
         <motion.div 
-          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-primary/15 to-orange-500/5 border border-primary/20 blur-xs flex items-center justify-center shadow-[0_0_40px_rgba(249,115,22,0.15)]"
+          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-primary/30 to-orange-500/10 border border-primary/40 blur-xs flex items-center justify-center shadow-[0_0_50px_rgba(249,115,22,0.4)]"
           animate={{ scale: [0.95, 1.05, 0.95] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
           {/* Micro rotating dashboard spinner */}
           <motion.div 
-            className="w-10 h-10 rounded-full border-t border-b border-primary/40"
+            className="w-10 h-10 rounded-full border-t-2 border-b-2 border-primary/80"
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
