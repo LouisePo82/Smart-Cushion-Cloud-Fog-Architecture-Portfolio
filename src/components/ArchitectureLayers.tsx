@@ -323,7 +323,7 @@ export const ArchitectureLayers = () => {
                   </div>
 
                   {/* Connecting Line extending OUT to the CTA card */}
-                  <div className="hidden lg:block absolute top-[44px] left-[90%] right-[-170px] h-[3px] -translate-y-1/2 z-0">
+                  <div className="hidden lg:block absolute top-[44px] left-[90%] h-[3px] -translate-y-1/2 z-0 lg:right-[-50px] xl:right-[-150px] 2xl:right-[-250px]">
                     <div className="w-full h-full border-t-2 border-dashed border-primary/40 relative">
                       {/* traveling neon energy dot from Live Dashboard to Dashboard card */}
                       <motion.div 
@@ -389,7 +389,7 @@ export const ArchitectureLayers = () => {
                   </div>
 
                   {/* Desktop Floating CTA connected by line */}
-                  <div className="absolute right-[-230px] top-[44px] -translate-y-1/2 z-50 hidden lg:flex">
+                  <div className="absolute top-[44px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
                     <motion.a
                       href="/dashboard"
                       initial={{ opacity: 0, scale: 0.92 }}
