@@ -485,19 +485,44 @@ export const ArchitectureLayers = () => {
         </div>
       </div>
 
-      {/* Dots Indicator — positioned relative to the section for absolute visibility */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
-        {[0, 1, 2, 3, 4].map((idx) => (
-          <button 
-            key={idx} 
-            onClick={() => {
-              setHoveredLayer(null); // Reset layer hover states
-              setDirection(idx > activeIndex ? 1 : -1);
-              setActiveIndex(idx);
-            }}
-            className={`rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-8 h-2.5 bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)]' : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/50 hover:scale-125'}`}
-          />
-        ))}
+      {/* Dots Indicator — Positioned relative to section, using a premium Vercel-style Liquid Spring Capsule */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-50">
+        {[0, 1, 2, 3, 4].map((idx) => {
+          const isActive = activeIndex === idx;
+          return (
+            <button 
+              key={idx} 
+              onClick={() => {
+                setHoveredLayer(null); // Reset layer hover states
+                setDirection(idx > activeIndex ? 1 : -1);
+                setActiveIndex(idx);
+              }}
+              className="relative w-8 h-8 flex items-center justify-center focus:outline-none cursor-pointer group"
+            >
+              {/* Inactive Dot (fades out when active, responds to hover) */}
+              <motion.div 
+                className={`rounded-full transition-all duration-300 ${
+                  isActive 
+                    ? 'w-0 h-0 bg-transparent' 
+                    : 'w-2.5 h-2.5 bg-white/20 group-hover:bg-white/50 group-hover:scale-125'
+                }`}
+              />
+
+              {/* Liquid Active Indicator Capsule (slides smoothly with spring physics) */}
+              {isActive && (
+                <motion.div
+                  layoutId="activeSlideIndicator"
+                  className="absolute w-8 h-2.5 bg-gradient-to-r from-primary to-orange-500 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.7),inset_0_1px_1px_rgba(255,255,255,0.2)] z-10"
+                  transition={{
+                    type: "spring",
+                    stiffness: 380,
+                    damping: 30
+                  }}
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
 
     </section>
