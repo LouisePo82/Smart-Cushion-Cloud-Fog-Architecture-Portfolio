@@ -1,41 +1,100 @@
-# Smart Cushion Product Showcase
+# 🦦 Smart Cushion Cloud-Fog IoT Ecosystem
 
-This is a premium product showcase website built with **Astro**, **Shadcn/UI**, and **Tailwind CSS**.
+Welcome to the central repository for the **Smart Cushion Spinal Wellness System**. This project is built for the **NTUST Cloud-Fog Computing Course (114-2)**.
 
-## 🚀 Getting Started
+The Web platform acts as the **Centralized Ecosystem Portal**. From here, you can explore our complete multi-tier hardware-software ecosystem. Below is the directory linking all specialized sub-repositories and the structural architecture that binds them.
 
-1.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
+---
 
-2.  **Run development server**:
-    ```bash
-    npm run dev
-    ```
+## 🌐 Centralized Repository Directory
 
-3.  **Build for production**:
-    ```bash
-    npm run build
-    ```
+To understand the full scope of our Cloud-Fog solution, explore the corresponding codebase for each layer of the architecture:
 
-## 🛠 Tech Stack
+| Tier / Component | Repository Name | Description | Key Technologies |
+| :--- | :--- | :--- | :--- |
+| **💻 Front-End Portal** | [smart-cushion-web](https://github.com/tonguyentanphuong/smart-cushion-web) | *This Repository*. Symmetrical neon-dark showcase & real-time telemetry dashboard. | Astro, React, Framer Motion |
+| **🔌 Hardware Node** | [Smart_Cushion_esp32s](https://github.com/tonguyentanphuong/Smart_Cushion_esp32s) | ESP32-S firmware for 8-channel FSR sensor acquisition and telemetry publishing. | ESP-IDF, C++, FreeRTOS, MQTT |
+| **📡 Local Fog Node** | [smart-cushion-fog-node](https://github.com/tonguyentanphuong/smart-cushion-fog-node) | Edge server performing real-time AI posture classification and local broker queue management. | Node.js, Mosquitto, PostgreSQL |
+| **🧠 Deep Learning Engine** | [smart-cushion-AI](https://github.com/tonguyentanphuong/smart-cushion-AI) | Training pipelines and weights for the 5-Posture Sitting Classification model. | PyTorch, NumPy, Scikit-Learn |
+| **☁️ Serverless Cloud** | [smart-cushion-cloud](https://github.com/tonguyentanphuong/smart-cushion-cloud) | AWS Serverless cluster handling persistent telemetry pipelines, analytics, and history API. | AWS IoT Core, Lambda, DynamoDB |
 
--   **Framework**: [Astro](https://astro.build/)
--   **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
--   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/)
--   **Deployment**: [Vercel](https://vercel.com/)
+---
 
-## 📂 Structure
+## 📐 System Architecture Diagram
 
--   `src/pages/`: Contains the main landing page.
--   `src/components/`: Modular React and Astro components.
--   `src/layouts/`: Global layout and SEO configuration.
--   `public/`: Static assets (AI-generated product images).
+Our solution utilizes an optimized **4-Tier Cloud-Fog Topology** to isolate heavy AI computing workloads on the edge, keeping cloud storage costs low while ensuring sub-second local sensory feedback loop:
 
-## 🌐 Deployment to Vercel
+```text
++------------------------------------------------------------------------------------+
+|                             1. IoT Edge Hardware Node                              |
+|   [FSR Matrix (8 Sensors)] --- (Analog Signals) ---> [ESP32 Microcontroller]      |
++------------------------------------------+-----------------------------------------+
+                                           | 
+                                           | Telemetry (Raw Weights) via MQTT
+                                           v
++------------------------------------------------------------------------------------+
+|                            2. Local Fog Node AI Broker                             |
+|              +-------------------------------------------------------+             |
+|              |               [MQTT Broker (Mosquitto)]               |             |
+|              +---------------------------+---------------------------+             |
+|                                          |                                         |
+|                                          v                                         |
+|              +-------------------------------------------------------+             |
+|              |        [Spinal Posture Classifier (AI Engine)]        |             |
+|              |         *Classifies into 5 seating postures*          |             |
+|              +---------------------------+---------------------------+             |
+|                                          |                                         |
+|                     (If Bad Posture)     v     (Bridge Synchronization)            |
+|       [Active Vibration Feedback] <------+-----> [Fog-to-Cloud Uploader]           |
++-----------------------------------------------------------+------------------------+
+                                                            |
+                                                            | AWS IoT Core (Secure MQTT)
+                                                            v
++------------------------------------------------------------------------------------+
+|                              3. Serverless AWS Cloud                               |
+|   [AWS IoT Core Rules] ---> [AWS Lambda Services] ---> [Amazon DynamoDB (Store)]    |
++------------------------------------------+-----------------------------------------+
+                                           |
+                                           | REST APIs & Live WebSockets
+                                           v
++------------------------------------------------------------------------------------+
+|                       4. Astro Web Dashboard (This Repo)                           |
+|      [React Live Monitor] <---> [Gamified Capybara Healthy Sitting Passport]       |
++------------------------------------------------------------------------------------+
+```
 
-1.  Push this folder to a GitHub repository.
-2.  Connect the repository to Vercel.
-3.  Vercel will automatically detect Astro and deploy it.
+---
+
+## 🚀 Web App Quick Start
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/tonguyentanphuong/smart-cushion-web.git
+   cd smart-cushion-web
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server locally:
+   ```bash
+   npm run dev
+   ```
+4. Build for static production hosting:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🛠 Tech Stack (Web App)
+- **Framework:** [Astro](https://astro.build/) (Static Site Generation with Island Architecture)
+- **Interactive UI components:** [React](https://react.dev/) & [Shadcn UI](https://ui.shadcn.com/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Physical Animations:** [Framer Motion](https://www.framer.com/motion/) (Liquid spring interpolation)
+- **Hosting:** [Vercel](https://vercel.com/)
