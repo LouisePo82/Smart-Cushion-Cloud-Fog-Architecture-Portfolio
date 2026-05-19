@@ -12,7 +12,8 @@ To understand the full scope of our Cloud-Fog solution, explore the correspondin
 
 | Tier / Component | Repository Name | Description | Key Technologies |
 | :--- | :--- | :--- | :--- |
-| **💻 Front-End Portal** | [smart-cushion-web](https://github.com/tonguyentanphuong/smart-cushion-web) | *This Repository*. Symmetrical neon-dark showcase & real-time telemetry dashboard. | Astro, React, Framer Motion |
+| **💻 Front-End Showcase** | [smart-cushion-web](https://github.com/tonguyentanphuong/smart-cushion-web) | *This Repository*. Symmetrical neon-dark showcase & landing portal. | Astro, React, Framer Motion |
+| **📱 Companion Web App** | [smart-cushion-app](https://github.com/tonguyentanphuong/smart-cushion-app) | Interactive real-time posture telemetry dashboard & historical analysis client. | Next.js, React, Tailwind CSS |
 | **🔌 Hardware Node** | [Smart_Cushion_esp32s](https://github.com/tonguyentanphuong/Smart_Cushion_esp32s) | ESP32-S firmware for 8-channel FSR sensor acquisition and telemetry publishing. | ESP-IDF, C++, FreeRTOS, MQTT |
 | **📡 Local Fog Node** | [smart-cushion-fog-node](https://github.com/tonguyentanphuong/smart-cushion-fog-node) | Edge server performing real-time AI posture classification and local broker queue management. | Node.js, Mosquitto, PostgreSQL |
 | **🧠 Deep Learning Engine** | [smart-cushion-AI](https://github.com/tonguyentanphuong/smart-cushion-AI) | Training pipelines and weights for the 5-Posture Sitting Classification model. | PyTorch, NumPy, Scikit-Learn |
