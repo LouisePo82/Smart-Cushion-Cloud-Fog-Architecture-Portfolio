@@ -446,22 +446,50 @@ export const ArchitectureLayers = () => {
 
           {/* Left Navigation Arrow — hidden on first slide */}
           {activeIndex > 0 && (
-            <button 
+            <motion.button 
               onClick={() => paginate(-1)} 
-              className="absolute top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/60 border border-white/20 text-white/80 hover:text-black hover:bg-primary hover:border-primary hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-md z-50 group hidden sm:flex left-2 md:-left-8 lg:-left-16 xl:-left-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/80 border border-white/20 text-white hover:text-black flex items-center justify-center backdrop-blur-md z-50 group left-2 md:-left-8 lg:-left-16 xl:-left-20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden cursor-pointer"
             >
-              <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform stroke-[2.5px]" />
-            </button>
+              {/* Outer Breathing Halo Ring */}
+              <span className="absolute inset-0 rounded-full border border-primary/30 animate-[ping_2.5s_infinite] pointer-events-none" />
+              
+              {/* Liquid expand background */}
+              <span className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 ease-out origin-center z-0" />
+              
+              {/* Ambient Shadow glow */}
+              <span className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" />
+
+              {/* Icon */}
+              <ChevronLeft size={24} className="relative z-10 group-hover:-translate-x-1.5 transition-transform duration-300 ease-out stroke-[3px]" />
+            </motion.button>
           )}
 
           {/* Right Navigation Arrow — hidden on last slide */}
           {activeIndex < totalSlides - 1 && (
-            <button 
+            <motion.button 
               onClick={() => paginate(1)} 
-              className="absolute top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/60 border border-white/20 text-white/80 hover:text-black hover:bg-primary hover:border-primary hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-md z-50 group hidden sm:flex right-2 md:-right-8 lg:-right-16 xl:-right-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/80 border border-white/20 text-white hover:text-black flex items-center justify-center backdrop-blur-md z-50 group right-2 md:-right-8 lg:-right-16 xl:-right-20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden cursor-pointer"
             >
-              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform stroke-[2.5px]" />
-            </button>
+              {/* Outer Breathing Halo Ring */}
+              <span className="absolute inset-0 rounded-full border border-primary/30 animate-[ping_2.5s_infinite] pointer-events-none" />
+              
+              {/* Liquid expand background */}
+              <span className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 ease-out origin-center z-0" />
+              
+              {/* Ambient Shadow glow */}
+              <span className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" />
+
+              {/* Icon */}
+              <ChevronRight size={24} className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-300 ease-out stroke-[3px]" />
+            </motion.button>
           )}
 
 
