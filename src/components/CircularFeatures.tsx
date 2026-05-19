@@ -12,8 +12,8 @@ const products = [
 
 const features = [
   {
-    title: "9-Posture Recognition",
-    description: "Our advanced AI analyzes data from a high-precision 3x3 sensor matrix to accurately identify 9 distinct sitting postures.",
+    title: "5-Posture Recognition",
+    description: "Our advanced AI analyzes data from a high-precision 3x3 sensor matrix to accurately identify 5 distinct sitting postures.",
     icon: Brain,
     image: "/feat_posture_recognition.png",
     color: "text-blue-500",
