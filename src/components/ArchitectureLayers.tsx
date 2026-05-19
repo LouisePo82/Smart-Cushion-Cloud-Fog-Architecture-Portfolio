@@ -53,12 +53,12 @@ export const ArchitectureLayers = () => {
   };
 
   return (
-    <section className="pt-8 pb-16 bg-black relative h-full border-t border-white/5 flex flex-col justify-center overflow-hidden">
+    <section className="pt-4 pb-10 bg-black relative h-full border-t border-white/5 flex flex-col justify-center overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="relative w-full max-w-6xl mx-auto h-[600px] flex items-center justify-center">
+        <div className="relative w-full max-w-7xl mx-auto h-[78vh] min-h-[640px] flex items-center justify-center">
           
           <AnimatePresence initial={false} custom={direction} mode="wait">
             
@@ -75,11 +75,11 @@ export const ArchitectureLayers = () => {
                        <Activity size={16} /> Technical Documentation
                     </motion.div>
                     
-                    <motion.h1 variants={itemVariants} className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-black text-white tracking-tighter mb-6 leading-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
+                    <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black text-white tracking-tighter mb-6 leading-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
                       System <br className="hidden sm:inline" /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_10px_rgba(249,115,22,0.25)] italic pr-2">Architecture</span><br/>Models
                     </motion.h1>
 
-                    <motion.p variants={itemVariants} className="text-neutral-400 max-w-xl text-lg md:text-xl font-medium leading-relaxed">
+                    <motion.p variants={itemVariants} className="text-neutral-400 max-w-xl text-xl md:text-2xl font-medium leading-relaxed">
                       A comparative view of standard architectural models applied to the Smart Cushion ecosystem.
                     </motion.p>
                   </div>
@@ -106,33 +106,33 @@ export const ArchitectureLayers = () => {
                 className="absolute inset-0 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-xl shadow-2xl"
               >
                 <div className="w-full md:w-5/12 text-center md:text-left mb-10 md:mb-0 relative z-10">
-                  <motion.div variants={itemVariants} className="text-[12rem] md:text-[16rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-4">3</motion.div>
-                  <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-300 drop-shadow-[0_2px_10px_rgba(103,232,249,0.2)] mb-2">Cloud Computing</motion.h2>
-                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-sm">Service Models</motion.p>
+                  <motion.div variants={itemVariants} className="text-[10rem] md:text-[13rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-4">3</motion.div>
+                  <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-300 drop-shadow-[0_2px_10px_rgba(103,232,249,0.2)] mb-2">Cloud Computing</motion.h2>
+                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-base">Service Models</motion.p>
                 </div>
 
                 <div className="w-full md:w-7/12 flex flex-col gap-6 relative z-10 group/list">
                   <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-500 cursor-default group">
-                    <div className="w-1/3 bg-emerald-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-emerald-400 font-bold text-lg mb-1">End User</span><span className="text-emerald-500/70 text-xs">No Install Needed</span></div>
-                    <div className="w-2/3 p-6 flex items-center justify-between">
-                      <div><strong className="text-white text-xl block mb-1">Smart Cushion Dashboard</strong><span className="text-neutral-400 text-sm">Astro + React web app, accessed via browser URL</span></div>
-                      <div className="text-emerald-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">SaaS</div>
+                    <div className="w-1/3 bg-emerald-500/20 p-7 flex flex-col items-center justify-center text-center"><span className="text-emerald-400 font-bold text-xl mb-1">End User</span><span className="text-emerald-500/70 text-sm">No Install Needed</span></div>
+                    <div className="w-2/3 p-7 flex items-center justify-between">
+                      <div><strong className="text-white text-2xl block mb-1">Smart Cushion Dashboard</strong><span className="text-neutral-400 text-base">Astro + React web app, accessed via browser URL</span></div>
+                      <div className="text-emerald-400 font-black text-4xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">SaaS</div>
                     </div>
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-default group">
-                    <div className="w-1/3 bg-orange-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-orange-400 font-bold text-lg mb-1">Our Team</span><span className="text-orange-500/70 text-xs">App Builder</span></div>
-                    <div className="w-2/3 p-6 flex items-center justify-between">
-                      <div><strong className="text-white text-xl block mb-1">AWS IoT Core & Lambda</strong><span className="text-neutral-400 text-sm">Managed MQTT broker, serverless AI triggers & DB writes</span></div>
-                      <div className="text-orange-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">PaaS</div>
+                    <div className="w-1/3 bg-orange-500/20 p-7 flex flex-col items-center justify-center text-center"><span className="text-orange-400 font-bold text-xl mb-1">Our Team</span><span className="text-orange-500/70 text-sm">App Builder</span></div>
+                    <div className="w-2/3 p-7 flex items-center justify-between">
+                      <div><strong className="text-white text-2xl block mb-1">AWS IoT Core & Lambda</strong><span className="text-neutral-400 text-base">Managed MQTT broker, serverless AI triggers & DB writes</span></div>
+                      <div className="text-orange-400 font-black text-4xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">PaaS</div>
                     </div>
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] transition-all duration-500 cursor-default group">
-                    <div className="w-1/3 bg-purple-500/20 p-6 flex flex-col items-center justify-center text-center"><span className="text-purple-400 font-bold text-lg mb-1">AWS Infra</span><span className="text-purple-500/70 text-xs">Raw Resources</span></div>
-                    <div className="w-2/3 p-6 flex items-center justify-between">
-                      <div><strong className="text-white text-xl block mb-1">EC2 & RDS PostgreSQL</strong><span className="text-neutral-400 text-sm">Virtual compute, storage & database for session history</span></div>
-                      <div className="text-purple-400 font-black text-3xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">IaaS</div>
+                    <div className="w-1/3 bg-purple-500/20 p-7 flex flex-col items-center justify-center text-center"><span className="text-purple-400 font-bold text-xl mb-1">AWS Infra</span><span className="text-purple-500/70 text-sm">Raw Resources</span></div>
+                    <div className="w-2/3 p-7 flex items-center justify-between">
+                      <div><strong className="text-white text-2xl block mb-1">EC2 & RDS PostgreSQL</strong><span className="text-neutral-400 text-base">Virtual compute, storage & database for session history</span></div>
+                      <div className="text-purple-400 font-black text-4xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">IaaS</div>
                     </div>
                   </motion.div>
                 </div>
@@ -151,11 +151,11 @@ export const ArchitectureLayers = () => {
                 </div>
 
                 <div className="text-center mb-3 md:mb-4 relative z-10">
-                  <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-primary drop-shadow-[0_2px_10px_rgba(249,115,22,0.2)] mb-1.5">IoT Architecture</motion.h2>
-                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-xs">Standard 5-Layer Stack</motion.p>
+                  <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-primary drop-shadow-[0_2px_10px_rgba(249,115,22,0.2)] mb-1.5">IoT Architecture</motion.h2>
+                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-sm">Standard 5-Layer Stack</motion.p>
                 </div>
 
-                <div className="flex flex-col flex-1 justify-center w-full max-w-2xl relative z-10 min-h-[360px]">
+                <div className="flex flex-col flex-1 justify-center w-full max-w-3xl relative z-10 min-h-[420px]">
                   {layersData.map((layer, idx) => {
                     const isHovered = hoveredLayer === layer.id;
                     const isAnyHovered = hoveredLayer !== null;
@@ -185,30 +185,30 @@ export const ArchitectureLayers = () => {
                               : `${layer.color} ${layer.dashed ? 'border-dashed border-red-500/40' : layer.borderColor || 'border-blue-500/30'}`
                           }`}
                         >
-                          <div className={`flex items-center gap-5 p-3 md:p-3.5 px-6`}>
-                            {/* Icon block */}
-                            <div className={`text-2xl md:text-3xl w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 transition-transform duration-300 ${isHovered ? 'scale-110 rotate-3' : ''}`}>
-                              {layer.icon}
-                            </div>
-                            
-                            <div className="flex flex-col flex-1">
-                              <div className="flex flex-col md:flex-row md:items-center justify-between gap-1">
-                                <span className="text-white font-bold text-base md:text-lg tracking-wide">{layer.name}</span>
-                              </div>
-                              
-                              <div className="relative w-full mt-0.5 overflow-hidden min-h-[16px] md:min-h-[20px]">
-                                {/* General desc (visible when not hovered) */}
-                                <span className={`text-neutral-400 text-xs md:text-sm font-medium transition-all duration-300 block ${isHovered ? 'opacity-0 -translate-y-2 pointer-events-none absolute' : 'opacity-100 translate-y-0'}`}>
-                                  {layer.desc}
-                                </span>
-                                
-                                {/* Detailed info (visible when hovered) */}
-                                <span className={`text-neutral-200 text-xs md:text-sm font-medium transition-all duration-300 block leading-relaxed ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none absolute'}`}>
-                                  {layer.info}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
+                          <div className={`flex items-center gap-6 p-4 md:p-5 px-7`}>
+                             {/* Icon block */}
+                             <div className={`text-3xl md:text-4xl w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 transition-transform duration-300 ${isHovered ? 'scale-110 rotate-3' : ''}`}>
+                               {layer.icon}
+                             </div>
+                             
+                             <div className="flex flex-col flex-1">
+                               <div className="flex flex-col md:flex-row md:items-center justify-between gap-1">
+                                 <span className="text-white font-bold text-lg md:text-xl tracking-wide">{layer.name}</span>
+                               </div>
+                               
+                               <div className="relative w-full mt-0.5 overflow-hidden min-h-[20px] md:min-h-[24px]">
+                                 {/* General desc (visible when not hovered) */}
+                                 <span className={`text-neutral-400 text-sm md:text-base font-medium transition-all duration-300 block ${isHovered ? 'opacity-0 -translate-y-2 pointer-events-none absolute' : 'opacity-100 translate-y-0'}`}>
+                                   {layer.desc}
+                                 </span>
+                                 
+                                 {/* Detailed info (visible when hovered) */}
+                                 <span className={`text-neutral-200 text-sm md:text-base font-medium transition-all duration-300 block leading-relaxed ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none absolute'}`}>
+                                   {layer.info}
+                                 </span>
+                               </div>
+                             </div>
+                           </div>
                         </motion.div>
                       </React.Fragment>
                     );
@@ -224,9 +224,9 @@ export const ArchitectureLayers = () => {
                 className="absolute inset-0 flex flex-col md:flex-row bg-gradient-to-bl from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl"
               >
                 <div className="w-full md:w-1/3 text-center md:text-left flex flex-col justify-center pr-8 relative z-10">
-                  <motion.div variants={itemVariants} className="text-[12rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-2 mb-4">7</motion.div>
-                  <motion.h2 variants={itemVariants} className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-indigo-400 drop-shadow-[0_2px_10px_rgba(129,140,248,0.2)] mb-2">OSI Model</motion.h2>
-                  <motion.p variants={itemVariants} className="text-neutral-400 text-sm">Open Systems Interconnection</motion.p>
+                  <motion.div variants={itemVariants} className="text-[9rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-2 mb-2">7</motion.div>
+                  <motion.h2 variants={itemVariants} className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-indigo-400 drop-shadow-[0_2px_10px_rgba(129,140,248,0.2)] mb-2">OSI Model</motion.h2>
+                  <motion.p variants={itemVariants} className="text-neutral-400 text-base">Open Systems Interconnection</motion.p>
                 </div>
 
                 <div className="w-full md:w-2/3 flex gap-4 flex-1 items-end relative z-10">
@@ -260,10 +260,10 @@ export const ArchitectureLayers = () => {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none" />
                 
                 <div className="text-center mb-16 relative z-10">
-                  <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-widest mb-4">
+                  <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-mono tracking-widest mb-4">
                     <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> PRACTICAL IMPLEMENTATION
                   </motion.div>
-                  <motion.h2 variants={itemVariants} className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
+                  <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
                     From <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)] italic">Sensor</span> to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-300 drop-shadow-[0_2px_8px_rgba(6,182,212,0.3)] italic">Screen</span>
                   </motion.h2>
                 </div>
@@ -283,17 +283,17 @@ export const ArchitectureLayers = () => {
                         whileHover={{ scale: 1.1, y: -5 }}
                         onMouseEnter={() => setHoveredNode(node.id)}
                         onMouseLeave={() => setHoveredNode(null)}
-                        className="flex flex-col items-center w-full lg:w-44 group relative z-10 cursor-pointer"
+                        className="flex flex-col items-center w-full lg:w-52 group relative z-10 cursor-pointer"
                       >
-                        <div className={`w-20 h-20 md:w-24 md:h-24 rounded-[1.5rem] flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 group-hover:border-white/30 overflow-hidden`}>
+                        <div className={`w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem] flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 group-hover:border-white/30 overflow-hidden`}>
                           {node.image ? (
                             <img 
                               src={node.image} 
                               alt={node.title} 
-                              className="w-14 h-14 md:w-16 md:h-16 object-contain relative z-10 transition-transform duration-500 group-hover:scale-110" 
+                              className="w-16 h-16 md:w-20 md:h-20 object-contain relative z-10 transition-transform duration-500 group-hover:scale-110" 
                             />
                           ) : (
-                            <node.icon className={`w-10 h-10 md:w-12 md:h-12 ${node.color} relative z-10`} />
+                            <node.icon className={`w-12 h-12 md:w-14 md:h-14 ${node.color} relative z-10`} />
                           )}
                           
                           {/* Inner pulsing glow */}
@@ -311,7 +311,7 @@ export const ArchitectureLayers = () => {
                           )}
                         </div>
                         <div className="mt-6 text-center h-28 flex flex-col items-center relative w-full px-2">
-                          <h4 className="text-white font-bold text-base md:text-lg tracking-wide mb-1 transition-colors group-hover:text-primary">{node.title}</h4>
+                          <h4 className="text-white font-bold text-lg md:text-xl tracking-wide mb-1 transition-colors group-hover:text-primary">{node.title}</h4>
                           
                           <div className="relative w-full h-16 flex justify-center items-start overflow-hidden">
                             {/* Default Description */}
