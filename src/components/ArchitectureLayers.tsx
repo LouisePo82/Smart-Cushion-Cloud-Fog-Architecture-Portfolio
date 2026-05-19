@@ -229,23 +229,70 @@ export const ArchitectureLayers = () => {
                   <motion.p variants={itemVariants} className="text-neutral-400 text-base">Open Systems Interconnection</motion.p>
                 </div>
 
-                <div className="w-full md:w-2/3 flex gap-4 flex-1 items-end relative z-10">
-                  <div className="w-1/3 flex flex-col gap-2 md:gap-3 justify-end">
-                    <motion.div variants={itemVariants}><DataUnitBox text="Data" height="h-[216px] md:h-[248px]" color="bg-white/5 text-white/50 border-white/10" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Segments / Datagrams" height="h-16 md:h-20" color="bg-cyan-500/10 text-cyan-400 border-cyan-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Packets" height="h-16 md:h-20" color="bg-green-500/10 text-green-400 border-green-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Frames" height="h-16 md:h-20" color="bg-lime-500/10 text-lime-400 border-lime-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Bits" height="h-16 md:h-20" color="bg-yellow-500/10 text-yellow-400 border-yellow-500/30" /></motion.div>
-                  </div>
-                  
-                  <div className="w-2/3 flex flex-col gap-2 md:gap-3">
-                    <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & JSON Payloads" info="Smart Cushion Web App interaction layer." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="Data Formatting" info="Conversion of raw sensor arrays into JSON for transmission." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="MQTT Connection" info="Establishing and maintaining the link between ESP32 and Broker." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee" info="Ensuring sensor packets arrive in order via TCP Port 1883." color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={3} name="Network" desc="IP Routing" info="Assigning local IP addresses to Cushion and Fog Nodes." color="bg-green-500/20 border-green-500/40 text-green-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={2} name="Data Link" desc="Wi-Fi MAC Addressing" info="Managing physical addresses for wireless data frames." color="bg-lime-500/20 border-lime-500/40 text-lime-300" /></motion.div>
-                    <motion.div variants={itemVariants}><OsiLayerBox num={1} name="Physical" desc="RF Signal & FSR Wiring" info="The physical pressure sensors and ESP32 radio waves." color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" /></motion.div>
+                <div className="w-full flex gap-4 flex-1 items-end relative z-10">
+                  <div className="w-full flex flex-col gap-2 md:gap-3 group/container">
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & JSON Payloads" 
+                        info="Smart Cushion Web App interaction layer." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" 
+                        visual={<div className="font-mono text-[10px] md:text-xs text-indigo-200 mt-2 p-2 bg-black/40 rounded border border-indigo-500/30 overflow-hidden">
+                          {`{ "id": "esp_01", "posture": "good", "sensors": [...] }`}
+                        </div>}
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={6} name="Presentation" desc="Data Formatting" 
+                        info="Conversion of raw sensor arrays into JSON for transmission." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300"
+                        visual={<div className="font-mono text-[10px] md:text-xs text-indigo-200 mt-2 flex items-center gap-2">
+                          <span className="px-2 py-1 bg-white/10 rounded">Raw ADC (0-4095)</span>
+                          <span className="text-white">→</span>
+                          <span className="px-2 py-1 bg-indigo-500/30 rounded text-white font-bold">JSON UTF-8</span>
+                        </div>} 
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={5} name="Session" desc="MQTT Connection" 
+                        info="Establishing and maintaining the link between ESP32 and Broker." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" 
+                        visual={<div className="flex items-center gap-4 mt-2">
+                          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 text-green-400 rounded border border-green-500/30 text-xs font-bold">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"/> CONNECTED (Keep-Alive 60s)
+                          </div>
+                        </div>}
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee" 
+                        info="Ensuring sensor packets arrive in order via TCP Port 1883." color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" 
+                        visual={<div className="font-mono text-xs md:text-sm text-cyan-200 mt-2 px-3 py-1.5 bg-cyan-900/40 rounded border border-cyan-500/30 inline-block">
+                          <span className="font-bold text-white">PROTOCOL:</span> TCP <span className="mx-2">|</span> <span className="font-bold text-white">PORT:</span> 1883 (MQTT) / 8883 (TLS)
+                        </div>}
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={3} name="Network" desc="IP Routing" 
+                        info="Assigning local IP addresses to Cushion and Fog Nodes." color="bg-green-500/20 border-green-500/40 text-green-300" 
+                        visual={<div className="font-mono text-[10px] md:text-xs text-green-200 mt-2 flex gap-4">
+                          <div className="flex flex-col bg-black/30 p-1.5 rounded"><span className="text-white/50 text-[9px]">SOURCE (ESP32)</span>192.168.1.104</div>
+                          <div className="flex flex-col bg-black/30 p-1.5 rounded"><span className="text-white/50 text-[9px]">DEST (FOG NODE)</span>192.168.1.100</div>
+                        </div>}
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={2} name="Data Link" desc="Wi-Fi MAC Addressing" 
+                        info="Managing physical addresses for wireless data frames." color="bg-lime-500/20 border-lime-500/40 text-lime-300" 
+                        visual={<div className="font-mono text-xs text-lime-200 mt-2 px-3 py-1.5 bg-black/40 rounded border border-lime-500/30 inline-flex items-center gap-2">
+                          <Activity size={14} className="text-lime-400" /> IEEE 802.11 b/g/n (Wi-Fi 4)
+                        </div>}
+                      />
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="flex-1">
+                      <OsiLayerBox num={1} name="Physical" desc="RF Signal & FSR Wiring" 
+                        info="The physical pressure sensors and ESP32 radio waves." color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" 
+                        visual={<div className="flex items-center gap-3 mt-2">
+                           <div className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded text-yellow-200 text-xs font-bold">ESP32 2.4GHz RF</div>
+                           <div className="px-3 py-1 bg-orange-500/20 border border-orange-500/30 rounded text-orange-200 text-xs font-bold">FSR Matrix Wiring</div>
+                        </div>}
+                      />
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
@@ -428,15 +475,25 @@ export const DataUnitBox = motion.create(React.forwardRef<HTMLDivElement, any>((
   </div>
 )));
 
-export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, info, color }, ref) => (
-  <div ref={ref} className={`h-16 md:h-20 ${color} border rounded-[1rem] flex items-stretch overflow-hidden group/osi hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-default relative`}>
-    <div className="flex-1 px-5 md:px-6 flex flex-col justify-center leading-tight">
-      <span className="font-bold text-white text-lg md:text-xl mb-0.5">{name}</span>
-      <span className="text-xs md:text-sm text-neutral-300 opacity-80 group-hover/osi:hidden transition-opacity">{desc}</span>
-      <span className="text-xs md:text-sm text-white/90 hidden group-hover/osi:block font-medium italic transition-opacity">{info}</span>
+export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, info, color, visual }, ref) => (
+  <div ref={ref} className={`h-[4.5rem] md:h-[5.5rem] hover:h-40 md:hover:h-44 ${color} border rounded-[1rem] flex items-stretch overflow-hidden group/osi hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:z-20 transition-all duration-500 cursor-default relative`}>
+    {/* Left info content */}
+    <div className="flex-1 px-5 md:px-6 flex flex-col justify-start pt-4 md:pt-5 relative">
+      <div className="flex flex-col leading-tight absolute transition-transform duration-500 group-hover/osi:-translate-y-1">
+        <span className="font-bold text-white text-lg md:text-xl mb-0.5">{name}</span>
+        <span className="text-xs md:text-sm text-neutral-300 opacity-80 group-hover/osi:hidden transition-opacity duration-300">{desc}</span>
+        <span className="text-xs md:text-sm text-white/90 hidden group-hover/osi:block font-medium italic transition-opacity duration-300">{info}</span>
+      </div>
+      
+      {/* Hidden visual component that reveals on hover */}
+      <div className="absolute left-5 md:left-6 right-16 bottom-4 opacity-0 translate-y-4 group-hover/osi:opacity-100 group-hover/osi:translate-y-0 transition-all duration-500 delay-100 pointer-events-none group-hover/osi:pointer-events-auto">
+        {visual}
+      </div>
     </div>
-    <div className="w-12 md:w-16 flex items-center justify-center font-black text-2xl md:text-3xl bg-black/20 border-l border-inherit group-hover/osi:bg-white/10 transition-colors">
-      {num}
+    
+    {/* Right Number Badge */}
+    <div className="w-16 md:w-20 shrink-0 flex flex-col items-center justify-center bg-black/20 border-l border-inherit group-hover/osi:bg-white/10 transition-colors duration-500">
+      <span className="font-black text-3xl md:text-4xl text-white opacity-50 group-hover/osi:opacity-100 transition-opacity duration-500 group-hover/osi:scale-110">{num}</span>
     </div>
   </div>
 )));
