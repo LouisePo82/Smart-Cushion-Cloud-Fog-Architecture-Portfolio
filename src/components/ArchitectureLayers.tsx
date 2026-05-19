@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Cpu, Cloud, Smartphone, Activity, BrainCircuit, Database } from "lucide-react";
 
@@ -25,6 +25,44 @@ export const ArchitectureLayers = () => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);
   const totalSlides = 5;
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const lastScrollTime = useRef<number>(0);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const handleNativeWheel = (e: WheelEvent) => {
+      const deltaY = e.deltaY;
+      if (Math.abs(deltaY) < 15) return; // Ignore micro-scrolls
+
+      const now = Date.now();
+      
+      // Smart boundary interception:
+      // 1. Scrolling down -> only intercept if we can still advance to next slides
+      const isScrollingDownBetweenSlides = deltaY > 0 && activeIndex < totalSlides - 1;
+      // 2. Scrolling up -> only intercept if we can still go back to previous slides
+      const isScrollingUpBetweenSlides = deltaY < 0 && activeIndex > 0;
+
+      if (isScrollingDownBetweenSlides || isScrollingUpBetweenSlides) {
+        // Intercept mouse wheel/trackpad event: prevent default page-level scrolling
+        if (e.cancelable) e.preventDefault();
+
+        // Throttle to once every 800ms to let slide transition animations finish
+        if (now - lastScrollTime.current > 800) {
+          lastScrollTime.current = now;
+          paginate(deltaY > 0 ? 1 : -1);
+        }
+      }
+    };
+
+    // passive: false allows e.preventDefault() to execute cleanly without console warnings
+    section.addEventListener('wheel', handleNativeWheel, { passive: false });
+    return () => {
+      section.removeEventListener('wheel', handleNativeWheel);
+    };
+  }, [activeIndex, totalSlides]);
 
   const paginate = (newDirection: number) => {
     setHoveredLayer(null);
@@ -53,7 +91,11 @@ export const ArchitectureLayers = () => {
   };
 
   return (
-    <section className="pt-4 pb-10 bg-black relative h-full border-t border-white/5 flex flex-col justify-center overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      id="architecture" 
+      className="pt-4 pb-10 bg-black relative h-full border-t border-white/5 flex flex-col justify-center overflow-hidden"
+    >
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
       
@@ -433,64 +475,7 @@ export const ArchitectureLayers = () => {
             )}
             
           </AnimatePresence>
-
-          {/* Left Navigation Arrow — hidden on first slide */}
-          {activeIndex > 0 && (
-            <button 
-              onClick={() => paginate(-1)} 
-              className="absolute left-2 md:-left-8 lg:-left-16 xl:-left-20 top-1/2 -translate-y-1/2 p-3 md:p-3.5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-primary/20 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all backdrop-blur-md z-50 group hidden sm:flex"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-          )}
-
-          {/* Left Navigation Arrow — hidden on first slide */}
-          {activeIndex > 0 && (
-            <motion.button 
-              onClick={() => paginate(-1)} 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.95 }}
-              className="absolute top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/80 border border-white/20 text-white hover:text-black flex items-center justify-center backdrop-blur-md z-50 group left-2 md:-left-8 lg:-left-16 xl:-left-20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden cursor-pointer"
-            >
-              {/* Outer Breathing Halo Ring */}
-              <span className="absolute inset-0 rounded-full border border-primary/30 animate-[ping_2.5s_infinite] pointer-events-none" />
-              
-              {/* Liquid expand background */}
-              <span className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 ease-out origin-center z-0" />
-              
-              {/* Ambient Shadow glow */}
-              <span className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" />
-
-              {/* Icon */}
-              <ChevronLeft size={24} className="relative z-10 group-hover:-translate-x-1.5 transition-transform duration-300 ease-out stroke-[3px]" />
-            </motion.button>
-          )}
-
-          {/* Right Navigation Arrow — hidden on last slide */}
-          {activeIndex < totalSlides - 1 && (
-            <motion.button 
-              onClick={() => paginate(1)} 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.15 }}
-              whileTap={{ scale: 0.95 }}
-              className="absolute top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/80 border border-white/20 text-white hover:text-black flex items-center justify-center backdrop-blur-md z-50 group right-2 md:-right-8 lg:-right-16 xl:-right-20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] overflow-hidden cursor-pointer"
-            >
-              {/* Outer Breathing Halo Ring */}
-              <span className="absolute inset-0 rounded-full border border-primary/30 animate-[ping_2.5s_infinite] pointer-events-none" />
-              
-              {/* Liquid expand background */}
-              <span className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 ease-out origin-center z-0" />
-              
-              {/* Ambient Shadow glow */}
-              <span className="absolute inset-0 rounded-full bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0" />
-
-              {/* Icon */}
-              <ChevronRight size={24} className="relative z-10 group-hover:translate-x-1.5 transition-transform duration-300 ease-out stroke-[3px]" />
-            </motion.button>
-          )}
+          {/* Slide Navigation is handled natively by Mouse Wheel / Trackpad Scrolling */}
 
 
 
