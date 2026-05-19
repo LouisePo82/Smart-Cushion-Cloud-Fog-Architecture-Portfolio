@@ -110,6 +110,53 @@ export const CircularFeatures = () => {
     });
   };
 
+  // Logical content slides → their peak section index
+  // 0=Intro(0), 1=DesignDNA(2), 2=Feat0(4), 3=Feat1(5), ..., 8=Feat5(9), 9=CTA(10)
+  const snapPoints = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11];
+  const [logicalSlide, setLogicalSlide] = React.useState(0);
+
+  // Keep logicalSlide in sync with activeSlide
+  React.useEffect(() => {
+    const nearest = snapPoints.reduce((prev, curr, idx) =>
+      Math.abs(curr - activeSlide) < Math.abs(snapPoints[prev] - activeSlide) ? idx : prev
+    , 0);
+    setLogicalSlide(nearest);
+  }, [activeSlide]);
+
+  const isScrolling = useRef(false);
+
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
+      
+      e.preventDefault();
+      
+      if (isScrolling.current) return;
+      
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const nextLogical = logicalSlide + direction;
+      
+      if (nextLogical >= 0 && nextLogical < snapPoints.length) {
+        isScrolling.current = true;
+        navigateTo(snapPoints[nextLogical]);
+        
+        setTimeout(() => {
+          isScrolling.current = false;
+        }, 800);
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [logicalSlide]);
+
   return (
     <div ref={containerRef} className="relative h-[1200vh] bg-black scroll-smooth">
       {/* Real Snap Points for both Desktop & Mobile */}
@@ -345,11 +392,11 @@ export const CircularFeatures = () => {
             </div>
 
             <h2 className="text-5xl lg:text-9xl font-bold text-white mb-10 lg:mb-16 tracking-tighter relative z-10">
-              Watch your Capy <br/> 
-              <span className="text-primary italic font-black">Thrive.</span>
+              See how it <br/>
+              <span className="text-primary italic font-black">all connects.</span>
             </h2>
-            <a href="/dashboard" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
-              Meet My Capy <ArrowRight size={28} />
+            <a href="/architecture" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-neutral-950 rounded-full font-bold text-xl lg:text-3xl hover:scale-105 hover:bg-primary/90 transition-all flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
+              Explore Architecture <ArrowRight size={28} />
             </a>
           </motion.div>
         </div>

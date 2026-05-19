@@ -65,17 +65,51 @@ export const SolutionsScroll = () => {
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
     window.scrollTo({
-      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight * 0.9),
+      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight),
       behavior: 'smooth'
     });
   };
 
+  const isScrolling = useRef(false);
+
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
+      
+      e.preventDefault();
+      
+      if (isScrolling.current) return;
+      
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const targetSlide = activeSlide + direction;
+      
+      if (targetSlide >= 0 && targetSlide < itemsCount) {
+        isScrolling.current = true;
+        navigateTo(targetSlide);
+        
+        setTimeout(() => {
+          isScrolling.current = false;
+        }, 750);
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [activeSlide, itemsCount]);
+
   return (
     <div ref={containerRef} className="relative h-[600vh] bg-neutral-950">
-      {/* Snap Points Container - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
+      {/* Snap Points Container */}
+      <div className="absolute inset-0 pointer-events-none z-50">
         {sections.map((_, i) => (
-          <div key={i} className="h-[90vh] w-full snap-start" />
+          <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
@@ -91,8 +125,8 @@ export const SolutionsScroll = () => {
             {/* Intro Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0, 0.06, 0.12], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.06, 0.12], [0, 0, -50]),
+                opacity: useTransform(smoothProgress, [0, 0.1, 0.2], [1, 1, 0]),
+                y: useTransform(smoothProgress, [0, 0.1, 0.2], [0, 0, -50]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
@@ -116,8 +150,8 @@ export const SolutionsScroll = () => {
 
             {/* Solution Slides */}
             {solutions.map((item, index) => {
-              const activePoint = (index + 1) / itemsCount;
-              const range = 0.08;
+              const activePoint = (index + 1) / (itemsCount - 1);
+              const range = 0.1;
 
               const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
               const x = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [100, 0, -100]);
@@ -172,8 +206,8 @@ export const SolutionsScroll = () => {
             {/* Closing Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0.75, 0.83, 0.95], [0, 1, 1]),
-                y: useTransform(smoothProgress, [0.75, 0.83], [50, 0]),
+                opacity: useTransform(smoothProgress, [0.8, 0.9, 1.0], [0, 1, 1]),
+                y: useTransform(smoothProgress, [0.8, 0.9], [50, 0]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center overflow-hidden"
             >

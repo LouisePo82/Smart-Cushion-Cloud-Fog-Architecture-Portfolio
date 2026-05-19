@@ -14,13 +14,11 @@ import {
 } from 'lucide-react';
 import { MonitorView } from './dashboard/MonitorView';
 import { AnalyticsView } from './dashboard/AnalyticsView';
-import { AIAdvisorView } from './dashboard/AIAdvisorView';
 
 const tabs = [
   { id: 'monitor', name: 'Live Monitor', icon: Activity },
   { id: 'analytics', name: 'Performance', icon: LayoutDashboard },
   { id: 'history', name: 'Session History', icon: History },
-  { id: 'advisor', name: 'AI Health Advisor', icon: MessageSquare },
 ];
 
 export const DashboardApp = () => {
@@ -111,7 +109,6 @@ export const DashboardApp = () => {
             >
               {activeTab === 'monitor' && <MonitorView />}
               {activeTab === 'analytics' && <AnalyticsView />}
-              {activeTab === 'advisor' && <AIAdvisorView />}
               {activeTab === 'history' && (
                 <div className="flex flex-col items-center justify-center h-full text-neutral-500 italic">
                   History view implementation coming soon...

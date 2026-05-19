@@ -45,15 +45,6 @@ const dashboardViews = [
     glow: "rgba(168, 85, 247, 0.5)"
   },
   {
-    id: "ai",
-    title: "AI Health Advisor",
-    description: "Interact with our specialized AI model to receive personalized ergonomic advice and stretching reminders.",
-    icon: MessageSquare,
-    image: "/dashboard-4.png",
-    color: "text-cyan-500",
-    glow: "rgba(6, 182, 212, 0.5)"
-  },
-  {
     id: "history",
     title: "Session History",
     description: "Review every sitting session in detail. Export logs for medical consultations or personal health tracking.",
@@ -106,7 +97,7 @@ export const CircularDashboard = () => {
     restDelta: 0.001,
   });
 
-  const sections = Array.from({ length: 10 });
+  const sections = Array.from({ length: 9 });
   const itemsCount = sections.length; 
   const denominator = itemsCount - 1;
 
@@ -119,8 +110,8 @@ export const CircularDashboard = () => {
 
   const rotation = useTransform(
     smoothProgress, 
-    [1 / denominator, 8 / denominator], 
-    [0, 315]
+    [1 / denominator, 7 / denominator], 
+    [0, 270]
   );
 
   const navigateTo = (index: number) => {
@@ -132,10 +123,44 @@ export const CircularDashboard = () => {
     });
   };
 
+  const isScrolling = useRef(false);
+
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
+      
+      e.preventDefault();
+      
+      if (isScrolling.current) return;
+      
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const targetSlide = activeSlide + direction;
+      
+      if (targetSlide >= 0 && targetSlide < itemsCount) {
+        isScrolling.current = true;
+        navigateTo(targetSlide);
+        
+        setTimeout(() => {
+          isScrolling.current = false;
+        }, 750);
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [activeSlide, itemsCount]);
+
   return (
-    <div ref={containerRef} className="relative h-[1000vh] bg-black scroll-smooth">
+    <div ref={containerRef} className="relative h-[900vh] bg-black scroll-smooth">
       {/* Real Snap Points for both Desktop & Mobile */}
-      <div className="absolute inset-0 flex flex-col pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-50">
         {sections.map((_, i) => (
           <div key={i} className="h-screen w-full snap-start" />
         ))}
@@ -146,7 +171,7 @@ export const CircularDashboard = () => {
         {/* Right Side: CIRCULAR UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.5 / denominator, 1 / denominator, 8 / denominator, 8.5 / denominator], [0, 1, 1, 0]),
+            opacity: useTransform(smoothProgress, [0.5 / denominator, 1 / denominator, 7 / denominator, 7.5 / denominator], [0, 1, 1, 0]),
           }}
           className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center"
         >
@@ -296,20 +321,7 @@ export const CircularDashboard = () => {
                             </motion.div>
                           )}
 
-                          {view.id === "ai" && (
-                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                              <motion.div 
-                                initial={{ y: "-100%" }}
-                                animate={{ y: "100%" }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="h-1/2 w-full bg-gradient-to-b from-transparent via-primary/30 to-transparent border-b-2 border-primary/50"
-                              />
-                              <div className="absolute bottom-10 left-10 flex items-center gap-3 bg-black/40 backdrop-blur-sm p-3 rounded-xl border border-white/10">
-                                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                                <span className="text-white text-[10px] font-mono tracking-wider">AI INFERENCE ACTIVE</span>
-                              </div>
-                            </div>
-                          )}
+
 
                           {view.id === "gacha" && (
                             <div className="absolute inset-0 pointer-events-none">
@@ -338,9 +350,9 @@ export const CircularDashboard = () => {
           {/* FINAL CTA */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator, 1], [0, 1, 1]),
-              scale: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [7.5 / denominator, 8 / denominator, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [7.5 / denominator, 8 / denominator], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [7.5 / denominator, 8 / denominator, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >

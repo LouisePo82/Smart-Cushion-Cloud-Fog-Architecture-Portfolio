@@ -4,13 +4,14 @@ import '@/styles/globals.css';
 interface Props {
 	title: string;
 	description?: string;
+	bodyClass?: string;
 }
 
-const { title, description = "Smart Cushion - The future of ergonomic seating with AI-powered posture detection." } = Astro.props;
+const { title, description = "Smart Cushion - The future of ergonomic seating with AI-powered posture detection.", bodyClass = "" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class={`scroll-smooth ${bodyClass.includes('overflow-hidden') ? 'overflow-hidden h-screen' : ''}`}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -47,7 +48,7 @@ const { title, description = "Smart Cushion - The future of ergonomic seating wi
 			}
 		</style>
 	</head>
-	<body class="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
+	<body class={`min-h-screen bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary ${bodyClass}`}>
 		<slot />
 	</body>
 </html>

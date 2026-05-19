@@ -2,43 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import { ProblemSection } from '../components/ProblemSection';
-import { CircularFeatures } from '../components/CircularFeatures';
-import { TechStack } from '../components/TechStack';
 import { Spotlight } from '@/components/ui/Spotlight';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
 ---
 
-<Layout title="Smart Cushion | AI-Powered Ergonomic Seating">
+<Layout title="Smart Cushion | AI-Powered Ergonomic Seating" bodyClass="h-screen overflow-hidden">
 	<Navbar client:load />
 	
-	<main class="relative overflow-hidden">
+	<main class="relative h-screen overflow-hidden">
 		<Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 		<Hero client:load />
-		<ProblemSection client:load />
-		<CircularFeatures client:load />
-		<TechStack client:load />
 	</main>
-
-	<footer class="py-12 border-t bg-black/50">
-		<div class="container mx-auto px-4">
-			<div class="flex flex-col md:flex-row justify-between items-center gap-8">
-				<div class="flex items-center gap-2 font-bold text-xl">
-					<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-xs">S</div>
-					<span>SmartCushion</span>
-				</div>
-				
-				<div class="flex gap-8 text-sm font-medium text-muted-foreground">
-					<a href="/features" class="hover:text-primary">Features</a>
-					<a href="/app" class="hover:text-primary">App</a>
-					<a href="/pricing" class="hover:text-primary">Pricing</a>
-				</div>
-				
-				<p class="text-sm text-muted-foreground">
-					© 2026 SmartCushion Inc.
-				</p>
-			</div>
-		</div>
-	</footer>
 </Layout>
+
