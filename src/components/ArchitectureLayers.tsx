@@ -411,7 +411,7 @@ export const ArchitectureLayers = () => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.92 }}
                 transition={{ type: "spring", stiffness: 280, damping: 22, delay: 0.1 }}
-                className="absolute -bottom-20 right-0 z-50 group hidden sm:flex flex-col items-center gap-1 cursor-pointer"
+                className="absolute bottom-6 right-6 z-50 group hidden sm:flex flex-col items-center gap-1 cursor-pointer"
               >
                 {/* Glow backdrop */}
                 <span className="absolute inset-0 rounded-2xl bg-primary/15 blur-2xl scale-125 group-hover:bg-primary/30 transition-all duration-500 pointer-events-none" />
