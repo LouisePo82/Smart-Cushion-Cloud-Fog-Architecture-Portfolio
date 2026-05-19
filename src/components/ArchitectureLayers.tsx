@@ -480,26 +480,28 @@ export const ArchitectureLayers = () => {
 
 
 
-          {/* Dots Indicator */}
-          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
-            {[0, 1, 2, 3, 4].map((idx) => (
-              <button 
-                key={idx} 
-                onClick={() => {
-                  setHoveredLayer(null); // Reset layer hover states
-                  setDirection(idx > activeIndex ? 1 : -1);
-                  setActiveIndex(idx);
-                }}
-                className={`rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-8 h-2.5 bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)]' : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/50 hover:scale-125'}`}
-              />
-            ))}
-          </div>
+
 
         </div>
       </div>
 
+      {/* Dots Indicator — positioned relative to the section for absolute visibility */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
+        {[0, 1, 2, 3, 4].map((idx) => (
+          <button 
+            key={idx} 
+            onClick={() => {
+              setHoveredLayer(null); // Reset layer hover states
+              setDirection(idx > activeIndex ? 1 : -1);
+              setActiveIndex(idx);
+            }}
+            className={`rounded-full transition-all duration-300 ${activeIndex === idx ? 'w-8 h-2.5 bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)]' : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/50 hover:scale-125'}`}
+          />
+        ))}
+      </div>
+
       {/* Subtle Bottom Ambient Orbital Core (Visual Consistency with Product & Dashboard) */}
-      <div className="absolute -bottom-36 left-1/2 -translate-x-1/2 w-[320px] h-[320px] pointer-events-none z-0 hidden md:flex items-center justify-center opacity-40">
+      <div className="absolute bottom-[-160px] left-1/2 -translate-x-1/2 w-[320px] h-[320px] pointer-events-none z-0 hidden md:flex items-center justify-center opacity-40">
         {/* Outer Orbit */}
         <motion.div 
           className="absolute w-full h-full rounded-full border border-white/5 border-dashed"
