@@ -1,13 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
-import { motion } from 'framer-motion';
 import { Mail, MapPin, Globe, Award, MessageSquare, Github, ArrowRight } from 'lucide-react';
 ---
 
 <Layout title="Contact Us | Smart Cushion Project">
 	<Navbar client:load />
-	<main class="min-h-screen bg-black pt-32 pb-20 relative overflow-hidden">
+	<main class="min-h-screen lg:h-screen bg-black pt-24 lg:pt-20 pb-8 relative overflow-hidden flex flex-col justify-center">
 		{/* Background Decor */}
 		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
 			<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full animate-pulse"></div>
@@ -16,105 +15,105 @@ import { Mail, MapPin, Globe, Award, MessageSquare, Github, ArrowRight } from 'l
 
 		<div class="container mx-auto px-4 relative z-10">
 			<div class="max-w-5xl mx-auto">
-				<div class="text-center mb-16">
-					<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-mono uppercase tracking-widest mb-4">
-						<Award size={14} /> NTUST Final Project
+				<div class="text-center mb-6 lg:mb-8">
+					<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] lg:text-xs font-mono uppercase tracking-widest mb-3">
+						<Award size={12} /> NTUST Final Project
 					</span>
-					<h1 class="text-4xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+					<h1 class="text-3xl lg:text-5xl font-bold text-white mb-3 tracking-tight">
 						Get in Touch with <br/><span class="text-primary italic">Our Team.</span>
 					</h1>
-					<p class="text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+					<p class="text-sm lg:text-base text-neutral-400 max-w-xl mx-auto leading-relaxed">
 						Have questions about our Cloud-Fog architecture or AI implementation? Reach out to the researchers behind Smart Cushion.
 					</p>
 				</div>
 
-				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
 					{/* Contact Cards */}
-					<div class="lg:col-span-1 space-y-6">
-						<div class="p-8 rounded-[2rem] bg-neutral-900/50 border border-neutral-800 backdrop-blur-xl">
-							<div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary mb-6">
-								<MapPin size={24} />
+					<div class="lg:col-span-1 flex flex-col justify-between gap-4">
+						<div class="p-5 rounded-2xl bg-neutral-900/50 border border-neutral-800 backdrop-blur-xl flex flex-col justify-center">
+							<div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-3">
+								<MapPin size={20} />
 							</div>
-							<h3 class="text-xl font-bold text-white mb-2">Location</h3>
-							<p class="text-neutral-400 text-sm leading-relaxed">
+							<h3 class="text-base font-bold text-white mb-1">Location</h3>
+							<p class="text-neutral-400 text-xs leading-relaxed">
 								National Taiwan University of Science and Technology (NTUST)<br/>
 								No. 43, Keelung Rd, Sec. 4, Da'an Dist, Taipei City, Taiwan.
 							</p>
 						</div>
 
-						<div class="p-8 rounded-[2rem] bg-neutral-900/50 border border-neutral-800 backdrop-blur-xl">
-							<div class="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
-								<Globe size={24} />
+						<div class="p-5 rounded-2xl bg-neutral-900/50 border border-neutral-800 backdrop-blur-xl flex flex-col justify-center">
+							<div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 mb-3">
+								<Globe size={20} />
 							</div>
-							<h3 class="text-xl font-bold text-white mb-2">Course Info</h3>
-							<p class="text-neutral-400 text-sm leading-relaxed">
-								Course: Cloud Fog Computing<br/>
-								Semester: 114-2<br/>
-								Category: Smart IoT Solution
+							<h3 class="text-base font-bold text-white mb-1">Course Info</h3>
+							<p class="text-neutral-400 text-xs leading-relaxed">
+								Course: Cloud Fog Computing (114-2)<br/>
+								Category: Smart IoT Spinal Wellness Solution
 							</p>
 						</div>
 
 						{/* GitHub Ecosystem Hub Card */}
-						<div class="p-8 rounded-[2rem] bg-neutral-900/50 border border-primary/20 backdrop-blur-xl relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.03)] flex flex-col justify-between">
-							<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-							<div>
-								<div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(249,115,22,0.15)] relative z-10">
-									<Github size={24} />
+						<div class="p-5 rounded-2xl bg-neutral-900/50 border border-primary/20 backdrop-blur-xl relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-[0_0_20px_rgba(249,115,22,0.02)] flex flex-col justify-between">
+							<div class="absolute -right-12 -top-12 w-24 h-24 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
+							<div class="relative z-10">
+								<div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-3 group-hover:scale-105 transition-transform duration-300 shadow-[0_0_12px_rgba(249,115,22,0.1)]">
+									<Github size={20} />
 								</div>
-								<h3 class="text-xl font-bold text-white mb-2 relative z-10">GitHub Hub</h3>
-								<p class="text-neutral-400 text-sm leading-relaxed mb-6 relative z-10">
-									Our web repository acts as the ecosystem portal. The README directs you to our ESP32 Firmware, MQTT Fog Node, and serverless AWS Cloud stacks.
+								<h3 class="text-base font-bold text-white mb-1">GitHub Hub</h3>
+								<p class="text-neutral-400 text-xs leading-relaxed mb-4">
+									Our parent repo README maps the entire ecosystem and links to ESP32 Firmware, Fog Node & Cloud stacks.
 								</p>
 							</div>
 							<a 
 								href="https://github.com/tonguyentanphuong/smart-cushion-web" 
 								target="_blank" 
 								rel="noopener noreferrer" 
-								class="inline-flex items-center gap-2 px-6 py-4 bg-primary text-neutral-950 font-bold text-sm rounded-2xl hover:bg-white hover:text-black transition-all duration-300 w-full justify-center shadow-lg shadow-primary/10 hover:shadow-white/10 relative z-10"
+								class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-neutral-950 font-bold text-xs rounded-xl hover:bg-white hover:text-black transition-all duration-300 w-full justify-center shadow-lg shadow-primary/10 hover:shadow-white/5 relative z-10"
 							>
-								Explore Ecosystem <ArrowRight size={16} class="group-hover:translate-x-1 transition-transform duration-300" />
+								Explore Ecosystem <ArrowRight size={14} class="group-hover:translate-x-1 transition-transform duration-300" />
 							</a>
 						</div>
 					</div>
 
 					{/* Contact Form / Info List */}
-					<div class="lg:col-span-2 p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/10 backdrop-blur-2xl">
-						<div class="flex items-center gap-4 mb-10">
-							<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-								<MessageSquare size={20} />
+					<div class="lg:col-span-2 p-6 lg:p-8 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-2xl flex flex-col justify-between">
+						<div>
+							<div class="flex items-center gap-3 mb-6">
+								<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+									<MessageSquare size={16} />
+								</div>
+								<h2 class="text-xl font-bold text-white">Project Inquiry</h2>
 							</div>
-							<h2 class="text-2xl font-bold text-white">Project Inquiry</h2>
-						</div>
 
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-							<div class="space-y-4">
-								<label class="text-xs font-mono text-neutral-500 uppercase tracking-widest">General Email</label>
-								<div class="flex items-center gap-3 p-4 rounded-2xl bg-black border border-neutral-800 text-white">
-									<Mail size={18} className="text-primary" />
-									<span class="text-xs sm:text-sm font-medium">114cloudfog_team5_smartcushion@gmail.com</span>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+								<div class="space-y-2">
+									<label class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">General Email</label>
+									<div class="flex items-center gap-2.5 p-3.5 rounded-xl bg-black border border-neutral-800 text-white overflow-hidden">
+										<Mail size={16} className="text-primary flex-shrink-0" />
+										<span class="text-xs font-semibold truncate">114cloudfog_team5_smartcushion@gmail.com</span>
+									</div>
+								</div>
+								<div class="space-y-2">
+									<label class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Lab Location</label>
+									<div class="flex items-center gap-2.5 p-3.5 rounded-xl bg-black border border-neutral-800 text-white">
+										<MapPin size={16} className="text-primary flex-shrink-0" />
+										<span class="text-xs font-semibold">C217, Hwa Hsia Campus, TaiwanTech</span>
+									</div>
 								</div>
 							</div>
-							<div class="space-y-4">
-								<label class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Lab Location</label>
-								<div class="flex items-center gap-3 p-4 rounded-2xl bg-black border border-neutral-800 text-white">
-									<MapPin size={18} className="text-primary" />
-									<span class="text-xs sm:text-sm font-medium">C217, 2F, Gen. Edu. Bldg, TaiwanTech Hwa Hsia Campus</span>
-								</div>
-							</div>
 						</div>
 
-						<div class="mt-12 p-8 rounded-3xl bg-primary/5 border border-primary/20">
-							<h4 class="text-white font-bold mb-4">Technical Discussion?</h4>
-							<p class="text-neutral-400 text-sm mb-6 leading-relaxed">
-								We are open to discussing the latency benchmarks and MQTT broker configurations used in our Fog-Node implementation.
+						<div class="mt-6 lg:mt-0 p-5 lg:p-6 rounded-2xl bg-primary/5 border border-primary/15">
+							<h4 class="text-white font-bold text-sm lg:text-base mb-2">Technical Discussion?</h4>
+							<p class="text-neutral-400 text-xs mb-4 leading-relaxed">
+								We are highly open to academic feedback regarding our real-time posture classification latency and AWS IoT core MQTT benchmark metrics.
 							</p>
-							<button class="w-full py-4 bg-primary text-white rounded-2xl font-bold hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20">
+							<button class="w-full py-3 bg-primary text-white rounded-xl text-xs lg:text-sm font-bold hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-md shadow-primary/10">
 								Send us a Message
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</main>
 </Layout>
