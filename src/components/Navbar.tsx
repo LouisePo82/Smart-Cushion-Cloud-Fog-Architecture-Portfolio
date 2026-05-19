@@ -68,14 +68,23 @@ const Navbar = () => {
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   className={`text-sm font-semibold relative py-2 px-4 rounded-full transition-colors duration-300 ${
-                    isActive ? "text-primary" : "text-neutral-400 hover:text-white"
+                    isActive ? "text-white" : "text-neutral-400 hover:text-white"
                   }`}
                 >
-                  {/* Active background pill */}
+                  {/* Active background glass pill */}
                   {isActive && (
                     <motion.span 
                       layoutId="activePill"
-                      className="absolute inset-0 bg-primary/10 border border-primary/25 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.15)] z-0"
+                      className="absolute inset-0 bg-gradient-to-r from-primary/15 to-orange-500/5 border border-primary/30 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] z-0"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+
+                  {/* Active Bottom Glowing Laser Line */}
+                  {isActive && (
+                    <motion.span 
+                      layoutId="activePillLaser"
+                      className="absolute bottom-1 left-4 right-4 h-[2px] bg-gradient-to-r from-primary to-orange-500 rounded-full shadow-[0_0_8px_#f97316] z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
