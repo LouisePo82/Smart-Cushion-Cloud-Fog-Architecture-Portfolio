@@ -444,13 +444,23 @@ export const ArchitectureLayers = () => {
             </button>
           )}
 
+          {/* Left Navigation Arrow — hidden on first slide */}
+          {activeIndex > 0 && (
+            <button 
+              onClick={() => paginate(-1)} 
+              className="absolute top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/60 border border-white/20 text-white/80 hover:text-black hover:bg-primary hover:border-primary hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-md z-50 group hidden sm:flex left-2 md:-left-8 lg:-left-16 xl:-left-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+            >
+              <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform stroke-[2.5px]" />
+            </button>
+          )}
+
           {/* Right Navigation Arrow — hidden on last slide */}
           {activeIndex < totalSlides - 1 && (
             <button 
               onClick={() => paginate(1)} 
-              className="absolute right-2 md:-right-8 lg:-right-16 xl:-right-20 top-1/2 -translate-y-1/2 p-3 md:p-3.5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-primary/20 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all backdrop-blur-md z-50 group hidden sm:flex"
+              className="absolute top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-black/60 border border-white/20 text-white/80 hover:text-black hover:bg-primary hover:border-primary hover:shadow-[0_0_25px_rgba(249,115,22,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-md z-50 group hidden sm:flex right-2 md:-right-8 lg:-right-16 xl:-right-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
             >
-              <ChevronRight size={24} className="group-hover:translate-x-0.5 transition-transform" />
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform stroke-[2.5px]" />
             </button>
           )}
 
