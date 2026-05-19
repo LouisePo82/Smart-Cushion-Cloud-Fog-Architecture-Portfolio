@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Globe, Award, MessageSquare } from 'lucide-react';
+import { Mail, MapPin, Globe, Award, MessageSquare, Github, ArrowRight } from 'lucide-react';
 ---
 
 <Layout title="Contact Us | Smart Cushion Project">
@@ -52,6 +52,28 @@ import { Mail, MapPin, Globe, Award, MessageSquare } from 'lucide-react';
 								Semester: 114-2<br/>
 								Category: Smart IoT Solution
 							</p>
+						</div>
+
+						{/* GitHub Ecosystem Hub Card */}
+						<div class="p-8 rounded-[2rem] bg-neutral-900/50 border border-primary/20 backdrop-blur-xl relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-[0_0_30px_rgba(249,115,22,0.03)] flex flex-col justify-between">
+							<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+							<div>
+								<div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(249,115,22,0.15)] relative z-10">
+									<Github size={24} />
+								</div>
+								<h3 class="text-xl font-bold text-white mb-2 relative z-10">GitHub Hub</h3>
+								<p class="text-neutral-400 text-sm leading-relaxed mb-6 relative z-10">
+									Our web repository acts as the ecosystem portal. The README directs you to our ESP32 Firmware, MQTT Fog Node, and serverless AWS Cloud stacks.
+								</p>
+							</div>
+							<a 
+								href="https://github.com/tonguyentanphuong/smart-cushion-web" 
+								target="_blank" 
+								rel="noopener noreferrer" 
+								class="inline-flex items-center gap-2 px-6 py-4 bg-primary text-neutral-950 font-bold text-sm rounded-2xl hover:bg-white hover:text-black transition-all duration-300 w-full justify-center shadow-lg shadow-primary/10 hover:shadow-white/10 relative z-10"
+							>
+								Explore Ecosystem <ArrowRight size={16} class="group-hover:translate-x-1 transition-transform duration-300" />
+							</a>
 						</div>
 					</div>
 
