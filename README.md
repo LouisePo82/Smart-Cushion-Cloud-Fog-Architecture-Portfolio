@@ -16,7 +16,7 @@ To understand the full scope of our Cloud-Fog solution, explore the correspondin
 | **📱 Companion Web App** | [smart-cushion-app](https://github.com/MuoiVung/smart-cushion-app) | Interactive real-time posture telemetry dashboard & historical analysis client. | Next.js, React, Tailwind CSS |
 | **🔌 Hardware Node** | [smart-cushion-edge](https://github.com/MuoiVung/smart-cushion-edge) | ESP32-S firmware for 9-channel FSR sensor acquisition and telemetry publishing. | ESP-IDF, C++, FreeRTOS, MQTT |
 | **📡 Local Fog Node** | [smart-cushion-fog-node](https://github.com/MuoiVung/smart-cushion-fog-node) | Edge server performing real-time AI posture classification and local broker queue management. | Node.js, Mosquitto, PostgreSQL |
-| **🧠 Deep Learning Engine** | [smart-cushion-AI](https://github.com/MuoiVung/smart-cushion-AI) | Training pipelines and weights for the 5-Posture Sitting Classification model. | PyTorch, NumPy, Scikit-Learn |
+| **🧠 AI Engine** | [smart-cushion-AI](https://github.com/MuoiVung/smart-cushion-AI) | Training pipelines and weights for the 5-Posture Sitting Classification model. | PyTorch, NumPy, Scikit-Learn |
 | **☁️ Serverless Cloud** | [smart-cushion-cloud](https://github.com/MuoiVung/smart-cushion-cloud) | AWS Serverless cluster handling persistent telemetry pipelines, analytics, and history API. | AWS IoT Core, Lambda, DynamoDB |
 
 ---
