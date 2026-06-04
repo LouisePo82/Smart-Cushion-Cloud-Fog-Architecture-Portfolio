@@ -59,7 +59,7 @@ Our solution utilizes an optimized **4-Tier Cloud-Fog Topology** to isolate heav
                                            | REST APIs & Live WebSockets
                                            v
 +------------------------------------------------------------------------------------+
-|                4. Companion Web App (https://github.com/MuoiVung/smart-cushion-app)|
+|                       4. Next.js Companion App Dashboard                           |
 |      [React Live Monitor] <---> [Gamified Capybara Healthy Sitting Passport]       |
 +------------------------------------------------------------------------------------+
 ```
