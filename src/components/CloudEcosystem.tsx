@@ -66,65 +66,6 @@ export const CloudEcosystem = () => {
       image: "/AWS_IOT.png"
     },
     {
-      id: "lambda",
-      name: "AWS Lambda",
-      logo: "/aws_lambda_logo.svg",
-      color: "text-orange-500",
-      glowColor: "rgba(249,115,22,0.4)",
-      bgClass: "bg-orange-500/10",
-      borderClass: "border-orange-500/30",
-      tagline: "Serverless computing handling real-time APIs & background jobs.",
-      role: "Executes business logic on-demand without server overhead. Manages user authentication, daily posture summaries, and runs our anti-cheat reward logic.",
-      resources: [
-        "SmartCushion-ProcessSummary (Stores MQTT reports)",
-        "SmartCushion-AddGems (Postures-to-gems engine)",
-        "SmartCushion-GachaRoll (Anti-cheat gacha logic)",
-        "SmartCushion-GetDailySummary (Speedy API backing)"
-      ],
-      snippetTitle: "SmartCushion-AddGems Lambda",
-      snippet: `def lambda_handler(event, context):\n    user = db.get_user(event['username'])\n    nup_duration = event['nup_duration']\n    \n    # Securely calculate gems: 1 min NUP = 5 Gems\n    earned_gems = int(nup_duration / 60) * 5\n    db.update_gems(user, earned_gems)\n    \n    return {"status": "success", "earned": earned_gems}`,
-      image: "/Lambda.png"
-    },
-    {
-      id: "dynamodb",
-      name: "Amazon DynamoDB",
-      logo: "/aws_dynamodb_logo.svg",
-      color: "text-cyan-400",
-      glowColor: "rgba(34,211,238,0.4)",
-      bgClass: "bg-cyan-500/10",
-      borderClass: "border-cyan-500/30",
-      tagline: "Fully managed NoSQL database with single-digit millisecond latency.",
-      role: "Stores all project entities. Uses high-performance Partition Keys to handle parallel stream logging, keeping user profiles, sessions, and WebSocket links synchronized in real-time.",
-      resources: [
-        "smart-cushion-users (Account progress & gems)",
-        "smart-cushion-sessions (Detailed posture logs)",
-        "smart-cushion-daily-summary (Pre-calculated stats)",
-        "smart-cushion-ws-connections (WebSocket mapping)"
-      ],
-      snippetTitle: "DynamoDB Item: smart-cushion-users",
-      snippet: `{\n  "username": "peter_ntust",\n  "gems": 250,\n  "unlocked_items": ["capybara_gold", "desk_avatar_02"],\n  "streak_days": 5,\n  "last_active": "2026-05-21"\n}`,
-      image: "/DynamoDB.png"
-    },
-    {
-      id: "apigateway",
-      name: "AWS API Gateway",
-      logo: "/aws_apigateway_logo.svg",
-      color: "text-purple-400",
-      glowColor: "rgba(168,85,247,0.4)",
-      bgClass: "bg-purple-500/10",
-      borderClass: "border-purple-500/30",
-      tagline: "Secure endpoints routing REST & WebSocket communication.",
-      role: "Acts as the portal to the cloud. Integrates directly with Astro web dashboards via REST API and acts as a stateful WebSocket proxy to relay live posture alerts from the physical cushion.",
-      resources: [
-        "REST API: /login, /sessions, /summary",
-        "Progression & Reward Endpoints: /user/gems, /gacha/roll",
-        "WebSocket Route: $connect, $disconnect, $default"
-      ],
-      snippetTitle: "API Route Integration Map",
-      snippet: `POST /gacha/roll   -> Lambda: SmartCushion-GachaRoll\nGET  /summary      -> Lambda: SmartCushion-GetDailySummary\nWSS  /live         -> WebSocket Proxy API`,
-      image: "/REST_API_Gateway.png"
-    },
-    {
       id: "cloudformation",
       name: "AWS CloudFormation",
       logo: "/aws_cloudformation_logo.svg",
@@ -161,6 +102,65 @@ export const CloudEcosystem = () => {
       snippetTitle: "CloudWatch Alarm Log",
       snippet: `[INFO] 2026-05-21 17:07:13 - Posture summary processed for peter_ntust\n[WARN] 2026-05-21 17:08:00 - Lambda execution duration exceeded 2000ms\n[INFO] 2026-05-21 17:08:15 - Active connection count: 24`,
       image: "/CloudWatch.png"
+    },
+    {
+      id: "dynamodb",
+      name: "Amazon DynamoDB",
+      logo: "/aws_dynamodb_logo.svg",
+      color: "text-cyan-400",
+      glowColor: "rgba(34,211,238,0.4)",
+      bgClass: "bg-cyan-500/10",
+      borderClass: "border-cyan-500/30",
+      tagline: "Fully managed NoSQL database with single-digit millisecond latency.",
+      role: "Stores all project entities. Uses high-performance Partition Keys to handle parallel stream logging, keeping user profiles, sessions, and WebSocket links synchronized in real-time.",
+      resources: [
+        "smart-cushion-users (Account progress & gems)",
+        "smart-cushion-sessions (Detailed posture logs)",
+        "smart-cushion-daily-summary (Pre-calculated stats)",
+        "smart-cushion-ws-connections (WebSocket mapping)"
+      ],
+      snippetTitle: "DynamoDB Item: smart-cushion-users",
+      snippet: `{\n  "username": "peter_ntust",\n  "gems": 250,\n  "unlocked_items": ["capybara_gold", "desk_avatar_02"],\n  "streak_days": 5,\n  "last_active": "2026-05-21"\n}`,
+      image: "/DynamoDB.png"
+    },
+    {
+      id: "lambda",
+      name: "AWS Lambda",
+      logo: "/aws_lambda_logo.svg",
+      color: "text-orange-500",
+      glowColor: "rgba(249,115,22,0.4)",
+      bgClass: "bg-orange-500/10",
+      borderClass: "border-orange-500/30",
+      tagline: "Serverless computing handling real-time APIs & background jobs.",
+      role: "Executes business logic on-demand without server overhead. Manages user authentication, daily posture summaries, and runs our anti-cheat reward logic.",
+      resources: [
+        "SmartCushion-ProcessSummary (Stores MQTT reports)",
+        "SmartCushion-AddGems (Postures-to-gems engine)",
+        "SmartCushion-GachaRoll (Anti-cheat gacha logic)",
+        "SmartCushion-GetDailySummary (Speedy API backing)"
+      ],
+      snippetTitle: "SmartCushion-AddGems Lambda",
+      snippet: `def lambda_handler(event, context):\n    user = db.get_user(event['username'])\n    nup_duration = event['nup_duration']\n    \n    # Securely calculate gems: 1 min NUP = 5 Gems\n    earned_gems = int(nup_duration / 60) * 5\n    db.update_gems(user, earned_gems)\n    \n    return {"status": "success", "earned": earned_gems}`,
+      image: "/Lambda.png"
+    },
+    {
+      id: "apigateway",
+      name: "AWS API Gateway",
+      logo: "/aws_apigateway_logo.svg",
+      color: "text-purple-400",
+      glowColor: "rgba(168,85,247,0.4)",
+      bgClass: "bg-purple-500/10",
+      borderClass: "border-purple-500/30",
+      tagline: "Secure endpoints routing REST & WebSocket communication.",
+      role: "Acts as the portal to the cloud. Integrates directly with Astro web dashboards via REST API and acts as a stateful WebSocket proxy to relay live posture alerts from the physical cushion.",
+      resources: [
+        "REST API: /login, /sessions, /summary",
+        "Progression & Reward Endpoints: /user/gems, /gacha/roll",
+        "WebSocket Route: $connect, $disconnect, $default"
+      ],
+      snippetTitle: "API Route Integration Map",
+      snippet: `POST /gacha/roll   -> Lambda: SmartCushion-GachaRoll\nGET  /summary      -> Lambda: SmartCushion-GetDailySummary\nWSS  /live         -> WebSocket Proxy API`,
+      image: "/REST_API_Gateway.png"
     }
   ];
 

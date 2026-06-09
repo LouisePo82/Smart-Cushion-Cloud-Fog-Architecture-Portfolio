@@ -33,22 +33,157 @@ export const SensorToScreen = () => {
       </div>
 
       <div className="relative w-full max-w-6xl mx-auto">
-        {/* Connecting Line (Desktop) */}
-        <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[3px] bg-white/5 -translate-y-1/2 rounded-full overflow-hidden">
-           <motion.div className="absolute top-0 bottom-0 w-64 bg-gradient-to-r from-transparent via-primary/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-           <motion.div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
-        </div>
+        {/* SVG Flow Connections (Desktop Only) */}
+        <svg className="hidden lg:block absolute top-0 left-0 w-full h-[250px] pointer-events-none z-0" viewBox="0 -60 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            {/* Glow filters */}
+            <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-orange" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-emerald" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="glow-purple" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            
+            {/* Gradients */}
+            <linearGradient id="grad-cushion-mcu" x1="100" y1="56" x2="300" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="grad-mcu-fog" x1="300" y1="56" x2="500" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#f97316" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="grad-fog-mcu" x1="500" y1="56" x2="300" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#ef4444" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="grad-fog-cloud" x1="500" y1="56" x2="700" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#c084fc" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="grad-cloud-dash" x1="700" y1="56" x2="900" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#c084fc" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#34d399" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="grad-fog-dash" x1="500" y1="56" x2="900" y2="56" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#34d399" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
 
-        {/* Connecting Line extending OUT to the CTA card */}
-        <div className="hidden lg:block absolute top-[44px] left-[90%] h-[3px] -translate-y-1/2 z-0 lg:right-[-50px] xl:right-[-150px] 2xl:right-[-250px]">
-          <div className="w-full h-full border-t-2 border-dashed border-primary/40 relative">
-            <motion.div 
-              className="absolute -top-[6px] w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_rgba(249,115,22,1)]"
-              animate={{ left: ["0%", "100%"] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            />
-          </div>
-        </div>
+          {/* 1. Cushion to MCU */}
+          <path id="path-cushion-mcu" d="M 100,56 L 300,56" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="6 4" />
+          
+          {/* 2. MCU to Fog */}
+          <path id="path-mcu-fog" d="M 300,56 L 500,56" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="6 4" />
+          
+          {/* 3. Fog to MCU (Reverse Alert) */}
+          <path id="path-fog-mcu" d="M 500,56 Q 400,120 300,56" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="4 4" />
+          
+          {/* 4. Fog to Cloud */}
+          <path id="path-fog-cloud" d="M 500,56 L 700,56" stroke="url(#grad-fog-cloud)" strokeWidth="3" strokeDasharray="6 4" />
+          
+          {/* 5. Cloud to Dashboard */}
+          <path id="path-cloud-dash" d="M 700,56 L 900,56" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="6 4" />
+          
+          {/* 6. Fog to Dashboard Direct (Local WebSockets) */}
+          <path id="path-fog-dash" d="M 500,56 Q 700,-35 900,56" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="4 4" />
+
+          {/* 7. Dashboard to CTA (Dashed line going out) */}
+          <path id="path-dash-cta" d="M 900,56 L 1000,56" stroke="rgba(249, 115, 22, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+
+          {/* Animated light pulses */}
+          <circle r="4" fill="#60a5fa" filter="url(#glow-cyan)">
+            <animateMotion dur="2.5s" repeatCount="indefinite">
+              <mpath href="#path-cushion-mcu" />
+            </animateMotion>
+          </circle>
+          
+          <circle r="4" fill="#22d3ee" filter="url(#glow-cyan)">
+            <animateMotion dur="2s" repeatCount="indefinite">
+              <mpath href="#path-mcu-fog" />
+            </animateMotion>
+          </circle>
+          
+          <circle r="4" fill="#ef4444" filter="url(#glow-orange)">
+            <animateMotion dur="2.2s" repeatCount="indefinite">
+              <mpath href="#path-fog-mcu" />
+            </animateMotion>
+          </circle>
+          
+          <circle r="4" fill="#f97316" filter="url(#glow-orange)">
+            <animateMotion dur="3s" repeatCount="indefinite">
+              <mpath href="#path-fog-cloud" />
+            </animateMotion>
+          </circle>
+          
+          <circle r="4" fill="#c084fc" filter="url(#glow-purple)">
+            <animateMotion dur="2.5s" repeatCount="indefinite">
+              <mpath href="#path-cloud-dash" />
+            </animateMotion>
+          </circle>
+          
+          <circle r="4" fill="#34d399" filter="url(#glow-emerald)">
+            <animateMotion dur="1.8s" repeatCount="indefinite">
+              <mpath href="#path-fog-dash" />
+            </animateMotion>
+          </circle>
+
+          <circle r="3" fill="#f97316" filter="url(#glow-orange)">
+            <animateMotion dur="2s" repeatCount="indefinite">
+              <mpath href="#path-dash-cta" />
+            </animateMotion>
+          </circle>
+
+          {/* Text Labels with drop-shadow effects */}
+          <g className="text-[10px] font-mono font-bold">
+            {/* Cushion to MCU */}
+            <text x="200" y="32" fill="#93c5fd" textAnchor="middle">Analog Signals</text>
+            <text x="200" y="44" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">ADC Sampling</text>
+            
+            {/* MCU to Fog */}
+            <text x="400" y="32" fill="#67e8f9" textAnchor="middle">MQTT (Local)</text>
+            <text x="400" y="44" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
+            
+            {/* Fog to MCU (Reverse) */}
+            <text x="400" y="105" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
+            <text x="400" y="117" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
+            
+            {/* Fog to Cloud */}
+            <text x="600" y="32" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
+            <text x="600" y="44" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Secure MQTT (TLS)</text>
+            
+            {/* Cloud to Dashboard */}
+            <text x="800" y="32" fill="#d8b4fe" textAnchor="middle">API Gateway</text>
+            <text x="800" y="44" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">WebSockets / REST</text>
+            
+            {/* Fog to Dashboard Direct */}
+            <text x="700" y="-22" fill="#6ee7b7" textAnchor="middle">Local WebSockets</text>
+            <text x="700" y="-10" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Live Telemetry (&lt;100ms)</text>
+          </g>
+        </svg>
 
         <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
           {dataNodes.map((node, i) => (
@@ -104,7 +239,7 @@ export const SensorToScreen = () => {
         </div>
 
         {/* Desktop Floating CTA connected by line */}
-        <div className="absolute top-[44px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
+        <div className="absolute top-[56px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
           <motion.a
             href="/cloud"
             initial={{ opacity: 0, scale: 0.92 }}
