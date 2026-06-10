@@ -220,7 +220,7 @@ export const SensorToScreen = () => {
                 </div>
               </div>
               
-              <div className="mt-4 text-center h-14 flex flex-col items-center relative w-full px-2 justify-start">
+              <div className="mt-12 text-center h-14 flex flex-col items-center relative w-full px-2 justify-start">
                 <div className="relative w-full flex justify-center items-start">
                   <span className={`text-neutral-400 text-xs md:text-sm font-semibold leading-relaxed transition-all duration-300 block w-full ${hoveredNode === node.id ? 'opacity-0 scale-95 pointer-events-none absolute' : 'opacity-100 scale-100'}`}>
                     {node.desc}
