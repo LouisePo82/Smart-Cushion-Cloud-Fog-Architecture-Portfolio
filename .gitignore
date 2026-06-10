@@ -6,3 +6,4 @@ dist/
 *.log
 index.lock
 node_modules
+presentation_temp/slide_*.png
