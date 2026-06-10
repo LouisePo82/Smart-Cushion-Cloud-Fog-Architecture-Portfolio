@@ -9,23 +9,32 @@ interface SensorToScreenProps {
 
 const dataNodes = [
   { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", details: "9 high-precision FSR pressure sensors + temperature sensor with 50Hz polling rate.", image: "/cushion-slate.png", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
-  { id: "esp", title: "Edge MCU", desc: "ESP32 Pre-processing", details: "ADC noise filtering, local calibration, WiFi connection, and MQTT JSON packaging.", image: "/esp32-node.png", icon: Cpu, color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
-  { id: "fog", title: "Fog Node", desc: "AI Inference Model", details: "Local AI model, posture inference under 100ms, and MQTT feedback trigger.", image: "/fog-node-pc.png", icon: BrainCircuit, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", glow: true },
-  { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", details: "AWS IoT Core broker, database logging in DynamoDB Tables, and serverless logic.", image: "/aws-logo-neon.png", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { id: "esp", title: "Edge MCU", desc: "ESP32 Pre-processing", details: "ADC noise filtering, local calibration, WiFi connection, and MQTT JSON packaging.", image: "/esp32-node.png", icon: Cpu, color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20", scaledInfo: { title: "Cost-Effective Edge Scaling", desc: ["• Independent MCU per user", "• Handles local sensor sampling & haptic feedback", "• Extremely cheap hardware cost", "• Infinitely scalable deployment"] } },
+  { id: "fog", title: "Fog Node", desc: "AI Inference Model", details: "Local AI model, posture inference under 100ms, and MQTT feedback trigger.", image: "/fog-node-pc.png", icon: BrainCircuit, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", glow: true, scaledInfo: { title: "Horizontal Fog Scaling", desc: ["• 1 Gateway orchestrates 10-50 cushions", "• Eliminates cloud bandwidth waste", "• Ultra-low latency local processing", "• Easily add gateways per room"] } },
+  { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", details: "AWS IoT Core broker, database logging in DynamoDB Tables, and serverless logic.", image: "/aws-logo-neon.png", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20", scaledInfo: { title: "Serverless Auto-Scaling", desc: ["• AWS IoT Core handles millions of devices", "• Serverless Lambda on-demand compute", "• DynamoDB auto-scaling for Big Data", "• Pay-as-you-go (No idle costs)"] } },
   { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", details: "React WebApp, real-time posture detection, and health analytics.", image: "/app.png", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
 ];
 
 export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [isScaled, setIsScaled] = useState(false);
+  const [selectedScaleNode, setSelectedScaleNode] = useState<string | null>(null);
 
   const itemVariants = {
     initial: { y: 15, opacity: 0, scale: 0.98 },
     animate: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 400, damping: 25 } }
   };
 
+  const handleContainerClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('.node-clickable') || (e.target as HTMLElement).closest('.popup-card')) return;
+    setSelectedScaleNode(null);
+  };
+
   return (
-    <div className="w-full h-full flex flex-col bg-white/5 border border-white/10 rounded-[3rem] pt-8 pb-8 px-8 md:pt-10 md:pb-10 md:px-12 backdrop-blur-md justify-center overflow-visible relative">
+    <div 
+      className="w-full h-full flex flex-col bg-white/5 border border-white/10 rounded-[3rem] pt-8 pb-8 px-8 md:pt-10 md:pb-10 md:px-12 backdrop-blur-md justify-center overflow-visible relative"
+      onClick={handleContainerClick}
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none rounded-[3rem]" />
       
       <div className="text-center mb-6 relative z-10 flex flex-col items-center">
@@ -47,7 +56,10 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
 
         {mode === "future-work" && (
           <motion.button
-            onClick={() => setIsScaled(!isScaled)}
+            onClick={() => {
+              setIsScaled(!isScaled);
+              setSelectedScaleNode(null);
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="mt-4 inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-orange-500 text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_8px_25px_rgba(249,115,22,0.3)] hover:shadow-[0_8px_35px_rgba(249,115,22,0.55)] border border-white/10 cursor-pointer transition-all duration-300 relative z-50"
@@ -55,6 +67,14 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
             {isScaled ? "↵ Reset to Standard View" : "⤢ Scale System Architecture ➔"}
           </motion.button>
         )}
+        
+        <AnimatePresence>
+          {isScaled && (
+            <motion.p initial={{opacity: 0, y: -10, height: 0}} animate={{opacity: 1, y: 0, height: "auto"}} exit={{opacity: 0, y: -10, height: 0}} className="mt-4 text-neutral-400 text-sm font-medium tracking-wide">
+              Click the highlighted layers to view scaling strategies.
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
@@ -284,9 +304,11 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
           {dataNodes.map((node, i) => {
             const isMultiplied = isScaled && (node.id === "edge" || node.id === "esp" || node.id === "dashboard");
             const items = isMultiplied ? [0, 1, 2, 3, 4] : [0];
+            const isSelected = selectedScaleNode === node.id;
+            const isDimmed = selectedScaleNode && !isSelected && isScaled;
 
             return (
-              <div key={node.id} className="flex flex-col items-center w-full lg:w-52 relative z-10">
+              <div key={node.id} className={`flex flex-col items-center w-full lg:w-52 relative ${isSelected ? 'z-50' : 'z-10'}`}>
                 <div className={`flex flex-col gap-2 items-center justify-center ${isScaled ? "h-[352px]" : "h-[112px]"} transition-all duration-500`}>
                   {items.map((idx) => {
                     const itemId = `${node.id}-${idx}`;
@@ -298,14 +320,20 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
                           : `User ${idx + 1}`
                       : node.title;
 
+                    const isClickable = isScaled && (node as any).scaledInfo;
+
                     return (
                       <motion.div
                         key={itemId}
                         layoutId={`box-${node.id}-${idx}`}
-                        whileHover={{ scale: 1.08, y: -2 }}
+                        whileHover={isClickable ? { scale: 1.08, y: -2, boxShadow: "0 0 30px rgba(255,255,255,0.2)" } : { scale: 1.08, y: -2 }}
+                        whileTap={isClickable ? { scale: 0.95 } : undefined}
                         onMouseEnter={() => setHoveredNode(node.id)}
                         onMouseLeave={() => setHoveredNode(null)}
-                        className={`${isScaled ? "w-16 h-16 rounded-2xl" : "w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem]"} flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow && !isScaled ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 hover:border-white/30 overflow-hidden cursor-pointer`}
+                        onClick={() => {
+                          if (isClickable) setSelectedScaleNode(isSelected ? null : node.id);
+                        }}
+                        className={`node-clickable ${isScaled ? "w-16 h-16 rounded-2xl" : "w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem]"} flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow && !isScaled ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 ${isClickable ? 'cursor-pointer hover:border-white/30' : 'cursor-default'} ${isSelected ? 'ring-2 ring-white/50 border-white/80 scale-105 z-50' : ''} ${isDimmed ? 'opacity-30 grayscale blur-[1px]' : ''} overflow-hidden`}
                       >
                         {node.image ? (
                           <img 
@@ -336,10 +364,61 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
                             {itemTitle}
                           </span>
                         </div>
+
+                        {/* Interactive Ping Indicator */}
+                        {isClickable && !isSelected && !isDimmed && idx === 2 && (
+                           <span className="absolute -top-1 -right-1 flex h-3 w-3 z-50">
+                             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${node.id === 'esp' ? 'bg-cyan-400' : node.id === 'fog' ? 'bg-primary' : 'bg-purple-400'}`}></span>
+                             <span className={`relative inline-flex rounded-full h-3 w-3 ${node.id === 'esp' ? 'bg-cyan-500' : node.id === 'fog' ? 'bg-orange-500' : 'bg-purple-500'}`}></span>
+                           </span>
+                        )}
                       </motion.div>
                     );
                   })}
                 </div>
+
+                {/* Floating Popup Card next to the column */}
+                <AnimatePresence>
+                  {isSelected && (node as any).scaledInfo && (
+                    <motion.div
+                      initial={{ opacity: 0, x: node.id === 'esp' ? 20 : node.id === 'cloud' ? -20 : 0, y: node.id === 'fog' ? 20 : 0, scale: 0.9 }}
+                      animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                      className={`popup-card absolute z-[100] w-80 p-5 rounded-2xl bg-neutral-900/95 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-left cursor-default ${
+                        node.id === 'esp' ? 'left-[130%] top-1/2 -translate-y-1/2' 
+                        : node.id === 'fog' ? 'bottom-[110%] mb-4 left-1/2 -translate-x-1/2' 
+                        : node.id === 'cloud' ? 'right-[130%] top-1/2 -translate-y-1/2'
+                        : ''
+                      }`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <h4 className={`font-black text-base flex items-center gap-2 ${node.id === 'esp' ? 'text-cyan-400' : node.id === 'fog' ? 'text-primary' : 'text-purple-400'}`}>
+                          <node.icon size={18} />
+                          {(node as any).scaledInfo.title}
+                        </h4>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedScaleNode(null);
+                          }}
+                          className="text-neutral-400 hover:text-white transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                      </div>
+                      <ul className="text-neutral-300 text-xs leading-relaxed space-y-1.5 font-medium">
+                        {((node as any).scaledInfo.desc as string[]).map((point, idx) => (
+                          <li key={idx} className="flex items-start gap-1.5">
+                            <span className="text-primary mt-0.5">•</span>
+                            <span>{point.replace('• ', '')}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 
                 {/* Bottom labels (Only visible in standard view / when NOT scaled) */}
                 <AnimatePresence>
