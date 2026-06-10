@@ -152,7 +152,7 @@ export const CloudEcosystem = () => {
       bgClass: "bg-purple-500/10",
       borderClass: "border-purple-500/30",
       tagline: "Secure endpoints routing REST & WebSocket communication.",
-      role: "Acts as the portal to the cloud. Integrates directly with Astro web dashboards via REST API and acts as a stateful WebSocket proxy to relay live posture alerts from the physical cushion.",
+      role: "Acts as the portal to the cloud. Integrates directly with the React webapp via REST API and acts as a stateful WebSocket proxy to relay live posture alerts from the physical cushion.",
       resources: [
         "REST API: /login, /sessions, /summary",
         "Progression & Reward Endpoints: /user/gems, /gacha/roll",
