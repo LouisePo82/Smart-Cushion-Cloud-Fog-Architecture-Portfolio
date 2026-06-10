@@ -75,21 +75,21 @@ async function run() {
     
     // 2. Solutions
     { url: 'http://localhost:4321/solutions', name: 'slide_02.png', scrollY: 0, wait: 1200 },
-    { url: 'http://localhost:4321/solutions', name: 'slide_03.png', scrollY: 900, wait: 1200 },
-    { url: 'http://localhost:4321/solutions', name: 'slide_04.png', scrollY: 1778, wait: 1200 },
-    { url: 'http://localhost:4321/solutions', name: 'slide_05.png', scrollY: 2667, wait: 1200 },
-    { url: 'http://localhost:4321/solutions', name: 'slide_06.png', scrollY: 3600, wait: 1200 },
+    { url: 'http://localhost:4321/solutions', name: 'slide_03.png', scrollY: 1080, wait: 1200 },
+    { url: 'http://localhost:4321/solutions', name: 'slide_04.png', scrollY: 2160, wait: 1200 },
+    { url: 'http://localhost:4321/solutions', name: 'slide_05.png', scrollY: 3240, wait: 1200 },
+    { url: 'http://localhost:4321/solutions', name: 'slide_06.png', scrollY: 4320, wait: 1200 },
     
     // 3. Product (CircularFeatures)
     { url: 'http://localhost:4321/features', name: 'slide_07.png', scrollY: 0, wait: 2000 },
-    { url: 'http://localhost:4321/features', name: 'slide_08.png', scrollY: 1822, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_09.png', scrollY: 3644, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_10.png', scrollY: 4555, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_11.png', scrollY: 5466, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_12.png', scrollY: 6377, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_13.png', scrollY: 7288, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_14.png', scrollY: 8199, wait: 1200 },
-    { url: 'http://localhost:4321/features', name: 'slide_15.png', scrollY: 9110, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_08.png', scrollY: 2160, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_09.png', scrollY: 4320, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_10.png', scrollY: 5400, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_11.png', scrollY: 6480, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_12.png', scrollY: 7560, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_13.png', scrollY: 8640, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_14.png', scrollY: 9720, wait: 1200 },
+    { url: 'http://localhost:4321/features', name: 'slide_15.png', scrollY: 10800, wait: 1200 },
     
     // 4. Architecture
     { url: 'http://localhost:4321/architecture', name: 'slide_16.png', wait: 2000 }, // Title slide
@@ -106,14 +106,14 @@ async function run() {
     
     // 6. Dashboard
     { url: 'http://localhost:4321/dashboard', name: 'slide_25.png', scrollY: 0, wait: 2000 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_26.png', scrollY: 911, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_27.png', scrollY: 1822, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_28.png', scrollY: 2733, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_29.png', scrollY: 3644, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_30.png', scrollY: 4555, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_31.png', scrollY: 5466, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_32.png', scrollY: 6377, wait: 1200 },
-    { url: 'http://localhost:4321/dashboard', name: 'slide_33.png', scrollY: 7288, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_26.png', scrollY: 1080, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_27.png', scrollY: 2160, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_28.png', scrollY: 3240, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_29.png', scrollY: 4320, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_30.png', scrollY: 5400, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_31.png', scrollY: 6480, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_32.png', scrollY: 7560, wait: 1200 },
+    { url: 'http://localhost:4321/dashboard', name: 'slide_33.png', scrollY: 8640, wait: 1200 },
     
     // 7. Future Work
     { url: 'http://localhost:4321/future-work', name: 'slide_34.png', wait: 2000 }, // Standard mode
