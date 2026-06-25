@@ -1,8 +1,8 @@
-# Smart Cushion Cloud-Fog IoT System — Personal Portfolio Note
+# Smart Cushion Cloud-Fog IoT System — Personal Project Note
 
-This repository is my personal fork/archive of our group project for the course **Cloud and Fog Computing in the Internet of Things**.
+This repository is my personal fork of our group project for the course **Cloud and Fog Computing in the Internet of Things**.
 
-The original project is the **Smart Cushion Cloud-Fog IoT Ecosystem**, a smart sitting system that connects edge sensing, local fog processing, cloud storage/analytics, and a user-facing dashboard.
+The project is a smart sitting system that connects edge sensing, local fog processing, cloud storage, and a user-facing dashboard/app. I keep this fork mainly as a record of my contribution and learning from the project.
 
 ## Course Context
 
@@ -24,79 +24,98 @@ https://smart-cushion-web.vercel.app
 Companion app demo:
 https://smart-cushion-app.vercel.app/live-monitor
 
-Full technical implementation credit belongs to the team members who developed the web platform, companion app, edge node, fog node, AI engine, and AWS Serverless cloud layer.
+Full technical implementation credit belongs to the team members who developed the web platform, companion app, edge node, fog node, AI engine, and serverless cloud layer.
 
-This fork is kept as a transparent portfolio record of my contribution. It does not claim ownership of the full technical source code.
+This fork does not claim ownership of the full source code. It is mainly used to show my role in the project and to keep the project visible in my academic portfolio.
 
 ## My Role
 
 **Cloud-Fog Architecture & Dashboard Contributor**
 
-My contribution focused on architecture discussion, fog-cloud-app data alignment, dashboard metric definition, app/dashboard review, and final presentation/demo support.
+At the beginning of the project, I joined the architecture discussion and helped align the fog-cloud-app logic.
 
-Due to health issues during the technical implementation phase, I was not the main implementer of the AWS cloud backend. The final cloud implementation was completed by other team members.
+My main contribution was not coding the final AWS cloud backend. Instead, I focused on the system design side, including:
+
+* Fog-to-cloud output direction
+* Cloud-to-app response logic
+* Dashboard metric definition
+* App/dashboard review
+* Presentation and live demo preparation
+
+During the technical implementation phase, I had health issues, so other team members completed the final cloud backend implementation. I still contributed through system review, dashboard feedback, and demo/presentation support.
 
 ## My Contribution Areas
 
 ### 1. Cloud-Fog-App Architecture Alignment
 
-I helped align the main responsibility of each layer:
+I helped discuss how the system should divide responsibilities across the fog, cloud, and app layers.
 
-* Fog: real-time local processing, posture result generation, and telemetry/event/summary output
-* Cloud: data storage, lightweight aggregation, AWS Lambda processing, and API response
-* App: user-facing display layer that calls cloud APIs instead of querying the database directly
+The main idea was:
 
-The main idea was to keep the app simple and let the cloud return clean, UI-ready responses.
+* Fog handles real-time local processing and posture output
+* Cloud stores data, performs light aggregation, and provides API responses
+* App displays user-friendly information from the cloud API
 
-### 2. Fog Output and Data Flow Alignment
+A key point I supported was that the app should not query the database directly. The cloud should return clean and simple responses that are ready for the dashboard.
 
-I helped define the simplified fog-to-cloud output direction for team discussion, including:
+### 2. Fog Output and Data Flow Discussion
+
+I helped align the simplified data flow from fog to cloud.
+
+The discussion focused on three types of records:
 
 * Summary records for each sitting session
 * Event records for important user-facing events
-* Low-frequency telemetry records when lightweight tracking is needed
+* Low-frequency telemetry records when needed
 
-This helped the team keep the data flow simple and aligned with the dashboard scope.
+This helped keep the project scope practical and suitable for a small course demo.
 
 ### 3. Cloud-to-App Output Design
 
-I contributed to the cloud-to-app output direction for dashboard use cases, especially:
+I helped define what kind of information the cloud should return to the app, especially for:
 
-* Dashboard summary response
-* Session history response
+* Dashboard summary
+* Session history
 
-The goal was to make the cloud output easy for the app to display, instead of asking the app to process raw backend data.
+The goal was to make the app easier to build and easier for users to understand.
 
-### 4. Dashboard Metrics Definition
+### 4. Dashboard Metrics
 
-I helped define the main user-facing dashboard metrics:
+I helped define the main dashboard metrics for users:
 
 * Total sitting time
 * Poor posture time
 * Alert count
 * Posture distribution
 
-The metric design focused on being easy to understand, easy to demo, and suitable for a small course project.
+These metrics were selected because they are simple, easy to explain, and useful for showing sitting behavior.
 
-### 5. App UI and Dashboard Review
+### 5. App and Dashboard Review
 
-I reviewed and gave feedback on the app/dashboard flow, especially for:
+I reviewed the app/dashboard flow and gave feedback on pages such as:
 
 * My Coach
 * My Insights
 * My Sessions
 
-The review focused on making the dashboard clearer, more user-friendly, and more connected to the wellness goal of the smart cushion system.
+My review focused on making the dashboard clearer, more supportive, and more connected to the wellness purpose of the smart cushion.
 
 ### 6. Presentation and Live Demo Support
 
-I helped refine the final presentation story and live demo flow.
+I also helped prepare the final presentation and live demo story.
 
-The demo explanation connected the real-time Live Monitor, daily guidance in My Coach, weekly behavior in My Insights, and session review in My Sessions. I also helped shape the final message that the project is not only a smart cushion prototype, but a small cloud-fog wellness ecosystem.
+The demo flow connected:
 
-## Note on Internal Documents
+* Live Monitor for real-time posture
+* My Coach for daily guidance
+* My Insights for weekly behavior
+* My Sessions for session review
 
-Some detailed specification notes and team alignment documents were prepared during the project, but they are not published in this repository. This README only summarizes my contribution at a portfolio level.
+The final message was that this project is not only a smart cushion prototype, but a small cloud-fog wellness system that gives real-time support and long-term posture insight.
+
+## Note
+
+Some internal notes and specification drafts were used during the project, but they are not published in this repository. This README only summarizes my contribution at a high level.
 
 ---
 
