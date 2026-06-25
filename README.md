@@ -1,3 +1,109 @@
+# Smart Cushion Cloud-Fog IoT System — Personal Portfolio Note
+
+This repository is my personal fork/archive of our group project for the course **Cloud and Fog Computing in the Internet of Things**.
+
+The original project is the **Smart Cushion Cloud-Fog IoT Ecosystem**, a smart sitting system that connects edge sensing, local fog processing, cloud storage/analytics, and a user-facing dashboard.
+
+## Course Context
+
+* Course: Cloud and Fog Computing in the Internet of Things
+* Project type: Final group project
+* Institution: National Taiwan University of Science and Technology
+* Project topic: Smart Cushion Cloud-Fog IoT Ecosystem
+
+## Source Code and Team Credit
+
+This repository is forked from the original group project repository.
+
+Original central repository:
+https://github.com/tonguyentanphuong/smart-cushion-web
+
+Project website:
+https://smart-cushion-web.vercel.app
+
+Companion app demo:
+https://smart-cushion-app.vercel.app/live-monitor
+
+Full technical implementation credit belongs to the team members who developed the web platform, companion app, edge node, fog node, AI engine, and AWS Serverless cloud layer.
+
+This fork is kept as a transparent portfolio record of my contribution. It does not claim ownership of the full technical source code.
+
+## My Role
+
+**Cloud-Fog Architecture & Dashboard Contributor**
+
+My contribution focused on architecture discussion, fog-cloud-app data alignment, dashboard metric definition, app/dashboard review, and final presentation/demo support.
+
+Due to health issues during the technical implementation phase, I was not the main implementer of the AWS cloud backend. The final cloud implementation was completed by other team members.
+
+## My Contribution Areas
+
+### 1. Cloud-Fog-App Architecture Alignment
+
+I helped align the main responsibility of each layer:
+
+* Fog: real-time local processing, posture result generation, and telemetry/event/summary output
+* Cloud: data storage, lightweight aggregation, AWS Lambda processing, and API response
+* App: user-facing display layer that calls cloud APIs instead of querying the database directly
+
+The main idea was to keep the app simple and let the cloud return clean, UI-ready responses.
+
+### 2. Fog Output and Data Flow Alignment
+
+I helped define the simplified fog-to-cloud output direction for team discussion, including:
+
+* Summary records for each sitting session
+* Event records for important user-facing events
+* Low-frequency telemetry records when lightweight tracking is needed
+
+This helped the team keep the data flow simple and aligned with the dashboard scope.
+
+### 3. Cloud-to-App Output Design
+
+I contributed to the cloud-to-app output direction for dashboard use cases, especially:
+
+* Dashboard summary response
+* Session history response
+
+The goal was to make the cloud output easy for the app to display, instead of asking the app to process raw backend data.
+
+### 4. Dashboard Metrics Definition
+
+I helped define the main user-facing dashboard metrics:
+
+* Total sitting time
+* Poor posture time
+* Alert count
+* Posture distribution
+
+The metric design focused on being easy to understand, easy to demo, and suitable for a small course project.
+
+### 5. App UI and Dashboard Review
+
+I reviewed and gave feedback on the app/dashboard flow, especially for:
+
+* My Coach
+* My Insights
+* My Sessions
+
+The review focused on making the dashboard clearer, more user-friendly, and more connected to the wellness goal of the smart cushion system.
+
+### 6. Presentation and Live Demo Support
+
+I helped refine the final presentation story and live demo flow.
+
+The demo explanation connected the real-time Live Monitor, daily guidance in My Coach, weekly behavior in My Insights, and session review in My Sessions. I also helped shape the final message that the project is not only a smart cushion prototype, but a small cloud-fog wellness ecosystem.
+
+## Note on Internal Documents
+
+Some detailed specification notes and team alignment documents were prepared during the project, but they are not published in this repository. This README only summarizes my contribution at a portfolio level.
+
+---
+
+The original project README continues below.
+
+---
+
 # 🦦 Smart Cushion Cloud-Fog IoT Ecosystem
 
 Welcome to the central repository for the **Smart Cushion Spinal Wellness System**. This project is built for the **NTUST Cloud-Fog Computing Course (114-2)**.
