@@ -24,7 +24,7 @@ https://smart-cushion-web.vercel.app
 Companion app demo:
 https://smart-cushion-app.vercel.app/live-monitor
 
-Full technical implementation credit belongs to the team members who developed the web platform, companion app, edge node, fog node, AI engine, and serverless cloud layer.
+Full technical implementation credit belongs to the team members who developed the web platform, companion app, edge node, fog node, AI engine, and AWS serverless cloud layer.
 
 This fork does not claim ownership of the full source code. It is mainly used to show my role in the project and to keep the project visible in my academic portfolio.
 
